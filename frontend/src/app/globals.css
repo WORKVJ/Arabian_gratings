@@ -1,114 +1,92 @@
 @import "tailwindcss";
 
+/* ─── Runtime CSS custom properties (available in JS/CSS at runtime) ─── */
 :root {
-  --background: #f8fafc;
-  --foreground: #0f1115;
-  --card-bg: #ffffff;
-  --accent: #d97706;
-  --accent-hover: #b45309;
-  --charcoal: #0f1115;
-  --slate-grey: #475569;
-  --metallic-zinc: #e2e8f0;
-  --border-color: #e2e8f0;
-  --focus-ring: #d97706;
+  --background:     #ffffff;
+  --foreground:     #111318;
+  --card-bg:        #ffffff;
+  --bg-secondary:   #F5F6F7;
+  --bg-tertiary:    #F0F1F2;
+  --accent:         #d97706;
+  --accent-hover:   #b45309;
+  --charcoal:       #111318;
+  --slate-grey:     #59616B;
+  --metallic-zinc:  #D9DDE1;
+  --border-color:   #D9DDE1;
 }
 
+/* ─── Tailwind v4 theme tokens ────────────────────────────────────────── */
+/* Literal values required here — var() to :root variables NOT supported  */
+/* at Tailwind build time for color tokens.                                */
+/* Font vars use Next.js-injected CSS variables (resolved at runtime).     */
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card-bg: var(--card-bg);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--color-accent-hover);
-  --color-charcoal: var(--charcoal);
-  --color-slate-grey: var(--slate-grey);
-  --color-metallic-zinc: var(--metallic-zinc);
-  --color-border-color: var(--border-color);
+  /* Colors */
+  --color-background:   #ffffff;
+  --color-foreground:   #111318;
+  --color-card-bg:      #ffffff;
+  --color-accent:       #d97706;
+  --color-accent-hover: #b45309;
+  --color-charcoal:     #111318;
+  --color-slate-grey:   #59616B;
+  --color-border:       #D9DDE1;
 
-  --font-sans: var(--font-inter), sans-serif;
-  --font-display: var(--font-space-grotesk), sans-serif;
-  --font-mono: monospace;
+  /* Fonts — Next.js injects --font-inter / --font-space-grotesk at runtime */
+  --font-sans:    var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, "Courier New", monospace;
 }
 
-/* Global Elements styling */
+/* ─── Base element styles ─────────────────────────────────────────────── */
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typographic Headings using Space Grotesk font */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
-/* Focus visibility for accessibility */
 *:focus-visible {
-  outline: 2px solid var(--focus-ring);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 
-/* Modern Industrial Card systems */
-.premium-card-light {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-}
+/* ─── Custom utility classes ──────────────────────────────────────────── */
 
-.premium-card-dark {
-  background-color: #0f1115;
-  border: 1px solid #1e293b;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
-
-/* Technical grid helper for hero blocks background overlay */
+/* Light technical grid — white/off-white section backgrounds */
 .tech-grid-overlay {
-  background-size: 30px 30px;
-  background-image: 
-    linear-gradient(to right, rgba(71, 85, 105, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(71, 85, 105, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(89, 97, 107, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(89, 97, 107, 0.06) 1px, transparent 1px);
 }
 
+/* Dark technical grid — CTA / footer dark sections */
 .tech-grid-overlay-dark {
   background-size: 30px 30px;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(226, 232, 240, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(226, 232, 240, 0.03) 1px, transparent 1px);
 }
 
-/* Blueprint dot pattern grid */
+/* Blueprint dot grid — amber, for dark backgrounds */
 .tech-dot-grid {
   background-size: 24px 24px;
   background-image: radial-gradient(rgba(217, 119, 6, 0.15) 1px, transparent 0);
 }
 
+/* Blueprint dot grid — grey, for white/light backgrounds */
 .tech-dot-grid-light {
-  background-size: 24px 24px;
-  background-image: radial-gradient(rgba(71, 85, 105, 0.08) 1px, transparent 0);
+  background-size: 28px 28px;
+  background-image: radial-gradient(rgba(89, 97, 107, 0.07) 1px, transparent 0);
 }
 
-/* Diagonal clip path mask reveals for premium image transitions */
-.clip-reveal-active {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-.clip-reveal-hidden-right {
-  clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
-}
-.clip-reveal-hidden-left {
-  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-}
-
-/* Scroll track indicator lines */
-.scroll-track-line {
-  background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
-}
-
-/* Disable transitions if reduced motion is requested */
+/* ─── Accessibility: reduced motion ───────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -117,4 +95,3 @@ h1, h2, h3, h4, h5, h6 {
     scroll-behavior: auto !important;
   }
 }
-
