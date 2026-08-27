@@ -270,6 +270,12 @@ const categoryToProductSlugMap: Record<string, string> = {
   'frp-grp-products': 'moulded-grp-walkway-grating',
 };
 
+const heroSlides = [
+  { src: '/product-frp-grating.jpg', label: 'GRP PRODUCTS // WALKWAY PLATFORM', alt: 'Bright yellow GRP walkway grating' },
+  { src: '/product-steel-grating.jpg', label: 'GALVANIZED STEEL // REFINERY ACCESS', alt: 'Hot-dip galvanized steel grating staircase' },
+  { src: '/product-aluminium-grating.jpg', label: 'ALUMINIUM SYSTEMS // UTILITY FLOORS', alt: 'Lightweight aluminium access flooring' },
+];
+
 export default function HomeClient({ categories: rawCategories, industries: rawIndustries, projects: rawProjects, posts: rawPosts }: HomeClientProps) {
   const categories = rawCategories.length > 0 ? rawCategories : defaultCategories;
   const industries = rawIndustries.length > 0 ? rawIndustries : defaultIndustries;
@@ -294,6 +300,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
   const [isHoveredInd, setIsHoveredInd] = useState<number | null>(null);
   const [activeIndStatIndex, setActiveIndStatIndex] = useState(0);
   const [isHoveredIndStat, setIsHoveredIndStat] = useState<number | null>(null);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
   const [visSpecIndex, setVisSpecIndex] = useState(0);
 
   useEffect(() => {
@@ -327,6 +334,14 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
     }, 3000);
     return () => clearInterval(interval);
   }, [isHoveredIndStat, noMotion]);
+
+  useEffect(() => {
+    if (noMotion) return;
+    const interval = setInterval(() => {
+      setActiveHeroSlide((prev) => (prev + 1) % 3);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [noMotion]);
 
   useEffect(() => {
     if (noMotion) return;
@@ -573,28 +588,46 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
           <div className="flex flex-col gap-2 max-w-[580px] w-full">
             {/* Factory Image — 4:3 Aspect Ratio */}
             <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-50 border border-[#D9DDE1]">
-              <motion.div
-                className="absolute inset-0"
-                initial={noMotion ? false : { scale: 1.06 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 2.0, ease: easeOut }}
-              >
-                <Image
-                  src="/hero-industrial.jpg"
-                  alt="Arabian Gratings industrial manufacturing facility"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover object-center"
-                  priority
-                />
-              </motion.div>
+              {heroSlides.map((slide, idx) => {
+                const isCurrent = activeHeroSlide === idx;
+                return (
+                  <motion.div
+                    key={slide.src}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isCurrent ? 1 : 0 }}
+                    transition={{ duration: 0.8, ease: 'easeInOut' }}
+                  >
+                    <Image
+                      src={slide.src}
+                      alt={slide.alt}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover object-center"
+                      priority={idx === 0}
+                    />
+                  </motion.div>
+                );
+              })}
               {/* Technical corner accents */}
               <div className="absolute top-4 left-4 border-t border-l border-[#D9DDE1] w-5 h-5 z-10" />
               <div className="absolute top-4 right-4 border-t border-r border-[#D9DDE1] w-5 h-5 z-10" />
-              <div className="absolute top-4 left-12 z-10">
-                <span className="font-mono text-[8px] text-[#59616B] uppercase tracking-widest bg-white/90 border border-[#D9DDE1] px-2 py-0.5">
-                  MANUFACTURING // SAUDI
+              <div className="absolute top-4 left-12 z-10 flex items-center gap-1.5">
+                <span className="font-mono text-[8px] text-[#E8612C] uppercase tracking-widest bg-white border border-[#D9DDE1] px-2 py-0.5 font-bold transition-all duration-300">
+                  {heroSlides[activeHeroSlide].label}
                 </span>
+              </div>
+
+              {/* Navigation dots on the bottom-right of the image */}
+              <div className="absolute bottom-4 right-4 z-10 flex space-x-1.5 bg-[#111318]/50 px-2.5 py-1.5 rounded-full backdrop-blur-sm">
+                {heroSlides.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveHeroSlide(idx)}
+                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${activeHeroSlide === idx ? 'bg-[#E8612C] w-3.5' : 'bg-white/60'}`}
+                    aria-label={`Go to hero slide ${idx + 1}`}
+                  />
+                ))}
               </div>
             </div>
 
