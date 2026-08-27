@@ -35,13 +35,19 @@ export default function ContactPage() {
         {/* Contact Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Column: Form */}
-          <div className="lg:col-span-7 bg-white border border-border-color p-8 rounded-sm shadow-sm">
-            <Reveal direction="up" delay={0.15}>
-              <h2 className="text-lg font-display font-bold text-foreground uppercase tracking-wider mb-6">
-                Send an Enquiry
-              </h2>
-              <ContactForm />
+          {/* Left Column: Form & Map */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="bg-white border border-border-color p-8 rounded-sm shadow-sm">
+              <Reveal direction="up" delay={0.15}>
+                <h2 className="text-lg font-display font-bold text-foreground uppercase tracking-wider mb-6">
+                  Send an Enquiry
+                </h2>
+                <ContactForm />
+              </Reveal>
+            </div>
+
+            <Reveal direction="up" delay={0.2}>
+              <ContactMap />
             </Reveal>
           </div>
 
@@ -113,10 +119,6 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-            </Reveal>
-
-            <Reveal direction="right" delay={0.25}>
-              <ContactMap />
             </Reveal>
 
             <Reveal direction="right" delay={0.3}>
