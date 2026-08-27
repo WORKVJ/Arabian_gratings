@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { defaultMetadata } from '@/lib/seo/config';
 import ContactForm from '@/components/enquiries/ContactForm';
+import ContactMap from '@/components/contact/ContactMap';
 import Reveal from '@/components/animations/Reveal';
 import { MapPin, Mail, Phone, Clock } from 'lucide-react';
 
@@ -112,6 +113,10 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+            </Reveal>
+
+            <Reveal direction="right" delay={0.25}>
+              <ContactMap />
             </Reveal>
 
             <Reveal direction="right" delay={0.3}>
