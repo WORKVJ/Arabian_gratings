@@ -691,58 +691,6 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
 
       </section>
 
-      {/* ─── PARTNERS MARQUEE SECTION ─── */}
-      <section className="bg-white py-12 border-b border-[#D9DDE1] overflow-hidden relative z-25">
-        <style>{`
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-marquee-infinite {
-            display: flex;
-            width: max-content;
-            animation: marquee 25s linear infinite;
-          }
-          .animate-marquee-infinite:hover {
-            animation-play-state: paused;
-          }
-        `}</style>
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 mb-6">
-          <FadeUp delay={0.05}>
-            <span className="font-mono text-[#E8612C] text-[9px] uppercase tracking-[0.25em] block">
-              Trusted By Leading Global & GCC Operations
-            </span>
-          </FadeUp>
-        </div>
-        <div className="relative w-full overflow-hidden select-none py-2">
-          {/* Subtle gradient fades on the sides for premium depth */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-          
-          <div className="animate-marquee-infinite flex items-center gap-16 sm:gap-24 px-8">
-            {/* Set 1 */}
-            {partnerLogos.map((logo, idx) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={`partner-logo-1-${idx}`}
-                src={logo}
-                alt={`Arabian Gratings Partner ${idx + 1}`}
-                className="h-10 w-auto max-w-[120px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
-              />
-            ))}
-            {/* Set 2 — duplicate for seamless infinite scroll */}
-            {partnerLogos.map((logo, idx) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={`partner-logo-2-${idx}`}
-                src={logo}
-                alt={`Arabian Gratings Partner ${idx + 1}`}
-                className="h-10 w-auto max-w-[120px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ─── 02 PRODUCTS ─── */}
       <section ref={productsRef} className="bg-[#F5F6F7] py-32 relative z-20 border-b border-[#D9DDE1]">
@@ -1201,6 +1149,44 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 <div className="border-t border-[#D9DDE1]" />
               </motion.div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PARTNERS MARQUEE ─── */}
+      <section className="bg-white py-16 border-b border-[#D9DDE1] overflow-hidden relative z-25">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 mb-8">
+          <FadeUp delay={0.05}>
+            <span className="font-mono text-[#E8612C] text-[9px] uppercase tracking-[0.25em] block mb-1">
+              05 // Trusted Partners
+            </span>
+            <h2 className="font-display font-black text-[#111318] text-[clamp(1.6rem,3vw,2.6rem)] leading-none tracking-tighter uppercase">
+              Trusted By Industry Leaders
+            </h2>
+          </FadeUp>
+        </div>
+        <div className="relative w-full overflow-hidden select-none py-4">
+          <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          <div className="animate-marquee-infinite flex items-center gap-20 sm:gap-32 px-12">
+            {partnerLogos.map((logo, idx) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={`pl1-${idx}`}
+                src={logo}
+                alt={`Partner ${idx + 1}`}
+                className="h-16 w-auto max-w-[180px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
+              />
+            ))}
+            {partnerLogos.map((logo, idx) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={`pl2-${idx}`}
+                src={logo}
+                alt={`Partner ${idx + 1}`}
+                className="h-16 w-auto max-w-[180px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
+              />
+            ))}
           </div>
         </div>
       </section>
