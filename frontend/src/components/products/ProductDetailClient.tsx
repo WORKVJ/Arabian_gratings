@@ -640,71 +640,123 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
       )}
 
       {/* ── SECTION 04 — STANDARDS / DOCUMENTS ──────────────── */}
-      {(product.standard || (product.documents && product.documents.length > 0)) && (
-        <section className="border-t border-[#D9DDE1] py-20 bg-[#F7F8F9]" aria-label="Standards and Documents">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Standards */}
-              {product.standard && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-60px 0px' }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <span className="text-[10px] font-mono font-bold text-[#E8612C] tracking-[0.3em] uppercase block mb-4">
-                    04 // Standards
-                  </span>
-                  <h2 className="text-lg font-display font-black text-[#111318] uppercase tracking-wide mb-4">
-                    Engineering Standards &amp; Certifications
-                  </h2>
-                  <div className="border border-[#D9DDE1] bg-white p-5">
-                    <p className="text-[12px] font-mono text-[#374151] leading-relaxed">{product.standard}</p>
-                  </div>
-                </motion.div>
-              )}
+      {(product.standard || (product.documents && product.documents.length > 0)) && (() => {
+        const activeDocs = product.documents ? product.documents.filter((d) => d.is_active) : [];
+        const hasDocs = activeDocs.length > 0;
+        
+        const rawStandards = product.standard || '';
+        const standardsList = rawStandards.includes(',') && rawStandards.length < 150
+          ? rawStandards.split(',').map((s) => s.trim()).filter(Boolean)
+          : rawStandards ? [rawStandards] : [];
 
-              {/* Document downloads */}
-              {product.documents && product.documents.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-60px 0px' }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                >
-                  <span className="text-[10px] font-mono font-bold text-[#E8612C] tracking-[0.3em] uppercase block mb-4">
-                    Technical Documents
-                  </span>
-                  <h3 className="text-lg font-display font-black text-[#111318] uppercase tracking-wide mb-4">
-                    Datasheets &amp; Catalogs
-                  </h3>
-                  <div className="space-y-2">
-                    {product.documents.filter((d) => d.is_active).map((doc) => (
-                      <a
-                        key={doc.id}
-                        href={doc.file}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-between p-4 bg-white border border-[#D9DDE1] hover:border-[#E8612C] transition-colors group"
-                      >
-                        <div>
-                          <p className="text-[11px] font-display font-bold text-[#111318] uppercase tracking-wide group-hover:text-[#E8612C] transition-colors">
-                            {doc.title}
-                          </p>
-                          <p className="text-[9px] font-mono text-[#9CA3AF] uppercase tracking-wider mt-0.5">
-                            {doc.document_type}
-                          </p>
-                        </div>
-                        <Download className="w-4 h-4 text-[#9CA3AF] group-hover:text-[#E8612C] transition-colors shrink-0" />
-                      </a>
-                    ))}
+        return (
+          <section className="border-t border-[#D9DDE1] py-20 bg-[#F7F8F9]" aria-label="Standards and Documents">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className={hasDocs ? "grid grid-cols-1 lg:grid-cols-12 gap-12" : "max-w-4xl mx-auto"}>
+                
+                {/* Standards Column */}
+                {standardsList.length > 0 && (
+                  <div className={hasDocs ? "lg:col-span-7" : "w-full"}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-60px 0px' }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <span className="text-[10px] font-mono font-bold text-[#E8612C] tracking-[0.3em] uppercase block mb-4">
+                        04 // Standards
+                      </span>
+                      <h2 className="text-lg font-display font-black text-[#111318] uppercase tracking-wide mb-8">
+                        Engineering Standards &amp; Certifications
+                      </h2>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {standardsList.map((std, idx) => (
+                          <motion.div
+                            key={std}
+                            className="relative group bg-white border border-[#D9DDE1] p-5 transition-all duration-300 hover:bg-[#111318] hover:border-[#111318] hover:-translate-y-1 select-none shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(17,19,24,0.12)] rounded-sm"
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: idx * 0.08 }}
+                          >
+                            {/* Left accent bar on hover */}
+                            <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#E8612C] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
+                            
+                            <div className="flex items-start gap-3">
+                              <div className="flex-shrink-0 mt-0.5">
+                                <div className="w-5 h-5 rounded-full bg-[#E8612C]/10 flex items-center justify-center group-hover:bg-[#E8612C]/20 transition-colors">
+                                  <svg className="w-3 h-3 text-[#E8612C]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3.5">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                  </svg>
+                                </div>
+                              </div>
+                              <div>
+                                <span className="block font-mono text-[#E8612C] text-[9px] uppercase tracking-wider mb-1">
+                                  Compliance Code
+                                </span>
+                                <h4 className="font-display font-black text-[#111318] text-[13px] group-hover:text-white uppercase tracking-tight transition-colors duration-200 leading-snug">
+                                  {std}
+                                </h4>
+                                <p className="font-mono text-[#59616B] text-[8px] uppercase tracking-widest mt-1.5 group-hover:text-[#A3A9B0] transition-colors duration-200">
+                                  International Standard
+                                </p>
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
                   </div>
-                </motion.div>
-              )}
+                )}
+
+                {/* Document Downloads Column */}
+                {hasDocs && (
+                  <div className="lg:col-span-5">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-60px 0px' }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                    >
+                      <span className="text-[10px] font-mono font-bold text-[#E8612C] tracking-[0.3em] uppercase block mb-4">
+                        Technical Documents
+                      </span>
+                      <h3 className="text-lg font-display font-black text-[#111318] uppercase tracking-wide mb-8">
+                        Datasheets &amp; Catalogs
+                      </h3>
+                      <div className="space-y-3">
+                        {activeDocs.map((doc) => (
+                          <a
+                            key={doc.id}
+                            href={doc.file}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-between p-4 bg-white border border-[#D9DDE1] hover:border-[#111318] hover:bg-[#111318] transition-all duration-300 group shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgba(17,19,24,0.12)] hover:-translate-y-0.5 rounded-sm relative overflow-hidden"
+                          >
+                            <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#E8612C] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
+                            
+                            <div className="pl-2">
+                              <p className="text-[11px] font-display font-bold text-[#111318] uppercase tracking-wide group-hover:text-white transition-colors duration-200">
+                                {doc.title}
+                              </p>
+                              <p className="text-[9px] font-mono text-[#9CA3AF] uppercase tracking-wider mt-0.5 group-hover:text-[#A3A9B0] transition-colors duration-200">
+                                {doc.document_type}
+                              </p>
+                            </div>
+                            <Download className="w-4 h-4 text-[#9CA3AF] group-hover:text-white transition-colors duration-200 shrink-0 mr-1" />
+                          </a>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </div>
+                )}
+
+              </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        );
+      })()}
 
       {/* ── SECTION 05 — FAQ ─────────────────────────────────── */}
       {product.faq && product.faq.length > 0 && (
