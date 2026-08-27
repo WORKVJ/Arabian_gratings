@@ -311,28 +311,84 @@ function StickyCTA({ product, heroRef }: { product: Product; heroRef: React.RefO
     return () => observer.disconnect();
   }, [heroRef]);
 
+  const quoteHref = `/quote?product=${product.slug}`;
+  const contactHref = `/contact?subject=${encodeURIComponent(`Technical Consultation for ${product.name}`)}`;
+
   return (
     <AnimatePresence>
       {visible && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.25 }}
-          className="fixed bottom-4 right-4 z-40 hidden lg:flex items-center gap-3 bg-[#111318] border border-[#3A3F4A] px-4 py-3 shadow-2xl"
-        >
-          <span className="text-[10px] font-mono text-[#9CA3AF] uppercase tracking-widest max-w-[140px] truncate">
-            {product.name}
-          </span>
-          <Link
-            href={`/quote?product=${product.slug}`}
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors whitespace-nowrap"
+        <>
+          {/* Desktop Sticky Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.25 }}
+            className="fixed bottom-4 right-4 z-45 hidden lg:flex items-center gap-3 bg-[#111318] border border-[#3A3F4A] px-4 py-3 shadow-2xl rounded-sm"
           >
-            Request a Quote <ArrowRight className="w-3 h-3" />
-          </Link>
-        </motion.div>
+            <span className="text-[10px] font-mono text-[#9CA3AF] uppercase tracking-widest max-w-[140px] truncate">
+              {product.name}
+            </span>
+            <Link
+              href={quoteHref}
+              className="flex items-center gap-1.5 px-4 py-2 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors whitespace-nowrap rounded-sm"
+            >
+              Request Quote
+            </Link>
+            <Link
+              href={contactHref}
+              className="flex items-center gap-1.5 px-4 py-2 border border-[#3A3F4A] text-[#A3A9B0] text-[10px] font-display font-bold uppercase tracking-widest hover:text-white hover:border-white transition-colors whitespace-nowrap rounded-sm"
+            >
+              Consultation
+            </Link>
+          </motion.div>
+
+          {/* Mobile Bottom Sticky Action Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-0 left-0 right-0 z-45 lg:hidden bg-[#111318] border-t border-[#3A3F4A] p-3 flex gap-2 shadow-2xl"
+          >
+            <Link
+              href={quoteHref}
+              className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors whitespace-nowrap rounded-sm"
+            >
+              Request Quote
+            </Link>
+            <Link
+              href={contactHref}
+              className="flex-1 flex items-center justify-center gap-1.5 py-3 border border-[#3A3F4A] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:border-white transition-colors whitespace-nowrap rounded-sm"
+            >
+              Consultation
+            </Link>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
+  );
+}
+
+// ─── Section CTAs Inline Row ──────────────────────────────────────────────────
+
+function SectionCTAs({ productName, quoteHref }: { productName: string; quoteHref: string }) {
+  const contactHref = `/contact?subject=${encodeURIComponent(`Technical Consultation for ${productName}`)}`;
+  return (
+    <div className="flex flex-wrap gap-3 mt-6 pt-5 border-t border-[#D9DDE1]">
+      <Link
+        href={quoteHref}
+        className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#E8612C] text-white text-[9px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors rounded-sm"
+      >
+        Request Quote
+      </Link>
+      <Link
+        href={contactHref}
+        className="inline-flex items-center gap-1.5 px-4 py-2 border border-[#D9DDE1] text-[#111318] text-[9px] font-display font-bold uppercase tracking-widest hover:bg-[#111318] hover:text-white hover:border-[#111318] transition-all rounded-sm"
+      >
+        Technical Consultation
+      </Link>
+    </div>
   );
 }
 
@@ -504,6 +560,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                     <p key={i}>{para}</p>
                   ))}
                 </div>
+                <SectionCTAs productName={product.name} quoteHref={quoteHref} />
               </motion.div>
             </div>
 
@@ -588,12 +645,20 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                   Our engineering team can advise on load class, mesh size, bar spacing and finish options.
                 </p>
               </div>
-              <Link
-                href={quoteHref}
-                className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
-              >
-                Request a Quote <ArrowRight className="w-3 h-3" />
-              </Link>
+              <div className="flex gap-3 w-full sm:w-auto shrink-0">
+                <Link
+                  href={quoteHref}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors rounded-sm"
+                >
+                  Request Quote
+                </Link>
+                <Link
+                  href={`/contact?subject=${encodeURIComponent(`Technical Consultation for ${product.name}`)}`}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-[#D9DDE1] text-[#111318] text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#111318] hover:text-white hover:border-[#111318] transition-all rounded-sm"
+                >
+                  Consultation
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -635,6 +700,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 </motion.div>
               ))}
             </div>
+            <SectionCTAs productName={product.name} quoteHref={quoteHref} />
           </div>
         </section>
       )}
@@ -753,6 +819,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 )}
 
               </div>
+              <SectionCTAs productName={product.name} quoteHref={quoteHref} />
             </div>
           </section>
         );
@@ -799,6 +866,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 </motion.details>
               ))}
             </div>
+            <SectionCTAs productName={product.name} quoteHref={quoteHref} />
           </div>
         </section>
       )}
