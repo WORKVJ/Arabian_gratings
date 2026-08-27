@@ -1348,17 +1348,23 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            {posts[0] && (
-              <FadeUp delay={0.1} className="lg:col-span-7">
-                <Link href={`/blog/${posts[0].slug}`} className="group block">
-                  <div className="relative aspect-[16/10] overflow-hidden bg-[#F5F6F7] border border-[#D9DDE1] mb-6">
-                    <div className="w-full h-full bg-gradient-to-br from-[#F0F1F2] via-[#E5E7EA] to-[#DDDFE2] flex items-end p-8">
-                      <span className="font-display font-black text-[#D9DDE1] text-6xl uppercase tracking-tighter leading-none">Technical</span>
+            {posts[0] && (() => {
+              const imgSrc = getImageUrl(posts[0].featured_image?.file) || '/facility-overview.jpg';
+              return (
+                <FadeUp delay={0.1} className="lg:col-span-7">
+                  <Link href={`/blog/${posts[0].slug}`} className="group block">
+                    <div className="relative aspect-[16/10] overflow-hidden bg-[#F5F6F7] border border-[#D9DDE1] mb-6">
+                      <Image
+                        src={imgSrc}
+                        alt={posts[0].title}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-103"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111318]/30 via-transparent to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#E8612C]" />
                     </div>
-                    <div className="absolute inset-0 group-hover:bg-[#E8612C]/5 transition-colors duration-500" />
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#E8612C]" />
-                  </div>
-                  <div className="space-y-3">
+                    <div className="space-y-3">
                     <div className="flex items-center gap-4 font-mono text-[10px] text-[#59616B] uppercase tracking-widest">
                       <span>{posts[0].published_at}</span>
                       <span className="w-1 h-1 rounded-full bg-[#E8612C]" />
@@ -1375,7 +1381,8 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                   </div>
                 </Link>
               </FadeUp>
-            )}
+            );
+          })()}
 
             <div className="lg:col-span-5 flex flex-col gap-8">
               {posts.slice(1).map((post, i) => (
