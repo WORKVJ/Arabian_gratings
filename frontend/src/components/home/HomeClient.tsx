@@ -295,7 +295,6 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
   const [isHoveredMat, setIsHoveredMat] = useState<number | null>(null);
   const [activeProdIndex, setActiveProdIndex] = useState(0);
   const [isHoveredProd, setIsHoveredProd] = useState<number | null>(null);
-  const [activeIndIndex, setActiveIndIndex] = useState(0);
   const [isHoveredInd, setIsHoveredInd] = useState<number | null>(null);
   const [visSpecIndex, setVisSpecIndex] = useState(0);
 
@@ -1014,7 +1013,6 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                   style={{ height: '380px' }}
                   onHoverStart={() => setIsHoveredInd(idx)}
                   onHoverEnd={() => setIsHoveredInd(null)}
-                  onClick={() => setActiveIndIndex(idx)}
                 >
                   {/* Background Image */}
                   <div className="absolute inset-0 z-0">
@@ -1231,7 +1229,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {projects.map((proj, idx) => {
-              const imgSrc = (proj.featured_image as string | null) || projectImages[idx % projectImages.length];
+              const imgSrc = getImageUrl(proj.featured_image?.file) || projectImages[idx % projectImages.length];
               const isFirst = idx === 0;
               return (
                 <div key={proj.id} className={`group ${isFirst ? 'lg:col-span-7' : 'lg:col-span-5 lg:mt-24'}`}>
