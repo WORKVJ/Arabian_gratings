@@ -85,11 +85,47 @@ const defaultPosts: BlogPost[] = [
 ];
 
 const productImages = ['/product-steel-grating.jpg', '/product-frp-grating.jpg', '/product-steel-grating.jpg', '/product-frp-grating.jpg'];
-const productSpecs: Record<number, { label: string; value: string }[]> = {
-  0: [{ label: 'MATERIAL', value: 'ASTM A36 CARBON STEEL' }, { label: 'DEFLECTION', value: 'BS EN 14122 RATIO' }, { label: 'FINISH', value: 'ISO 1461 HOT-DIP GALVANIZED' }],
-  1: [{ label: 'MATRIX', value: 'GRP / FIBERGLASS' }, { label: 'CORROSION', value: 'ISOPHTHALIC ACID IMMUNITY' }, { label: 'SAFETY', value: 'SLIP-RESISTANT GRIT SURFACE' }],
-  2: [{ label: 'INSTALLATION', value: 'BOLTED END PLATES' }, { label: 'NOSING', value: 'SERRATED VISIBILITY PLATES' }, { label: 'LOAD RATING', value: '150KG CONCENTRATED' }],
-  3: [{ label: 'CAD COMPILING', value: 'CNC AUTOCAD SHAPING' }, { label: 'PENETRATIONS', value: 'CIRCULAR & COLLAR BANDING' }, { label: 'CERTIFICATE', value: 'ISO 9001 QUALIFIED TEST' }],
+const productSpecs: Record<string, { label: string; value: string }[]> = {
+  'steel-gratings': [
+    { label: 'MATERIAL', value: 'ASTM A36 CARBON STEEL' },
+    { label: 'DEFLECTION', value: 'BS EN 14122 COMPLIANT' },
+    { label: 'FINISH', value: 'ISO 1461 HOT-DIP GALVANIZED' }
+  ],
+  'frp-grp-products': [
+    { label: 'MATRIX', value: 'GRP / FIBERGLASS' },
+    { label: 'CORROSION', value: 'ISOPHTHALIC ACID IMMUNITY' },
+    { label: 'SAFETY', value: 'SLIP-RESISTANT GRIT SURFACE' }
+  ],
+  'stainless-steel-products': [
+    { label: 'GRADE', value: 'STAINLESS STEEL SS316 / SS304' },
+    { label: 'APPLICATION', value: 'HYGIENIC & OFFSHORE DRAINS' },
+    { label: 'FINISH', value: 'PICKLED & PASSIVATED' }
+  ],
+  'aluminium': [
+    { label: 'MATERIAL', value: 'ALUMINIUM ALLOY 6063-T6' },
+    { label: 'NOSING', value: 'SERRATED SHIFTING SAFETY' },
+    { label: 'LOAD RATING', value: 'LIGHTWEIGHT PEDESTRIAN ACCESS' }
+  ],
+  'manhole': [
+    { label: 'MATERIAL', value: 'DUCTILE IRON GJS500/7' },
+    { label: 'STANDARDS', value: 'BS EN 124 CLASS D400' },
+    { label: 'SEAL', value: 'DOUBLE SEALED O-RING GAS TIGHT' }
+  ],
+  'ss-gi-grating-clamps': [
+    { label: 'TYPE', value: 'M-CLIP / SADDLE CLAMP SYSTEM' },
+    { label: 'COMPATIBILITY', value: '30MM TO 41MM GRATING PITCH' },
+    { label: 'FASTENER', value: 'M8 BOLT WITH SQUARE NUT' }
+  ],
+  'step-iron': [
+    { label: 'CORE', value: 'STRUCTURAL STEEL / DUCTILE IRON' },
+    { label: 'ENCAPSULATION', value: 'VIRGIN POLYPROPYLENE PLASTIC' },
+    { label: 'STANDARDS', value: 'BS EN 13101 COMPLIANT' }
+  ],
+  'stud-products': [
+    { label: 'MATERIAL', value: 'STAINLESS STEEL SS316L' },
+    { label: 'PATTERN', value: 'TACTILE DOME / CONCENTRIC RING' },
+    { label: 'STEM', value: 'PIN STEM FOR ADHESIVE INJECTION' }
+  ]
 };
 const industryImages = ['/industry-oilgas.jpg', '/project-marine.jpg', '/project-marine.jpg', '/project-refinery.jpg'];
 const projectImages = ['/project-marine.jpg', '/project-refinery.jpg'];
@@ -870,7 +906,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 </span>
                 {categories.map((cat, idx) => {
                   const isActive = isHoveredProd !== null ? isHoveredProd === idx : activeProdIndex === idx;
-                  const specs = productSpecs[idx] ?? productSpecs[0];
+                  const specs = productSpecs[cat.slug] ?? productSpecs['steel-gratings'];
                   if (!isActive) return null;
                   return (
                     <div key={cat.id} className="space-y-0">
