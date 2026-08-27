@@ -680,117 +680,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
 
       </section>
 
-      {/* ─── 02 ENGINEERING INTRO ─── */}
-      <section ref={introRef} className="bg-white py-32 relative z-10 border-b border-[#D9DDE1]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-
-            {/* LEFT */}
-            <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-28">
-              <FadeUp delay={0.05}>
-                <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block">
-                  01 // ENGINEERING &mdash; SAUDI / GCC
-                </span>
-              </FadeUp>
-              <div className="w-12 h-[2px] bg-[#E8612C]/40" />
-              <div className="space-y-2">
-                <span className="block font-mono text-[#59616B] text-[9px] uppercase tracking-widest leading-[1.9]">
-                  SYSTEM TYPE: STRUCTURAL SYSTEMS<br />
-                  MATERIALS: STEEL / FRP / ALUMINIUM<br />
-                  DESIGN BASE: SITE ENGINEERED ACCESS<br />
-                  REGULATORY: GCC MUNICIPAL COMPLIANT
-                </span>
-              </div>
-            </div>
-
-            {/* RIGHT */}
-            <div className="lg:col-span-8 space-y-12">
-              <div className="space-y-6">
-                <MaskReveal delay={0.12}>
-                  <h2 className="font-display font-black text-[#111318] text-[clamp(2.2rem,4.8vw,4rem)] leading-[0.95] tracking-tighter uppercase">
-                    Engineered For<br />The Environments<br />That Demand More.
-                  </h2>
-                </MaskReveal>
-                <FadeUp delay={0.25} className="max-w-2xl">
-                  <p className="text-[#59616B] text-sm leading-relaxed">
-                    Arabian Gratings supplies site-engineered platform floor structures to steel suppliers, fabricators, and engineering firms across the GCC. Each batch complies with structural safety ratios and local Saudi municipal specifications.
-                  </p>
-                </FadeUp>
-              </div>
-
-              {/* Material selector tabs */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-[#D9DDE1]">
-                {[
-                  { id: 0, num: '01', title: 'STEEL', desc: 'CARBON & ALLOY' },
-                  { id: 1, num: '02', title: 'FRP', desc: 'FIBERGLASS MATRIX' },
-                  { id: 2, num: '03', title: 'ALUMINIUM', desc: 'LIGHTWEIGHT' },
-                ].map((item) => {
-                  const isActive = isHoveredMat !== null ? isHoveredMat === item.id : activeMatIndex === item.id;
-                  return (
-                    <div
-                      key={item.id}
-                      className="relative cursor-pointer transition-all duration-300 py-4 select-none"
-                      onMouseEnter={() => setIsHoveredMat(item.id)}
-                      onMouseLeave={() => setIsHoveredMat(null)}
-                      style={{ transform: isActive ? 'translateX(8px)' : 'translateX(0)' }}
-                    >
-                      <div className="absolute top-0 left-0 w-[2px] h-full bg-[#D9DDE1]">
-                        <motion.div
-                          className="w-full bg-[#E8612C]"
-                          initial={{ height: '0%' }}
-                          animate={{ height: isActive ? '100%' : '0%' }}
-                          transition={{ duration: 0.3 }}
-                        />
-                      </div>
-                      <div className="pl-4">
-                        <span className={`block font-mono text-[9px] uppercase tracking-widest ${isActive ? 'text-[#E8612C]' : 'text-[#59616B]'}`}>
-                          {item.num} {'//'} SPEC
-                        </span>
-                        <h3 className={`font-display font-black text-lg uppercase tracking-tight mt-1 ${isActive ? 'text-[#E8612C]' : 'text-[#111318]'}`}>
-                          {item.title}
-                        </h3>
-                        <span className="block font-sans text-[11px] text-[#59616B] uppercase tracking-wider mt-0.5">
-                          {item.desc}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Image stage */}
-              <div className="relative w-full aspect-[16/9] overflow-hidden bg-slate-100 border border-[#D9DDE1]">
-                {['/facility-overview.jpg', '/product-frp-grating.jpg', '/product-steel-grating.jpg'].map((imgSrc, idx) => {
-                  const isActive = isHoveredMat !== null ? isHoveredMat === idx : activeMatIndex === idx;
-                  return (
-                    <motion.div
-                      key={imgSrc}
-                      className="absolute inset-0 z-10"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: isActive ? 1 : 0 }}
-                      transition={{ duration: 0.8, ease: easeOut }}
-                    >
-                      <Image
-                        src={imgSrc}
-                        alt="Arabian Gratings structural material overview"
-                        fill
-                        sizes="100vw"
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#111318]/20 to-transparent" />
-                      <div className="absolute bottom-4 left-4 font-mono text-white/80 text-[9px] uppercase tracking-widest">
-                        METRIC STABILITY // SAUDI
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── 03 PRODUCTS ─── */}
+      {/* ─── 02 PRODUCTS ─── */}
       <section ref={productsRef} className="bg-[#F5F6F7] py-32 relative z-20 border-b border-[#D9DDE1]">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -800,7 +690,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               <div>
                 <FadeUp delay={0.05}>
                   <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block mb-4">
-                    02 // PRODUCT CATALOG
+                    01 // PRODUCT CATALOG
                   </span>
                 </FadeUp>
                 <MaskReveal delay={0.1}>
@@ -939,6 +829,116 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                         </Link>
                       </div>
                     </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 03 ENGINEERING INTRO ─── */}
+      <section ref={introRef} className="bg-white py-32 relative z-10 border-b border-[#D9DDE1]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+
+            {/* LEFT */}
+            <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-28">
+              <FadeUp delay={0.05}>
+                <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block">
+                  02 // ENGINEERING &mdash; SAUDI / GCC
+                </span>
+              </FadeUp>
+              <div className="w-12 h-[2px] bg-[#E8612C]/40" />
+              <div className="space-y-2">
+                <span className="block font-mono text-[#59616B] text-[9px] uppercase tracking-widest leading-[1.9]">
+                  SYSTEM TYPE: STRUCTURAL SYSTEMS<br />
+                  MATERIALS: STEEL / FRP / ALUMINIUM<br />
+                  DESIGN BASE: SITE ENGINEERED ACCESS<br />
+                  REGULATORY: GCC MUNICIPAL COMPLIANT
+                </span>
+              </div>
+            </div>
+
+            {/* RIGHT */}
+            <div className="lg:col-span-8 space-y-12">
+              <div className="space-y-6">
+                <MaskReveal delay={0.12}>
+                  <h2 className="font-display font-black text-[#111318] text-[clamp(2.2rem,4.8vw,4rem)] leading-[0.95] tracking-tighter uppercase">
+                    Engineered For<br />The Environments<br />That Demand More.
+                  </h2>
+                </MaskReveal>
+                <FadeUp delay={0.25} className="max-w-2xl">
+                  <p className="text-[#59616B] text-sm leading-relaxed">
+                    Arabian Gratings supplies site-engineered platform floor structures to steel suppliers, fabricators, and engineering firms across the GCC. Each batch complies with structural safety ratios and local Saudi municipal specifications.
+                  </p>
+                </FadeUp>
+              </div>
+
+              {/* Material selector tabs */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-[#D9DDE1]">
+                {[
+                  { id: 0, num: '01', title: 'STEEL', desc: 'CARBON & ALLOY' },
+                  { id: 1, num: '02', title: 'FRP', desc: 'FIBERGLASS MATRIX' },
+                  { id: 2, num: '03', title: 'ALUMINIUM', desc: 'LIGHTWEIGHT' },
+                ].map((item) => {
+                  const isActive = isHoveredMat !== null ? isHoveredMat === item.id : activeMatIndex === item.id;
+                  return (
+                    <div
+                      key={item.id}
+                      className="relative cursor-pointer transition-all duration-300 py-4 select-none"
+                      onMouseEnter={() => setIsHoveredMat(item.id)}
+                      onMouseLeave={() => setIsHoveredMat(null)}
+                      style={{ transform: isActive ? 'translateX(8px)' : 'translateX(0)' }}
+                    >
+                      <div className="absolute top-0 left-0 w-[2px] h-full bg-[#D9DDE1]">
+                        <motion.div
+                          className="w-full bg-[#E8612C]"
+                          initial={{ height: '0%' }}
+                          animate={{ height: isActive ? '100%' : '0%' }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </div>
+                      <div className="pl-4">
+                        <span className={`block font-mono text-[9px] uppercase tracking-widest ${isActive ? 'text-[#E8612C]' : 'text-[#59616B]'}`}>
+                          {item.num} {'//'} SPEC
+                        </span>
+                        <h3 className={`font-display font-black text-lg uppercase tracking-tight mt-1 ${isActive ? 'text-[#E8612C]' : 'text-[#111318]'}`}>
+                          {item.title}
+                        </h3>
+                        <span className="block font-sans text-[11px] text-[#59616B] uppercase tracking-wider mt-0.5">
+                          {item.desc}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Image stage */}
+              <div className="relative w-full aspect-[16/9] overflow-hidden bg-slate-100 border border-[#D9DDE1]">
+                {['/facility-overview.jpg', '/product-frp-grating.jpg', '/product-steel-grating.jpg'].map((imgSrc, idx) => {
+                  const isActive = isHoveredMat !== null ? isHoveredMat === idx : activeMatIndex === idx;
+                  return (
+                    <motion.div
+                      key={imgSrc}
+                      className="absolute inset-0 z-10"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: isActive ? 1 : 0 }}
+                      transition={{ duration: 0.8, ease: easeOut }}
+                    >
+                      <Image
+                        src={imgSrc}
+                        alt="Arabian Gratings structural material overview"
+                        fill
+                        sizes="100vw"
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111318]/20 to-transparent" />
+                      <div className="absolute bottom-4 left-4 font-mono text-white/80 text-[9px] uppercase tracking-widest">
+                        METRIC STABILITY // SAUDI
+                      </div>
+                    </motion.div>
                   );
                 })}
               </div>
