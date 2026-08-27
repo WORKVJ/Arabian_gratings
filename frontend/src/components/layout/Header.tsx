@@ -11,24 +11,15 @@ export default function Header() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const noMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrolled(currentScrollY > 50);
-      if (currentScrollY > lastScrollY && currentScrollY > 150) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-      }
-      setLastScrollY(currentScrollY);
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -67,8 +58,7 @@ export default function Header() {
         scrolled ? 'py-2.5 shadow-lg shadow-black/20' : 'py-3'
       }`}
       style={{
-        transform: visible ? 'translateY(0)' : 'translateY(-100%)',
-        transition: 'transform 0.4s ease, padding 0.3s ease, background-color 0.3s ease, border-color 0.3s ease',
+        transition: 'padding 0.3s ease, background-color 0.3s ease, border-color 0.3s ease',
       }}
     >
       <nav className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-8 flex items-center justify-between gap-6">
