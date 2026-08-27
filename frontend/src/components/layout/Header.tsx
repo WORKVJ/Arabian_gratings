@@ -43,7 +43,29 @@ export default function Header() {
 
   const menuItems = [
     { name: 'Home', href: '/' },
-    { name: 'Products', href: '/products' },
+    {
+      name: 'Products',
+      href: '/products',
+      dropdown: [
+        { name: 'FRP/GRP Products', href: '/products/category/frp-grp-products' },
+        { name: 'Steel Gratings', href: '/products/category/steel-gratings' },
+        { name: 'Stainless Steel Products', href: '/products/category/stainless-steel-products' },
+        { name: 'Aluminium', href: '/products/category/aluminium' },
+        { name: 'Manhole', href: '/products/category/manhole' },
+        { name: 'SS/GI Grating Clamps', href: '/products/category/ss-gi-grating-clamps' },
+        { name: 'Step Iron', href: '/products/category/step-iron' },
+        { name: 'Stud Products', href: '/products/category/stud-products' },
+      ],
+    },
+    {
+      name: 'Services',
+      href: '/services',
+      dropdown: [
+        { name: 'Custom Fabrication', href: '/services/custom-fabrication' },
+        { name: 'Technical Consultation', href: '/services/technical-consultation' },
+        { name: 'Site Survey & Installation', href: '/services/site-survey-installation' },
+      ],
+    },
     { name: 'Industries', href: '/industries' },
     { name: 'Projects', href: '/projects' },
     { name: 'About', href: '/about' },
@@ -85,10 +107,10 @@ export default function Header() {
                   : pathname === item.href || pathname.startsWith(item.href + '/');
 
               return (
-                <div key={item.name} className="relative group">
+                <div key={item.name} className="relative group py-2">
                   <Link
                     href={item.href}
-                    className={`relative font-sans text-[11px] font-semibold uppercase tracking-wider transition-colors py-2 block ${
+                    className={`relative font-sans text-[11px] font-semibold uppercase tracking-wider transition-colors block ${
                       isPageActive ? 'text-[#E8612C]' : 'text-[#111318] hover:text-[#E8612C]'
                     }`}
                   >
@@ -98,6 +120,21 @@ export default function Header() {
                       style={isPageActive ? { width: '100%' } : {}}
                     />
                   </Link>
+                  {item.dropdown && (
+                    <div className="absolute top-full left-0 pt-2 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-300 z-50">
+                      <div className="bg-white border border-[#D9DDE1] py-3 w-64 shadow-md rounded-sm">
+                        {item.dropdown.map((sub) => (
+                          <Link
+                            key={sub.name}
+                            href={sub.href}
+                            className="block px-5 py-2.5 text-[10px] font-sans font-bold uppercase tracking-widest text-[#111318] hover:text-[#E8612C] hover:bg-slate-50 transition-colors"
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -149,6 +186,20 @@ export default function Header() {
                     <span className="font-mono text-xs text-[#E8612C]">0{idx + 1}</span>
                     <span>{item.name}</span>
                   </Link>
+                  {item.dropdown && (
+                    <div className="pl-8 mt-3 space-y-2.5 flex flex-col">
+                      {item.dropdown.map((sub) => (
+                        <Link
+                          key={sub.name}
+                          href={sub.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="text-xs font-bold font-sans uppercase tracking-wider text-[#59616B] hover:text-[#E8612C] transition-colors py-1"
+                        >
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
 
