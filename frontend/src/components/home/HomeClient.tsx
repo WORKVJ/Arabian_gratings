@@ -84,6 +84,17 @@ const defaultPosts: BlogPost[] = [
   { id: 2, title: 'GRP/FRP Matrix Selection Guide for Sulphur Environments', slug: 'grp-frp-matrix-selection-guide', excerpt: 'A review of isophthalic polyester versus vinyl ester resin resistance profiles in local refineries and desalination plants.', content: '', content_blocks: [], featured_image: null, category: { id: 2, name: 'Material Engineering', slug: 'material-engineering', description: '', is_active: true }, author: { id: 1, name: 'Chemical Specialist' }, status: 'PUBLISHED', is_featured: false, published_at: '2025-08-22', created_at: '', updated_at: '', related_products: [], related_industries: [], related_posts: [], no_index: false },
 ];
 
+const partnerLogos = [
+  '/img/logo-01 (1).png',
+  '/img/logo-04.png',
+  '/img/logo-05.png',
+  '/img/logo-06.png',
+  '/img/logo-08.png',
+  '/img/logo-10.png',
+  '/img/logo-11.png',
+  '/img/logo-12.png',
+];
+
 const productImages = ['/product-steel-grating.jpg', '/product-frp-grating.jpg', '/product-steel-grating.jpg', '/product-frp-grating.jpg'];
 const productSpecs: Record<string, { label: string; value: string }[]> = {
   'steel-gratings': [
@@ -678,6 +689,63 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
 
         </div>
 
+      </section>
+
+      {/* ─── PARTNERS MARQUEE SECTION ─── */}
+      <section className="bg-white py-12 border-b border-[#D9DDE1] overflow-hidden relative z-25">
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-marquee-infinite {
+            display: flex;
+            width: max-content;
+            animation: marquee 25s linear infinite;
+          }
+          .animate-marquee-infinite:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 mb-6">
+          <FadeUp delay={0.05}>
+            <span className="font-mono text-[#E8612C] text-[9px] uppercase tracking-[0.25em] block">
+              Trusted By Leading Global & GCC Operations
+            </span>
+          </FadeUp>
+        </div>
+        <div className="relative w-full overflow-hidden select-none py-2">
+          {/* Subtle gradient fades on the sides for premium depth */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          
+          <div className="animate-marquee-infinite flex items-center gap-16 sm:gap-24">
+            {/* Set 1 */}
+            {partnerLogos.map((logo, idx) => (
+              <div key={`partner-logo-1-${idx}`} className="h-10 w-28 relative grayscale opacity-45 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer">
+                <Image
+                  src={logo}
+                  alt={`Arabian Gratings Partner ${idx + 1}`}
+                  fill
+                  className="object-contain"
+                  sizes="120px"
+                />
+              </div>
+            ))}
+            {/* Set 2 (duplicate to make it scroll infinitely and seamlessly) */}
+            {partnerLogos.map((logo, idx) => (
+              <div key={`partner-logo-2-${idx}`} className="h-10 w-28 relative grayscale opacity-45 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer">
+                <Image
+                  src={logo}
+                  alt={`Arabian Gratings Partner ${idx + 1}`}
+                  fill
+                  className="object-contain"
+                  sizes="120px"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ─── 02 PRODUCTS ─── */}
