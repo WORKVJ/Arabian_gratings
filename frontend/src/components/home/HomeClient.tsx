@@ -1175,7 +1175,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 key={`pl1-${idx}`}
                 src={logo}
                 alt={`Partner ${idx + 1}`}
-                className="h-16 w-auto max-w-[180px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
+                className="h-24 w-auto max-w-[240px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
               />
             ))}
             {partnerLogos.map((logo, idx) => (
@@ -1184,7 +1184,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 key={`pl2-${idx}`}
                 src={logo}
                 alt={`Partner ${idx + 1}`}
-                className="h-16 w-auto max-w-[180px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
+                className="h-24 w-auto max-w-[240px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
               />
             ))}
           </div>
