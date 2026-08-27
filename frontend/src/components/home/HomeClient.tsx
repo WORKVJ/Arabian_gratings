@@ -85,7 +85,7 @@ const defaultPosts: BlogPost[] = [
 ];
 
 const partnerLogos = [
-  '/img/logo-01 (1).png',
+  '/img/logo-01.png',
   '/img/logo-04.png',
   '/img/logo-05.png',
   '/img/logo-06.png',
@@ -719,30 +719,26 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
           <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
           
-          <div className="animate-marquee-infinite flex items-center gap-16 sm:gap-24">
+          <div className="animate-marquee-infinite flex items-center gap-16 sm:gap-24 px-8">
             {/* Set 1 */}
             {partnerLogos.map((logo, idx) => (
-              <div key={`partner-logo-1-${idx}`} className="h-10 w-28 relative grayscale opacity-45 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer">
-                <Image
-                  src={logo}
-                  alt={`Arabian Gratings Partner ${idx + 1}`}
-                  fill
-                  className="object-contain"
-                  sizes="120px"
-                />
-              </div>
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={`partner-logo-1-${idx}`}
+                src={logo}
+                alt={`Arabian Gratings Partner ${idx + 1}`}
+                className="h-10 w-auto max-w-[120px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
+              />
             ))}
-            {/* Set 2 (duplicate to make it scroll infinitely and seamlessly) */}
+            {/* Set 2 — duplicate for seamless infinite scroll */}
             {partnerLogos.map((logo, idx) => (
-              <div key={`partner-logo-2-${idx}`} className="h-10 w-28 relative grayscale opacity-45 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer">
-                <Image
-                  src={logo}
-                  alt={`Arabian Gratings Partner ${idx + 1}`}
-                  fill
-                  className="object-contain"
-                  sizes="120px"
-                />
-              </div>
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={`partner-logo-2-${idx}`}
+                src={logo}
+                alt={`Arabian Gratings Partner ${idx + 1}`}
+                className="h-10 w-auto max-w-[120px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
+              />
             ))}
           </div>
         </div>
