@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import { defaultMetadata } from '@/lib/seo/config';
 import ContactForm from '@/components/enquiries/ContactForm';
 import ContactMap from '@/components/contact/ContactMap';

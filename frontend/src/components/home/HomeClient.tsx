@@ -12,7 +12,7 @@ import {
   useInView,
   animate,
 } from 'framer-motion';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { ProductCategory, Industry, Project, BlogPost } from '@/types';
 import { getImageUrl } from '@/lib/api/client';
 
@@ -292,6 +292,8 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
   const [activeProdIndex, setActiveProdIndex] = useState(0);
   const [isHoveredProd, setIsHoveredProd] = useState<number | null>(null);
   const [isHoveredInd, setIsHoveredInd] = useState<number | null>(null);
+  const [activeIndStatIndex, setActiveIndStatIndex] = useState(0);
+  const [isHoveredIndStat, setIsHoveredIndStat] = useState<number | null>(null);
   const [visSpecIndex, setVisSpecIndex] = useState(0);
 
   useEffect(() => {
@@ -318,6 +320,13 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
     return () => clearInterval(interval);
   }, [isHoveredProd, noMotion]);
 
+  useEffect(() => {
+    if (noMotion) return;
+    const interval = setInterval(() => {
+      if (isHoveredIndStat === null) setActiveIndStatIndex((prev) => (prev + 1) % 4);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [isHoveredIndStat, noMotion]);
 
   useEffect(() => {
     if (noMotion) return;
@@ -1093,22 +1102,47 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               { num: '321+', target: 321, suffix: '+', label: 'Projects Delivered' },
               { num: '4', target: 4, suffix: '', label: 'Core Industries Served' },
               { num: 'ISO', target: 0, suffix: '', label: '9001 Certified Quality' },
-            ].map((stat) => {
+            ].map((stat, idx) => {
               const isNumeric = stat.target > 0;
+              const isActive = (isHoveredIndStat !== null ? isHoveredIndStat === idx : activeIndStatIndex === idx) && !noMotion;
               return (
                 <motion.div
                   key={stat.label}
                   variants={staggerItem}
-                  className="bg-white/5 hover:bg-white/10 transition-colors duration-300 px-8 py-7 flex flex-col gap-1"
+                  className="px-8 py-7 flex flex-col gap-1 cursor-pointer select-none relative overflow-hidden"
+                  onMouseEnter={() => setIsHoveredIndStat(idx)}
+                  onMouseLeave={() => setIsHoveredIndStat(null)}
+                  animate={{
+                    backgroundColor: isActive ? '#E8612C' : 'rgba(255, 255, 255, 0.04)',
+                  }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
                 >
-                  <span className="font-display font-black text-white text-3xl tracking-tighter">
+                  {/* Subtle active line indicator */}
+                  {isActive && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-[3px] bg-white"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 3.0, ease: 'linear' }}
+                    />
+                  )}
+
+                  <span className="font-display font-black text-white text-3xl tracking-tighter block transition-transform duration-300 group-hover:scale-105">
                     {isNumeric ? (
                       <StatCounter value={stat.num} targetVal={stat.target} noMotion={!!noMotion} suffix={stat.suffix} />
                     ) : (
                       stat.num
                     )}
                   </span>
-                  <span className="font-mono text-white/40 text-[9px] uppercase tracking-widest">{stat.label}</span>
+                  <motion.span
+                    className="font-mono text-[9px] uppercase tracking-widest block"
+                    animate={{
+                      color: isActive ? 'rgba(255, 255, 255, 0.85)' : 'rgba(255, 255, 255, 0.4)',
+                    }}
+                    transition={{ duration: 0.35 }}
+                  >
+                    {stat.label}
+                  </motion.span>
                 </motion.div>
               );
             })}
