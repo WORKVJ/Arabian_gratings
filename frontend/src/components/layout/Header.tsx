@@ -38,7 +38,6 @@ export default function Header() {
     { name: 'Industries', href: '/industries' },
     { name: 'Projects', href: '/projects' },
     { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
   ];
 
   const productDropdownItems = [
