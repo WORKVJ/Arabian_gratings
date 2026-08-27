@@ -10,6 +10,7 @@ sys.path.append(str(Path(__file__).resolve().parent))
 django.setup()
 
 from apps.products.models import Media, Document, ProductCategory, Product, ProductImage, ProductSpecification
+from apps.industries.models import Industry
 
 def seed():
     print("Starting product database seed...")
@@ -361,7 +362,62 @@ def seed():
         prod.save()
         print(f"Linked related products for: {prod.name}")
 
-    print("Product database seeding completed successfully!")
+    # 5. Seed Industries
+    print("Seeding Industries...")
+    Industry.objects.all().delete()
+    
+    industries_data = [
+        {
+            "name": "Oil & Gas",
+            "slug": "oil-gas",
+            "short": "Exploration platforms, processing yards, and seawater splash zones requiring premium corrosion resistance.",
+            "desc": "Arabian Gratings supplies high-performance safety flooring and access systems specifically engineered for the demanding conditions of the onshore and offshore Oil & Gas sector. From offshore drilling rigs and FPSO vessels to onshore refineries, gas processing plants, and sulfur storage facilities, our industrial grating products deliver unparalleled durability and compliance with strict API, ISO, and ASTM regulations.",
+            "img": "industry-oilgas.jpg",
+            "prods": ["moulded-grp-walkway-grating", "electroforged-welded-steel-grating", "m-clip-grating-fastening-clamp"]
+        },
+        {
+            "name": "Marine & Offshore",
+            "slug": "marine-offshore",
+            "short": "Vessel decks, cargo bays, coastal jetties, and mooring structures subject to harsh salt spray.",
+            "desc": "Access walkways, gangways, vessel decks, and dock structures are continuously exposed to saltwater, tidal waves, and severe atmospheric moisture. Arabian Gratings provides hot-dip galvanized steel grids and advanced GRP molded gratings that resist marine corrosion and salt spray fatigue, ensuring structural integrity and slip-resistant footing for crews.",
+            "img": "project-marine.jpg",
+            "prods": ["moulded-grp-walkway-grating", "stainless-steel-ss316-floor-grating", "m-clip-grating-fastening-clamp"]
+        },
+        {
+            "name": "Desalination Plants",
+            "slug": "water-treatment",
+            "short": "Chemical-safe GRP grids and stainless floor plates for humid, chlorine-heavy utility yards.",
+            "desc": "Desalination plants and wastewater treatment facilities handle highly corrosive chemicals, chlorine-heavy environments, and high humidity levels. Our GRP/FRP gratings and stainless steel gratings are designed with vinyl ester resin matrices and pickling finishes to offer complete resistance to chemical splash and acidic attacks, securing safe walking platforms in water utilities.",
+            "img": "project-refinery.jpg",
+            "prods": ["moulded-grp-walkway-grating", "stainless-steel-ss316-floor-grating", "aluminium-access-grating-walkway"]
+        },
+        {
+            "name": "Infrastructure",
+            "slug": "infrastructure",
+            "short": "Trench covers, utility ducts, access walkways, and ventilation screens for municipal projects.",
+            "desc": "Arabian Gratings supplies heavy-duty trench covers, drainage grates, manhole covers, and utility duct frames for roads, railways, airports, and municipal construction projects. Engineered for heavy wheel loads (such as D400 and E600 classes), our access systems ensure safe traffic flow and long service life across urban municipal networks.",
+            "img": "cta-factory.jpg",
+            "prods": ["electroforged-welded-steel-grating", "ductile-iron-double-sealed-manhole-cover", "ductile-iron-plastic-encapsulated-step-iron", "stainless-steel-tactile-stud"]
+        }
+    ]
+
+    for ind_data in industries_data:
+        ind = Industry.objects.create(
+            name=ind_data["name"],
+            slug=ind_data["slug"],
+            short_description=ind_data["short"],
+            description=ind_data["desc"],
+            image=media_objs.get(ind_data["img"], default_media),
+            is_active=True,
+            no_index=False
+        )
+        # Link related products
+        linked_prods = [prod_objs[p_slug] for p_slug in ind_data["prods"] if p_slug in prod_objs]
+        ind.related_products.set(linked_prods)
+        ind.save()
+        print(f"Created industry: {ind.name} and linked {len(linked_prods)} products.")
+
+    print("Product & Industry database seeding completed successfully!")
 
 if __name__ == "__main__":
     seed()
