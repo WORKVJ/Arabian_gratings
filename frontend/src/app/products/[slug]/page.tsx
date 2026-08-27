@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
   // 1. Try category first
   try {
     const category = await getProductCategory(slug);
-    const title = category.seo_title || `${category.name} Supplier UAE | Arabian Gratings`;
-    const description = category.seo_description || `${category.short_description} Premium quality engineered grids by Arabian Gratings UAE. Delivering across Dubai, Abu Dhabi, Sharjah and the GCC.`;
+    const title = category.seo_title || `${category.name} Supplier Saudi Arabia | Arabian Gratings`;
+    const description = category.seo_description || `${category.short_description} Premium quality engineered grids by Arabian Gratings Saudi Arabia. Delivering across Jeddah, Dammam, Riyadh and the GCC.`;
     return generatePageMetadata(category, {
       title,
       description: description.slice(0, 160),
@@ -32,10 +32,10 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
     // 2. Fall back to product
     try {
       const product = await getProduct(slug);
-      const title = product.seo_title || `${product.name} UAE | Arabian Gratings`;
+      const title = product.seo_title || `${product.name} Saudi Arabia | Arabian Gratings`;
       let description = product.seo_description || stripHtml(product.short_description);
-      if (!product.seo_description && !description.includes('UAE') && !description.includes('GCC')) {
-        description = `${description} Premium industrial supply by Arabian Gratings UAE, delivering across Dubai, Abu Dhabi, Sharjah, and the GCC region.`;
+      if (!product.seo_description && !description.includes('Saudi') && !description.includes('GCC')) {
+        description = `${description} Premium industrial supply by Arabian Gratings Saudi Arabia, delivering across Jeddah, Dammam, Riyadh, and the GCC region.`;
       }
       return generatePageMetadata(product, {
         title,
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
           undefined,
       });
     } catch {
-      return { title: 'Product Details | Arabian Gratings UAE' };
+      return { title: 'Product Details | Arabian Gratings Saudi Arabia' };
     }
   }
 }

@@ -20,12 +20,12 @@ export async function generateMetadata({ params }: IndustryDetailPageProps): Pro
   try {
     const industry = await getIndustry(slug);
     return generatePageMetadata(industry, {
-      title: `${industry.name} | Arabian Gratings UAE`,
+      title: `${industry.name} | Arabian Gratings Saudi Arabia`,
       description: stripHtml(industry.short_description),
       path: `/industries/${industry.slug}`,
     });
   } catch {
-    return { title: 'Industry | Arabian Gratings UAE' };
+    return { title: 'Industry | Arabian Gratings Saudi Arabia' };
   }
 }
 

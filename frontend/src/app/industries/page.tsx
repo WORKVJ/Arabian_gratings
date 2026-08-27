@@ -10,8 +10,8 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
   ...defaultMetadata,
-  title: 'Industries Served | Arabian Gratings UAE',
-  description: 'Arabian Gratings supplies industrial grating solutions across Oil & Gas, Water Treatment, Power, Infrastructure, and other demanding sectors across the UAE and GCC.'
+  title: 'Industries Served | Arabian Gratings Saudi Arabia',
+  description: 'Arabian Gratings supplies industrial grating solutions across Oil & Gas, Water Treatment, Power, Infrastructure, and other demanding sectors across Saudi Arabia and GCC.'
 };
 
 export default async function IndustriesPage() {

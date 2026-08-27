@@ -10,7 +10,7 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
   ...defaultMetadata,
-  title: 'Services | Arabian Gratings UAE',
+  title: 'Services | Arabian Gratings Saudi Arabia',
   description: 'Arabian Gratings offers a range of industrial services including custom fabrication, layout coordination, technical drawing support, and project delivery assistance.'
 };
 

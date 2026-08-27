@@ -21,7 +21,7 @@ const LOCATIONS: Record<string, LocationData> = {
   'dubai': {
     name: 'Dubai',
     title: 'Industrial Grating Systems Supplier in Dubai | Arabian Gratings',
-    seoDescription: 'Premium steel, GRP, and aluminium gratings supplier in Dubai, UAE. Serving commercial infrastructure, municipal roads, and metro access layouts.',
+    seoDescription: 'Premium steel, GRP, and aluminium gratings supplier to Dubai, GCC. Serving commercial infrastructure, municipal roads, and metro access layouts.',
     intro: 'Dubai stands as the primary logistics and commercial hub of the Middle East, requiring state-of-the-art access systems. Arabian Gratings supplies precision-fabricated structural floor grids, architectural facade panels, and drainage manhole covers designed to fit the demanding architectural standards and fast-paced commercial developments across Dubai and the surrounding free zones.',
     projectContext: 'Our access panels are commonly specified for commercial skyscrapers, airport utility basements, metro station service rooms, and district cooling plants. We provide anodized aluminium facade systems and premium stainless steel safety grates for luxury architectural sites, ensuring clean aesthetic integration alongside structural load limits.',
     industries: [
@@ -50,7 +50,7 @@ const LOCATIONS: Record<string, LocationData> = {
     name: 'Abu Dhabi',
     title: 'Heavy-Duty Steel & GRP Grating Supplier in Abu Dhabi | Arabian Gratings',
     seoDescription: 'Certified heavy-duty electroforged steel and Moulded GRP walkway grating supplier in Abu Dhabi, Mussafah and Ruwais refineries. ISO 1461 galvanized.',
-    intro: 'Abu Dhabi contains the bulk of the UAE\'s energy and heavy industrial sectors, demanding access flooring with extreme chemical and load capabilities. Arabian Gratings supplies ISO 1461 hot-dip galvanized steel panels and vinyl ester GRP molded grids built to operate reliably in highly corrosive offshore drill platforms, oil refineries, and desalination zones.',
+    intro: 'Abu Dhabi contains the bulk of the regional energy and heavy industrial sectors, demanding access flooring with extreme chemical and load capabilities. Arabian Gratings supplies ISO 1461 hot-dip galvanized steel panels and vinyl ester GRP molded grids built to operate reliably in highly corrosive offshore drill platforms, oil refineries, and desalination zones.',
     projectContext: 'Our steel and composite structural platforms are engineered for extreme load spans. We support energy sector tenders in Mussafah Industrial Area, Ruwais Refinery utility corridors, and offshore gas processing platforms. Materials are supplied with complete raw material test certs and chemical load charts.',
     industries: [
       'Upstream Oil & Gas / Offshore Drill Platforms',
@@ -105,7 +105,7 @@ const LOCATIONS: Record<string, LocationData> = {
   'ajman': {
     name: 'Ajman',
     title: 'Marine Grating & Clamping Solutions in Ajman | Arabian Gratings',
-    seoDescription: 'Marine-grade SS316 grating panels and mounting clamps supplier in Ajman, UAE. Supplying access solutions for ports, shipyards, and coastal installations.',
+    seoDescription: 'Marine-grade SS316 grating panels and mounting clamps supplier to Ajman, GCC. Supplying access solutions for ports, shipyards, and coastal installations.',
     intro: 'Ajman\'s industrial base is closely aligned with maritime transport, port services, and ship repair yards along the Ajman Creek. Arabian Gratings delivers premium, seawater-tested stainless steel grating grids and secure saddle mounting clips designed to withstand high salinity, chemical washdowns, and structural vibrations.',
     projectContext: 'Our access grates are applied in marine access walkways, dry docks, and port passenger berths. We provide SS316 electroforge welded grids and vibration-proof clip fastening kits that prevent panels from loosening under wave actions or heavy marine machinery operation.',
     industries: [
@@ -220,7 +220,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const location = LOCATIONS[slug];
   if (!location) {
-    return { title: 'Industrial Gratings UAE' };
+    return { title: 'Industrial Gratings Saudi Arabia' };
   }
   return {
     title: location.title,
@@ -232,7 +232,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: location.title,
       description: location.seoDescription,
       url: `/locations/${slug}`,
-      locale: 'en_AE',
+      locale: 'en_SA',
       type: 'website',
     }
   };
@@ -282,7 +282,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
         <div className="max-w-3xl mb-16">
           <Reveal direction="left" delay={0.1}>
             <span className="text-accent font-mono font-bold tracking-widest text-[10px] uppercase block mb-3">
-              UAE Supply Division // {location.name}
+              Saudi Supply Division // {location.name}
             </span>
             <h1 className="text-3xl sm:text-5xl font-display font-black text-foreground uppercase mb-4 leading-tight">
               Industrial Gratings Supplier in <span className="text-accent">{location.name}</span>

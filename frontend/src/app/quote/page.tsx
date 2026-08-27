@@ -7,7 +7,7 @@ import { getProduct, getProductCategory } from '@/lib/api/client';
 
 export const metadata: Metadata = {
   ...defaultMetadata,
-  title: 'Request a Quote (RFQ) | Arabian Gratings UAE',
+  title: 'Request a Quote (RFQ) | Arabian Gratings Saudi Arabia',
   description: 'Submit an RFQ for industrial gratings, GRP/FRP walkway layouts, or custom access flooring. Attach drawings and layout specifications.',
 };
 

@@ -81,7 +81,7 @@ export default function ContactForm() {
           Enquiry Transmitted
         </h3>
         <p className="text-xs text-slate-500 max-w-md mx-auto mb-6 font-sans leading-relaxed">
-          Thank you for contacting Arabian Gratings UAE. Your enquiry has been successfully logged and routed to our sales division.
+          Thank you for contacting Arabian Gratings Saudi Arabia. Your enquiry has been successfully logged and routed to our sales division.
         </p>
         <button
           onClick={() => setIsSuccess(false)}

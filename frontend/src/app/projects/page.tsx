@@ -14,7 +14,7 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
   ...defaultMetadata,
-  title: 'Projects & Case Studies | Arabian Gratings UAE',
+  title: 'Projects & Case Studies | Arabian Gratings Saudi Arabia',
   description: 'Browse the Arabian Gratings project portfolio — engineering case studies spanning industrial grating installations, walkway systems, and access flooring solutions.'
 };
 

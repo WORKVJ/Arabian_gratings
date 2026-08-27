@@ -25,17 +25,17 @@ export async function generateMetadata({ params, searchParams }: CategoryPagePro
     const category = await getBlogCategory(slug);
     if (page > 1) {
       return {
-        title: `${category.name} Articles - Page ${page} | Arabian Gratings UAE`,
+        title: `${category.name} Articles - Page ${page} | Arabian Gratings Saudi Arabia`,
         robots: { index: false, follow: true },
       };
     }
     return generatePageMetadata(null, {
-      title: `${category.name} Articles | Arabian Gratings UAE`,
+      title: `${category.name} Articles | Arabian Gratings Saudi Arabia`,
       description: category.description || `Read articles and guides related to ${category.name}.`,
       path: `/blog/category/${category.slug}`,
     });
   } catch {
-    return { title: 'Category | Arabian Gratings UAE' };
+    return { title: 'Category | Arabian Gratings Saudi Arabia' };
   }
 }
 

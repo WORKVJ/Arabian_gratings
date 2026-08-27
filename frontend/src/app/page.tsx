@@ -47,7 +47,7 @@ export default async function Home() {
     name: 'Arabian Gratings & Manufacturing Company',
     url: SITE_URL,
     logo: `${SITE_URL}/logo.png`,
-    description: 'Leading manufacturer and supplier of high-performance steel, GRP, and aluminium gratings in the UAE and GCC.',
+    description: 'Leading manufacturer and supplier of high-performance steel, GRP, and aluminium gratings in Saudi Arabia and GCC.',
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+966 12 657 6896',

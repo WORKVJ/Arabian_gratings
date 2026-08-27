@@ -28,25 +28,25 @@ export async function generateMetadata({ searchParams }: BlogPageProps): Promise
 
   if (params.search) {
     return {
-      title: `Search results for "${params.search}" | Arabian Gratings UAE`,
+      title: `Search results for "${params.search}" | Arabian Gratings Saudi Arabia`,
       robots: { index: false, follow: true },
     };
   }
   if (page > 1) {
     return {
-      title: `Engineering Insights & Knowledge Hub - Page ${page} | Arabian Gratings UAE`,
+      title: `Engineering Insights & Knowledge Hub - Page ${page} | Arabian Gratings Saudi Arabia`,
       robots: { index: false, follow: true },
     };
   }
   if (params.category) {
     return {
-      title: `Category: ${params.category} | Arabian Gratings UAE`,
+      title: `Category: ${params.category} | Arabian Gratings Saudi Arabia`,
       description: `Browse engineering insights and articles related to ${params.category}.`,
     };
   }
   return {
     ...defaultMetadata,
-    title: 'Engineering Insights & Knowledge Hub | Arabian Gratings UAE',
+    title: 'Engineering Insights & Knowledge Hub | Arabian Gratings Saudi Arabia',
     description: 'Read technical articles, installation guides, and manufacturing insights on industrial steel and FRP gratings by Arabian Gratings.',
   };
 }

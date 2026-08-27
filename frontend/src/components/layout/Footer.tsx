@@ -46,7 +46,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Engineered access solutions. High-performance steel, aluminum, and FRP/GRP gratings for industrial and civil infrastructure installations in the UAE and Middle East.
+              Engineered access solutions. High-performance steel, aluminum, and FRP/GRP gratings for industrial and civil infrastructure installations in Saudi Arabia and Middle East.
             </p>
             <div className="space-y-3 text-xs text-slate-400">
               <div className="flex items-start space-x-2">
@@ -135,7 +135,7 @@ export default function Footer() {
         {/* Copyright & Legal Bar */}
         <div className="mt-12 pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
           <p className="mb-4 sm:mb-0">
-            &copy; {currentYear} Arabian Gratings UAE. All rights reserved.
+            &copy; {currentYear} Arabian Gratings Saudi Arabia. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link href="/privacy-policy" className="hover:text-slate-400">Privacy Policy</Link>

@@ -6,25 +6,25 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Arabian Gratings UAE | Premium Industrial Grating Solutions',
-    template: '%s | Arabian Gratings UAE'
+    default: 'Arabian Gratings Saudi Arabia | Premium Industrial Grating Solutions',
+    template: '%s | Arabian Gratings Saudi Arabia'
   },
-  description: 'Arabian Gratings is a leading supplier of premium industrial floor solutions, FRP/GRP gratings, steel, stainless steel, and aluminum grating installations in the UAE.',
+  description: 'Arabian Gratings is a leading supplier of premium industrial floor solutions, FRP/GRP gratings, steel, stainless steel, and aluminum grating installations in Saudi Arabia.',
   alternates: {
     canonical: './'
   },
   openGraph: {
-    title: 'Arabian Gratings UAE | Premium Industrial Grating Solutions',
-    description: 'Leading supplier of premium industrial floor solutions, FRP/GRP gratings, steel, and aluminum installations in the UAE.',
+    title: 'Arabian Gratings Saudi Arabia | Premium Industrial Grating Solutions',
+    description: 'Leading supplier of premium industrial floor solutions, FRP/GRP gratings, steel, and aluminum installations in Saudi Arabia.',
     url: './',
-    siteName: 'Arabian Gratings UAE',
-    locale: 'en_AE',
+    siteName: 'Arabian Gratings Saudi Arabia',
+    locale: 'en_SA',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Arabian Gratings UAE | Premium Industrial Grating Solutions',
-    description: 'Leading supplier of premium industrial floor solutions, FRP/GRP gratings, and steel installations in the UAE.',
+    title: 'Arabian Gratings Saudi Arabia | Premium Industrial Grating Solutions',
+    description: 'Leading supplier of premium industrial floor solutions, FRP/GRP gratings, and steel installations in Saudi Arabia.',
   },
   robots: {
     index: true,

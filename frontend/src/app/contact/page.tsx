@@ -8,8 +8,8 @@ import { MapPin, Mail, Phone, Clock } from 'lucide-react';
 
 export const metadata: Metadata = {
   ...defaultMetadata,
-  title: 'Contact Us | Arabian Gratings UAE',
-  description: 'Get in touch with Arabian Gratings UAE. Contact our engineering office in the UAE for sales enquiries, product layout specifications, and support.',
+  title: 'Contact Us | Arabian Gratings Saudi Arabia',
+  description: 'Get in touch with Arabian Gratings Saudi Arabia. Contact our engineering office in Saudi Arabia for sales enquiries, product layout specifications, and support.',
 };
 
 export default function ContactPage() {
@@ -27,7 +27,7 @@ export default function ContactPage() {
               Contact Sales & Engineering
             </h1>
             <p className="text-sm text-slate-500 leading-relaxed font-sans">
-              Have technical questions about load spans, custom configurations, or project rates? Reach out to our UAE team using the form below or our direct contact channels.
+              Have technical questions about load spans, custom configurations, or project rates? Reach out to our engineering team using the form below or our direct contact channels.
             </p>
           </div>
         </Reveal>

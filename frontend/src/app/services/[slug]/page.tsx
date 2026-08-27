@@ -18,12 +18,12 @@ export async function generateMetadata({ params }: ServiceDetailPageProps): Prom
   try {
     const service = await getService(slug);
     return generatePageMetadata(service, {
-      title: `${service.name} | Arabian Gratings UAE`,
+      title: `${service.name} | Arabian Gratings Saudi Arabia`,
       description: stripHtml(service.description),
       path: `/services/${service.slug}`,
     });
   } catch {
-    return { title: 'Service | Arabian Gratings UAE' };
+    return { title: 'Service | Arabian Gratings Saudi Arabia' };
   }
 }
 

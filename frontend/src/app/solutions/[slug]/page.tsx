@@ -19,12 +19,12 @@ export async function generateMetadata({ params }: SolutionDetailPageProps): Pro
   try {
     const solution = await getSolution(slug);
     return generatePageMetadata(solution, {
-      title: `${solution.name} | Arabian Gratings UAE`,
+      title: `${solution.name} | Arabian Gratings Saudi Arabia`,
       description: stripHtml(solution.description),
       path: `/solutions/${solution.slug}`,
     });
   } catch {
-    return { title: 'Solution | Arabian Gratings UAE' };
+    return { title: 'Solution | Arabian Gratings Saudi Arabia' };
   }
 }
 

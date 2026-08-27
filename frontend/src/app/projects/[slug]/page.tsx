@@ -22,13 +22,13 @@ export async function generateMetadata({ params }: ProjectDetailPageProps): Prom
   try {
     const project = await getProject(slug);
     return generatePageMetadata(project, {
-      title: `${project.title} | Arabian Gratings UAE`,
+      title: `${project.title} | Arabian Gratings Saudi Arabia`,
       description: stripHtml(project.description),
       path: `/projects/${project.slug}`,
       ogImageFallback: project.featured_image?.file || undefined,
     });
   } catch {
-    return { title: 'Project | Arabian Gratings UAE' };
+    return { title: 'Project | Arabian Gratings Saudi Arabia' };
   }
 }
 

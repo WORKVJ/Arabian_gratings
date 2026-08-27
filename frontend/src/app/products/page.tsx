@@ -10,17 +10,17 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
   ...defaultMetadata,
-  title: 'Industrial Grating Systems | Product Catalog UAE | Arabian Gratings',
+  title: 'Industrial Grating Systems | Product Catalog Saudi Arabia | Arabian Gratings',
   description:
-    'Explore Arabian Gratings\' complete range of industrial grating systems — steel, FRP, aluminium, stainless steel, stair treads, access covers and more. Engineered for UAE, Dubai and GCC industrial applications.',
+    'Explore Arabian Gratings\' complete range of industrial grating systems — steel, FRP, aluminium, stainless steel, stair treads, access covers and more. Engineered for Saudi, Jeddah, Dammam and GCC industrial applications.',
   alternates: {
     canonical: '/products',
   },
   openGraph: {
     ...defaultMetadata.openGraph,
-    title: 'Industrial Grating Systems | Product Catalog UAE | Arabian Gratings',
+    title: 'Industrial Grating Systems | Product Catalog Saudi Arabia | Arabian Gratings',
     description:
-      'Steel, FRP, aluminium and stainless steel grating solutions for oil & gas, infrastructure, marine and industrial projects across the UAE and GCC.',
+      'Steel, FRP, aluminium and stainless steel grating solutions for oil & gas, infrastructure, marine and industrial projects across Saudi Arabia and GCC.',
     url: '/products',
   },
 };
@@ -32,7 +32,7 @@ const catalogSchema = {
   '@type': 'CollectionPage',
   name: 'Industrial Grating Systems — Product Catalog',
   description:
-    'Complete range of engineered grating systems from Arabian Gratings UAE, including steel, FRP, aluminium and stainless steel products.',
+    'Complete range of engineered grating systems from Arabian Gratings Saudi Arabia, including steel, FRP, aluminium and stainless steel products.',
   url: `${SITE_URL}/products`,
   breadcrumb: {
     '@type': 'BreadcrumbList',

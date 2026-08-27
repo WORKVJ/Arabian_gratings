@@ -6,8 +6,8 @@ import { defaultMetadata } from '@/lib/seo/config';
 
 export const metadata: Metadata = {
   ...defaultMetadata,
-  title: 'About Arabian Gratings | Industrial Grating Manufacturer UAE',
-  description: 'Arabian Gratings is a premier manufacturer and supplier of heavy-duty metal and FRP/GRP grating systems in the UAE and wider GCC region.',
+  title: 'About Arabian Gratings | Industrial Grating Manufacturer Saudi Arabia',
+  description: 'Arabian Gratings is a premier manufacturer and supplier of heavy-duty metal and FRP/GRP grating systems in Saudi Arabia and wider GCC region.',
 };
 
 export default function AboutPage() {
@@ -25,13 +25,13 @@ export default function AboutPage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal direction="up" delay={0.1}>
             <span className="text-[10px] font-mono font-bold text-[#E8612C] tracking-[0.3em] uppercase block mb-4">
-              Company Overview // UAE
+              Company Overview // Saudi Arabia
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-[#111318] uppercase leading-tight tracking-tight max-w-3xl mb-5">
               Pioneering Grating Systems in the GCC.
             </h1>
             <p className="text-sm text-[#6B7280] max-w-2xl leading-relaxed">
-              Based in the UAE, Arabian Gratings manufactures and distributes premium metal and fiberglass reinforced plastic (GRP/FRP) grating solutions. We partner with the region&apos;s leading developers, contractors, and industrial plants to deliver certified floor and access systems.
+              Based in Saudi Arabia, Arabian Gratings manufactures and distributes premium metal and fiberglass reinforced plastic (GRP/FRP) grating solutions. We partner with the region&apos;s leading developers, contractors, and industrial plants to deliver certified floor and access systems.
             </p>
           </Reveal>
         </div>
@@ -59,7 +59,7 @@ export default function AboutPage() {
             {
               icon: Users,
               title: 'GCC Footprint',
-              desc: 'Strategically located in the UAE to support infrastructure, desalination, oil & gas, and marine operations regionwide.',
+              desc: 'Strategically located in Saudi Arabia to support infrastructure, desalination, oil & gas, and marine operations regionwide.',
             },
           ].map((item, idx) => (
             <Reveal key={item.title} direction="up" delay={idx * 0.08}>

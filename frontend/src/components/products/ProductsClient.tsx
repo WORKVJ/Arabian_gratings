@@ -25,7 +25,7 @@ function ProductCard({ product, index }: { product: ProductListItem; index: numb
   const imageAlt =
     product.primary_image?.alt_text ||
     product.primary_image?.media?.alt_text ||
-    `${product.name} — Arabian Gratings UAE`;
+    `${product.name} — Arabian Gratings Saudi Arabia`;
 
   const productIndex = String(index + 1).padStart(2, '0');
 
@@ -234,13 +234,13 @@ export default function ProductsClient({ initialProducts, categories }: Products
             transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <span className="text-[10px] font-mono font-bold text-[#E8612C] tracking-[0.3em] uppercase block mb-4">
-              Product Catalog // UAE / GCC
+              Product Catalog // Saudi / GCC
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-[#111318] uppercase leading-tight tracking-tight max-w-3xl mb-5">
               Engineered Systems for Every Application.
             </h1>
             <p className="text-sm text-[#6B7280] max-w-2xl leading-relaxed">
-              Arabian Gratings supplies a comprehensive range of industrial grating systems — steel, FRP/GRP, aluminium, stainless steel, stair treads, and access covers — engineered to international standards and deployed across UAE and GCC oil & gas, infrastructure, marine and industrial projects.
+              Arabian Gratings supplies a comprehensive range of industrial grating systems — steel, FRP/GRP, aluminium, stainless steel, stair treads, and access covers — engineered to international standards and deployed across Saudi and GCC oil & gas, infrastructure, marine and industrial projects.
             </p>
           </motion.div>
         </div>

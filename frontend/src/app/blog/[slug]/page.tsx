@@ -22,13 +22,13 @@ export async function generateMetadata({ params }: ArticleDetailPageProps): Prom
   try {
     const post = await getBlogPost(slug);
     return generatePageMetadata(post, {
-      title: `${post.title} | Arabian Gratings UAE`,
+      title: `${post.title} | Arabian Gratings Saudi Arabia`,
       description: stripHtml(post.excerpt || post.content),
       path: `/blog/${post.slug}`,
       ogImageFallback: post.featured_image?.file || undefined,
     });
   } catch {
-    return { title: 'Article | Arabian Gratings UAE' };
+    return { title: 'Article | Arabian Gratings Saudi Arabia' };
   }
 }
 
@@ -86,7 +86,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Arabian Gratings UAE',
+      name: 'Arabian Gratings Saudi Arabia',
       logo: {
         '@type': 'ImageObject',
         url: `${SITE_URL}/logo.png`,

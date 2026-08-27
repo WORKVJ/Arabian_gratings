@@ -917,13 +917,13 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             transition={{ duration: 0.6 }}
           >
             <span className="text-[9px] font-mono text-[#E8612C] tracking-[0.35em] uppercase block mb-5">
-              Engineering Support // UAE
+              Engineering Support // Saudi
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-white uppercase leading-tight tracking-tight mb-4">
               Need This System<br />for Your Project?
             </h2>
             <p className="text-sm text-[#9CA3AF] max-w-xl mx-auto leading-relaxed mb-10">
-              Talk to our engineering team about your load class requirements, environment conditions and project schedule. We supply across UAE, Dubai, Abu Dhabi and the wider GCC.
+              Talk to our engineering team about your load class requirements, environment conditions and project schedule. We supply across Saudi Arabia, Jeddah, Dammam and the wider GCC.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

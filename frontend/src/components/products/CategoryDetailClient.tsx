@@ -14,7 +14,7 @@ interface CategoryDetailClientProps {
 
 export default function CategoryDetailClient({ category, products }: CategoryDetailClientProps) {
   const imageUrl = getImageUrl(category.image?.file);
-  const imageAlt = category.image?.alt_text || `${category.name} Supplier UAE — Arabian Gratings`;
+  const imageAlt = category.image?.alt_text || `${category.name} Supplier Saudi Arabia — Arabian Gratings`;
 
   // Extracted lists for rich SEO block content matching category
   const technicalAdvantages = [
@@ -61,7 +61,7 @@ export default function CategoryDetailClient({ category, products }: CategoryDet
                   Industrial Supply // Category
                 </span>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-[#111318] uppercase leading-tight tracking-tight mb-5">
-                  {category.name} <span className="text-slate-400">Supplier in UAE</span>
+                  {category.name} <span className="text-slate-400">Supplier in Saudi Arabia</span>
                 </h1>
                 <p className="text-sm text-slate-500 max-w-2xl leading-relaxed mb-6 font-sans">
                   {category.short_description}
@@ -115,7 +115,7 @@ export default function CategoryDetailClient({ category, products }: CategoryDet
           </div>
           <div className="lg:col-span-8 text-xs text-slate-500 leading-relaxed font-sans space-y-4">
             <p>
-              {category.description || `Arabian Gratings delivers dynamic access solutions designed to operate under the high thermal cycles, chemical environments, and salt-laden humidity typical of UAE coastal projects in Dubai, Abu Dhabi, Sharjah, and the GCC region.`}
+              {category.description || `Arabian Gratings delivers dynamic access solutions designed to operate under the high thermal cycles, chemical environments, and salt-laden humidity typical of Saudi coastal projects in Jeddah, Dammam, and the GCC region.`}
             </p>
             <p>
               Our complete systems are fabricated with strict quality control lines. Every layout corresponds to the structural safety margins requested by regional municipal planning councils and utility developers.
@@ -240,7 +240,7 @@ export default function CategoryDetailClient({ category, products }: CategoryDet
           {/* Industries served */}
           <div>
             <h3 className="text-xs font-bold text-foreground uppercase tracking-widest border-b border-[#D9DDE1] pb-3 mb-6 font-display">
-              Sectors Served Across UAE & GCC
+              Sectors Served Across Saudi & GCC
             </h3>
             <ul className="space-y-3">
               {industries.map((ind, idx) => (

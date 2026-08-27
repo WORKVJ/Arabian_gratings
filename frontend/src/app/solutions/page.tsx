@@ -10,7 +10,7 @@ export const revalidate = 86400;
 
 export const metadata: Metadata = {
   ...defaultMetadata,
-  title: 'Engineering Solutions | Arabian Gratings UAE',
+  title: 'Engineering Solutions | Arabian Gratings Saudi Arabia',
   description: 'Explore Arabian Gratings engineering solutions for industrial access flooring, corrosion-resistant platforms, safety walkways, and structural grating systems.'
 };
 

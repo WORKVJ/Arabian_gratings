@@ -80,7 +80,7 @@ const defaultProjects: Project[] = [
 ];
 
 const defaultPosts: BlogPost[] = [
-  { id: 1, title: 'Hot-Dip Galvanizing Deflection Standards in Coastal UAE Docks', slug: 'hot-dip-galvanizing-deflection-standards', excerpt: 'Detailed analysis of corrosion fatigue on marine steel platforms and yield stress parameters in coastal environments.', content: '', content_blocks: [], featured_image: null, category: { id: 1, name: 'Technical Standards', slug: 'technical-standards', description: '', is_active: true }, author: { id: 1, name: 'Lead Structural Engineer' }, status: 'PUBLISHED', is_featured: true, published_at: '2025-05-12', created_at: '', updated_at: '', related_products: [], related_industries: [], related_posts: [], no_index: false },
+  { id: 1, title: 'Hot-Dip Galvanizing Deflection Standards in Coastal Saudi Docks', slug: 'hot-dip-galvanizing-deflection-standards', excerpt: 'Detailed analysis of corrosion fatigue on marine steel platforms and yield stress parameters in coastal environments.', content: '', content_blocks: [], featured_image: null, category: { id: 1, name: 'Technical Standards', slug: 'technical-standards', description: '', is_active: true }, author: { id: 1, name: 'Lead Structural Engineer' }, status: 'PUBLISHED', is_featured: true, published_at: '2025-05-12', created_at: '', updated_at: '', related_products: [], related_industries: [], related_posts: [], no_index: false },
   { id: 2, title: 'GRP/FRP Matrix Selection Guide for Sulphur Environments', slug: 'grp-frp-matrix-selection-guide', excerpt: 'A review of isophthalic polyester versus vinyl ester resin resistance profiles in local refineries and desalination plants.', content: '', content_blocks: [], featured_image: null, category: { id: 2, name: 'Material Engineering', slug: 'material-engineering', description: '', is_active: true }, author: { id: 1, name: 'Chemical Specialist' }, status: 'PUBLISHED', is_featured: false, published_at: '2025-08-22', created_at: '', updated_at: '', related_products: [], related_industries: [], related_posts: [], no_index: false },
 ];
 
@@ -374,7 +374,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 transition={{ duration: 0.7, ease: easeOut }}
               >
                 <span className="block font-mono text-[#E8612C] text-[10px] tracking-[0.25em] uppercase">
-                  Arabian Gratings UAE / Industrial Grating Systems
+                  Arabian Gratings Saudi / Industrial Grating Systems
                 </span>
                 <motion.div
                   className="h-px bg-[#E8612C] shrink-0"
@@ -431,7 +431,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.55, ease: easeOut }}
               >
-                Industrial flooring, access platforms, grating systems and engineered access solutions built for demanding industrial environments across the UAE and GCC.
+                Industrial flooring, access platforms, grating systems and engineered access solutions built for demanding industrial environments across Saudi and GCC.
               </motion.p>
 
               {/* CTAs */}
@@ -487,10 +487,10 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                   viewport={{ once: true, margin: "-50px 0px" }}
                 >
                   {[
-                    { value: '15+', label: 'Years in UAE' },
+                    { value: '10+', label: 'Years in Saudi' },
                     { value: 'ISO 9001', label: 'Quality Certified' },
-                    { value: '500+', label: 'Projects Delivered' },
-                    { value: 'UAE / GCC', label: 'Regional Coverage' },
+                    { value: '321+', label: 'Projects Delivered' },
+                    { value: 'Saudi / GCC', label: 'Regional Coverage' },
                   ].map((stat, idx) => {
                     const isHighlighted = (isHoveredStat !== null ? isHoveredStat === idx : activeStatIndex === idx) && !noMotion;
                     const opacityVal = noMotion ? 1.0 : (isHighlighted ? 1.0 : 0.6);
@@ -498,8 +498,8 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                     const lineColor = noMotion ? '#D9DDE1' : (isHighlighted ? '#E8612C' : '#D9DDE1');
                     const lineHeight = isHighlighted ? '2px' : '1px';
 
-                    const isNumeric = stat.value === '15+' || stat.value === '500+';
-                    const targetVal = stat.value === '15+' ? 15 : stat.value === '500+' ? 500 : 0;
+                    const isNumeric = stat.value === '10+' || stat.value === '500+' || stat.value === '321+';
+                    const targetVal = stat.value === '10+' ? 10 : (stat.value === '500+' || stat.value === '321+') ? 321 : 0;
 
                     return (
                       <motion.div
@@ -585,7 +585,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               <div className="absolute top-4 right-4 border-t border-r border-[#D9DDE1] w-5 h-5 z-10" />
               <div className="absolute top-4 left-12 z-10">
                 <span className="font-mono text-[8px] text-[#59616B] uppercase tracking-widest bg-white/90 border border-[#D9DDE1] px-2 py-0.5">
-                  MANUFACTURING // UAE
+                  MANUFACTURING // SAUDI
                 </span>
               </div>
             </div>
@@ -689,7 +689,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
             <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-28">
               <FadeUp delay={0.05}>
                 <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block">
-                  01 // ENGINEERING &mdash; UAE / GCC
+                  01 // ENGINEERING &mdash; SAUDI / GCC
                 </span>
               </FadeUp>
               <div className="w-12 h-[2px] bg-[#E8612C]/40" />
@@ -713,7 +713,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 </MaskReveal>
                 <FadeUp delay={0.25} className="max-w-2xl">
                   <p className="text-[#59616B] text-sm leading-relaxed">
-                    Arabian Gratings supplies site-engineered platform floor structures to steel suppliers, fabricators, and engineering firms across the GCC. Each batch complies with structural safety ratios and local UAE municipal specifications.
+                    Arabian Gratings supplies site-engineered platform floor structures to steel suppliers, fabricators, and engineering firms across the GCC. Each batch complies with structural safety ratios and local Saudi municipal specifications.
                   </p>
                 </FadeUp>
               </div>
@@ -779,7 +779,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#111318]/20 to-transparent" />
                       <div className="absolute bottom-4 left-4 font-mono text-white/80 text-[9px] uppercase tracking-widest">
-                        METRIC STABILITY // UAE
+                        METRIC STABILITY // SAUDI
                       </div>
                     </motion.div>
                   );
@@ -954,7 +954,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
             <div className="lg:col-span-8">
               <FadeUp delay={0.05}>
                 <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block mb-4">
-                  03 // INDUSTRIES &mdash; UAE / GCC
+                  03 // INDUSTRIES &mdash; SAUDI / GCC
                 </span>
               </FadeUp>
               <MaskReveal delay={0.1}>
@@ -1177,7 +1177,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                   <FadeUp delay={0.18 + idx * 0.1}>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest">
-                        <span className="text-[#59616B]">{proj.project_date || 'UAE'}</span>
+                        <span className="text-[#59616B]">{proj.project_date || 'Saudi Arabia'}</span>
                         <span className="text-[#59616B] text-right">{proj.location}</span>
                       </div>
                       <h3 className="font-display font-black text-[#111318] text-xl sm:text-2xl uppercase tracking-tight leading-tight group-hover:text-[#E8612C] transition-colors duration-300">
