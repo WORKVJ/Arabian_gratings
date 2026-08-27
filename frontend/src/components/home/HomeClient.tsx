@@ -879,6 +879,44 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
         </div>
       </section>
 
+      {/* ─── PARTNERS MARQUEE ─── */}
+      <section className="bg-background py-16 border-b border-[#1F242F] overflow-hidden relative z-25">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 mb-8">
+          <FadeUp delay={0.05}>
+            <span className="font-mono text-[#E8612C] text-[9px] uppercase tracking-[0.25em] block mb-1">
+              02 // Trusted Partners
+            </span>
+            <h2 className="font-display font-black text-foreground text-[clamp(1.6rem,3vw,2.6rem)] leading-none tracking-tighter uppercase">
+              Trusted By Industry Leaders
+            </h2>
+          </FadeUp>
+        </div>
+        <div className="relative w-full overflow-hidden select-none py-4">
+          <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-r from-[#090A0C] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-l from-[#090A0C] to-transparent z-10 pointer-events-none" />
+          <div className="animate-marquee-infinite flex items-center gap-20 sm:gap-32 px-12">
+            {partnerLogos.map((logo, idx) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={`pl1-${idx}`}
+                src={logo}
+                alt={`Partner ${idx + 1}`}
+                className="h-24 w-auto max-w-[240px] object-contain transition-all duration-300 cursor-pointer flex-shrink-0 hover:scale-105"
+              />
+            ))}
+            {partnerLogos.map((logo, idx) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={`pl2-${idx}`}
+                src={logo}
+                alt={`Partner ${idx + 1}`}
+                className="h-24 w-auto max-w-[240px] object-contain transition-all duration-300 cursor-pointer flex-shrink-0 hover:scale-105"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── 03 ENGINEERING INTRO ─── */}
       <section ref={introRef} className="bg-white py-32 relative z-10 border-b border-[#D9DDE1]">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
@@ -888,7 +926,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
             <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-28">
               <FadeUp delay={0.05}>
                 <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block">
-                  02 // ENGINEERING &mdash; SAUDI / GCC
+                  03 // ENGINEERING &mdash; SAUDI / GCC
                 </span>
               </FadeUp>
               <div className="w-12 h-[2px] bg-[#E8612C]/40" />
@@ -1233,43 +1271,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
         </div>
       </section>
 
-      {/* ─── PARTNERS MARQUEE ─── */}
-      <section className="bg-white py-16 border-b border-[#D9DDE1] overflow-hidden relative z-25">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 mb-8">
-          <FadeUp delay={0.05}>
-            <span className="font-mono text-[#E8612C] text-[9px] uppercase tracking-[0.25em] block mb-1">
-              05 // Trusted Partners
-            </span>
-            <h2 className="font-display font-black text-[#111318] text-[clamp(1.6rem,3vw,2.6rem)] leading-none tracking-tighter uppercase">
-              Trusted By Industry Leaders
-            </h2>
-          </FadeUp>
-        </div>
-        <div className="relative w-full overflow-hidden select-none py-4">
-          <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-          <div className="animate-marquee-infinite flex items-center gap-20 sm:gap-32 px-12">
-            {partnerLogos.map((logo, idx) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={`pl1-${idx}`}
-                src={logo}
-                alt={`Partner ${idx + 1}`}
-                className="h-24 w-auto max-w-[240px] object-contain transition-all duration-300 cursor-pointer flex-shrink-0 hover:scale-105"
-              />
-            ))}
-            {partnerLogos.map((logo, idx) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={`pl2-${idx}`}
-                src={logo}
-                alt={`Partner ${idx + 1}`}
-                className="h-24 w-auto max-w-[240px] object-contain transition-all duration-300 cursor-pointer flex-shrink-0 hover:scale-105"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* ─── 06 PROJECTS ─── */}
       <section ref={projectsRef} className="bg-[#f8fafc] py-28 relative z-20">
