@@ -241,14 +241,6 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
   const projectsRef = useRef<HTMLElement>(null);
   const insightsRef = useRef<HTMLElement>(null);
   const noMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 1024);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const [activeStatIndex, setActiveStatIndex] = useState(0);
   const [isHoveredStat, setIsHoveredStat] = useState<number | null>(null);
@@ -950,10 +942,10 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
           </div>
         </div>
 
-        {/* Accordion panels — photographic, dark internal treatment for readability */}
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
+        {/* Desktop Accordion Panel (hidden on mobile, shown on desktop) */}
+        <div className="hidden lg:block max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
           <div
-            className="flex flex-col lg:flex-row gap-0.5 h-auto lg:h-[580px] overflow-hidden border border-[#D9DDE1]"
+            className="flex flex-row gap-0.5 h-[580px] overflow-hidden border border-[#D9DDE1]"
             onMouseEnter={() => setIsHoveredInd(activeIndIndex)}
             onMouseLeave={() => setIsHoveredInd(null)}
           >
@@ -963,75 +955,100 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               return (
                 <motion.div
                   key={ind.id}
-                  className="relative overflow-hidden bg-slate-800 flex flex-col justify-end cursor-pointer"
-                  animate={isMobile ? {
-                    height: isActive ? 280 : 80,
-                    width: '100%'
-                  } : {
+                  className="relative overflow-hidden bg-slate-800 flex flex-col justify-end cursor-pointer h-full"
+                  animate={{
                     width: noMotion ? '100%' : (isActive ? '55%' : '11%'),
-                    height: '100%'
                   }}
                   transition={{ duration: 0.85, ease: easeOut }}
                   onClick={() => { setActiveIndIndex(idx); setIsHoveredInd(idx); }}
-                  style={{ minHeight: isMobile ? undefined : (noMotion ? '260px' : '400px') }}
+                  style={{ minHeight: noMotion ? '260px' : '400px' }}
                 >
                   <div className="absolute inset-0 z-0">
                     <Image
                       src={imgSrc}
                       alt={ind.name}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 800px"
+                      sizes="800px"
                       className={`object-cover transition-transform duration-1000 ${isActive ? 'scale-105' : 'scale-100'}`}
                     />
                     <div className="absolute inset-0 bg-[#111318]/75 z-10 transition-opacity duration-700" style={{ opacity: isActive ? 0.5 : 0.82 }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#111318] via-transparent to-transparent z-20" />
                   </div>
 
-                  {isMobile && !isActive ? (
-                    /* Mobile inactive single row banner style */
-                    <div className="relative z-30 px-6 py-5 flex items-center justify-between h-full select-none">
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-[#E8612C] text-xs font-black">0{idx + 1}</span>
-                        <h3 className="font-display font-black text-white text-xs uppercase tracking-tight">{ind.name}</h3>
-                      </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-white/50" />
-                    </div>
-                  ) : (
-                    /* Default full card style */
-                    <div className="relative z-30 p-6 sm:p-7 flex flex-col justify-between h-full select-none">
-                      <div className="flex justify-between items-start">
-                        <span className="font-mono text-[#E8612C] text-xs font-black">0{idx + 1}</span>
-                        {isActive && (
-                          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10 overflow-hidden">
-                            <motion.div
-                              className="h-full bg-[#E8612C]"
-                              initial={{ width: '0%' }}
-                              animate={{ width: '100%' }}
-                              transition={{ duration: 3.6, ease: 'linear' }}
-                            />
-                          </div>
-                        )}
-                      </div>
-                      <div className="space-y-3">
-                        <h3 className="font-display font-black text-white text-lg uppercase tracking-tight">{ind.name}</h3>
-                        {isActive && (
+                  <div className="relative z-30 p-6 sm:p-7 flex flex-col justify-between h-full select-none">
+                    <div className="flex justify-between items-start">
+                      <span className="font-mono text-[#E8612C] text-xs font-black">0{idx + 1}</span>
+                      {isActive && (
+                        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10 overflow-hidden">
                           <motion.div
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.15 }}
-                            className="space-y-4"
-                          >
-                            <p className="font-sans text-slate-300 text-xs leading-relaxed max-w-md">{ind.short_description}</p>
-                            <Link href={`/industries/${ind.slug}`} className="group/link inline-flex items-center gap-2 font-mono text-[9px] text-[#E8612C] uppercase tracking-[0.2em]">
-                              View Industry
-                              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1.5" />
-                            </Link>
-                          </motion.div>
-                        )}
-                      </div>
+                            className="h-full bg-[#E8612C]"
+                            initial={{ width: '0%' }}
+                            animate={{ width: '100%' }}
+                            transition={{ duration: 3.6, ease: 'linear' }}
+                          />
+                        </div>
+                      )}
                     </div>
-                  )}
+                    <div className="space-y-3">
+                      <h3 className="font-display font-black text-white text-lg uppercase tracking-tight">{ind.name}</h3>
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.15 }}
+                          className="space-y-4"
+                        >
+                          <p className="font-sans text-slate-300 text-xs leading-relaxed max-w-md">{ind.short_description}</p>
+                          <Link href={`/industries/${ind.slug}`} className="group/link inline-flex items-center gap-2 font-mono text-[9px] text-[#E8612C] uppercase tracking-[0.2em]">
+                            View Industry
+                            <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1.5" />
+                          </Link>
+                        </motion.div>
+                      )}
+                    </div>
+                  </div>
                 </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Mobile Grid/Stack Version (shown on mobile, hidden on desktop) */}
+        <div className="block lg:hidden max-w-7xl mx-auto px-6 sm:px-10">
+          <div className="flex flex-col gap-4">
+            {industries.map((ind, idx) => {
+              const imgSrc = (ind.image as string | null) || industryImages[idx % industryImages.length];
+              return (
+                <div
+                  key={ind.id}
+                  className="relative overflow-hidden bg-slate-800 h-[200px] flex flex-col justify-end p-6 rounded-sm border border-[#D9DDE1] group"
+                >
+                  <div className="absolute inset-0 z-0">
+                    <Image
+                      src={imgSrc}
+                      alt={ind.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 600px"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[#111318]/70 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111318]/90 via-[#111318]/25 to-transparent z-20" />
+                  </div>
+
+                  <div className="relative z-30 flex flex-col justify-end h-full space-y-2 select-none">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-[#E8612C] text-[10px] font-black">0{idx + 1}</span>
+                      <h3 className="font-display font-black text-white text-sm uppercase tracking-tight">{ind.name}</h3>
+                    </div>
+                    <p className="font-sans text-slate-300 text-[11px] leading-relaxed max-w-md line-clamp-2">
+                      {ind.short_description}
+                    </p>
+                    <Link href={`/industries/${ind.slug}`} className="inline-flex items-center gap-1.5 font-mono text-[9px] text-[#E8612C] uppercase tracking-[0.2em] pt-1">
+                      View Industry
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
+                  </div>
+                </div>
               );
             })}
           </div>
