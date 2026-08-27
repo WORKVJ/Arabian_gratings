@@ -924,9 +924,8 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 })}
               </div>
 
-              {/* Image stage */}
               <div className="relative w-full aspect-[16/9] overflow-hidden bg-slate-100 border border-[#D9DDE1]">
-                {['/facility-overview.jpg', '/product-frp-grating.jpg', '/product-steel-grating.jpg'].map((imgSrc, idx) => {
+                {['/product-steel-grating.jpg', '/product-frp-grating.jpg', '/product-aluminium-grating.jpg'].map((imgSrc, idx) => {
                   const isActive = isHoveredMat !== null ? isHoveredMat === idx : activeMatIndex === idx;
                   return (
                     <motion.div
