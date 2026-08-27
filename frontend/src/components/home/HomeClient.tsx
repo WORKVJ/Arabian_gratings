@@ -413,15 +413,15 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               {/* Credentials */}
               <div className="relative pt-8 mt-8 border-t border-[#D9DDE1] overflow-hidden rounded-sm">
                 {/* Subtle blueprint grid texture */}
-                <div className="absolute inset-0 opacity-[0.03] tech-dot-grid-light pointer-events-none" />
+                <div className="absolute inset-0 opacity-[0.015] tech-dot-grid-light pointer-events-none" />
                 
                 {/* Horizontal scan line */}
                 {!noMotion && (
                   <motion.div
-                    className="absolute left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#E8612C]/20 to-transparent pointer-events-none"
+                    className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#E8612C]/8 to-transparent pointer-events-none"
                     initial={{ top: '0%' }}
                     animate={{ top: '100%' }}
-                    transition={{ duration: 6, ease: 'linear', repeat: Infinity }}
+                    transition={{ duration: 8, ease: 'linear', repeat: Infinity }}
                   />
                 )}
 
@@ -447,10 +447,9 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                   ].map((stat, idx) => {
                     const isHighlighted = (isHoveredStat !== null ? isHoveredStat === idx : activeStatIndex === idx) && !noMotion;
                     const opacityVal = noMotion ? 1.0 : (isHighlighted ? 1.0 : 0.6);
-                    const yVal = noMotion ? 0 : (isHighlighted ? -3 : 0);
+                    const yVal = noMotion ? 0 : (isHighlighted ? -2 : 0);
                     const lineColor = noMotion ? '#D9DDE1' : (isHighlighted ? '#E8612C' : '#D9DDE1');
-                    const lineHeight = isHighlighted ? '3px' : '2px';
-                    const glowShadow = isHighlighted ? '0 1px 4px rgba(232, 97, 44, 0.25)' : 'none';
+                    const lineHeight = isHighlighted ? '2px' : '1px';
 
                     const isNumeric = stat.value === '15+' || stat.value === '500+';
                     const targetVal = stat.value === '15+' ? 15 : stat.value === '500+' ? 500 : 0;
@@ -472,11 +471,14 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                         animate={{
                           opacity: opacityVal,
                           y: yVal,
-                          backgroundColor: isHighlighted ? 'rgba(232, 97, 44, 0.02)' : 'rgba(232, 97, 44, 0)'
+                          backgroundColor: isHighlighted ? 'rgba(232, 97, 44, 0.05)' : 'rgba(232, 97, 44, 0)',
+                          boxShadow: isHighlighted 
+                            ? '0 4px 12px rgba(232, 97, 44, 0.04), inset 0 0 0 1px rgba(232, 97, 44, 0.08)' 
+                            : '0 4px 12px rgba(0, 0, 0, 0), inset 0 0 0 1px rgba(0, 0, 0, 0)'
                         }}
                         transition={{ duration: 0.25, ease: 'easeOut' }}
                       >
-                        <span className={`block font-display font-black text-2xl tracking-tight ${isHighlighted ? 'text-[#E8612C]' : 'text-[#111318]'}`}>
+                        <span className="block font-display font-black text-2xl sm:text-3xl tracking-tight text-[#111318] whitespace-nowrap">
                           {isNumeric ? (
                             <StatCounter value={stat.value} targetVal={targetVal} noMotion={!!noMotion} />
                           ) : (
@@ -488,8 +490,8 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                         </span>
                         
                         <div 
-                          className="absolute bottom-1 left-4 right-4 overflow-hidden" 
-                          style={{ height: lineHeight, boxShadow: glowShadow }}
+                          className="absolute bottom-2 left-4 right-4 overflow-hidden" 
+                          style={{ height: lineHeight }}
                         >
                           <motion.div
                             className="h-full"
