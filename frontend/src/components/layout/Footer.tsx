@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Mail, MapPin, Factory } from 'lucide-react';
+import Image from 'next/image';
 
 const footerLinks = {
   company: [
@@ -38,11 +39,14 @@ export default function Footer() {
           
           {/* Logo & Corporate Address */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center space-x-2 text-white">
-              <Factory className="w-6 h-6 text-accent" />
-              <span className="font-display font-black text-lg tracking-widest uppercase">
-                Arabian Gratings
-              </span>
+            <div className="flex items-center">
+              <Image
+                src="/img/logo.png"
+                alt="Arabian Gratings Logo"
+                width={160}
+                height={38}
+                className="h-9 w-auto object-contain"
+              />
             </div>
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
               Engineered access solutions. High-performance steel, aluminum, and FRP/GRP gratings for industrial and civil infrastructure installations in Saudi Arabia and Middle East.

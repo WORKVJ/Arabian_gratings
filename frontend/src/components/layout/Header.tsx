@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X, Factory } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Header() {
   const pathname = usePathname();
@@ -62,11 +63,15 @@ export default function Header() {
       <nav className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-8 flex items-center justify-between gap-6">
         {/* LOGO */}
         <div className="flex items-center">
-          <Link href="/" className="flex items-center space-x-3 group">
-            <Factory className="w-6 h-6 text-[#E8612C] transition-transform duration-300 group-hover:scale-105" />
-            <span className="font-display font-black text-sm tracking-[0.18em] uppercase text-[#111318]">
-              Arabian Gratings
-            </span>
+          <Link href="/" className="flex items-center group">
+            <Image
+              src="/img/logo.png"
+              alt="Arabian Gratings Logo"
+              width={160}
+              height={38}
+              className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-102"
+              priority
+            />
           </Link>
         </div>
 
