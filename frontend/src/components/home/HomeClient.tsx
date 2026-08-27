@@ -987,7 +987,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
           >
             {industries.map((ind, idx) => {
               const isActive = isHoveredInd !== null ? isHoveredInd === idx : activeIndIndex === idx;
-              const imgSrc = (ind.image as string | null) || industryImages[idx % industryImages.length];
+              const imgSrc = getImageUrl(ind.image?.file) || industryImages[idx % industryImages.length];
               return (
                 <motion.div
                   key={ind.id}
@@ -1053,7 +1053,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
         <div className="block lg:hidden max-w-7xl mx-auto px-6 sm:px-10">
           <div className="flex flex-col gap-4">
             {industries.map((ind, idx) => {
-              const imgSrc = (ind.image as string | null) || industryImages[idx % industryImages.length];
+              const imgSrc = getImageUrl(ind.image?.file) || industryImages[idx % industryImages.length];
               return (
                 <div
                   key={ind.id}
