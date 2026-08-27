@@ -979,7 +979,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
         </div>
 
         {/* Desktop Accordion Panel (hidden on mobile, shown on desktop) */}
-        <div className="hidden lg:block max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-16">
+        <div className="hidden lg:block max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div
             className="flex flex-row gap-0.5 h-[580px] overflow-hidden border border-[#D9DDE1]"
             onMouseEnter={() => setIsHoveredInd(activeIndIndex)}
