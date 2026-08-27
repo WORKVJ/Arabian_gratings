@@ -16,7 +16,7 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { ProductCategory, Industry, Project, BlogPost } from '@/types';
 import { getImageUrl } from '@/lib/api/client';
 
-function StatCounter({ value, targetVal, noMotion }: { value: string; targetVal: number; noMotion: boolean }) {
+function StatCounter({ value, targetVal, noMotion, suffix = '+' }: { value: string; targetVal: number; noMotion: boolean; suffix?: string }) {
   const [count, setCount] = useState(0);
   const [hasMounted, setHasMounted] = useState(false);
   const ref = useRef(null);
@@ -50,7 +50,7 @@ function StatCounter({ value, targetVal, noMotion }: { value: string; targetVal:
     return <span ref={ref}>{value}</span>;
   }
 
-  return <span ref={ref}>{count}+</span>;
+  return <span ref={ref}>{count}{suffix}</span>;
 }
 
 interface HomeClientProps {
@@ -246,14 +246,10 @@ function CtaSection() {
           </p>
         </FadeUp>
         <FadeUp delay={0.42}>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href="/quote" className="group inline-flex items-center gap-3 bg-[#E8612C] hover:bg-[#D4521F] text-white font-display font-bold text-xs uppercase tracking-[0.15em] px-10 py-5 transition-colors duration-300 shadow-2xl">
-              Submit RFQ Details
+          <div className="flex justify-center">
+            <Link href="/contact" className="group inline-flex items-center gap-3 bg-[#E8612C] hover:bg-[#D4521F] text-white font-display font-bold text-xs uppercase tracking-[0.15em] px-10 py-5 transition-colors duration-300 shadow-2xl">
+              Contact Us
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-            <Link href="/contact" className="group inline-flex items-center gap-3 border border-white/20 hover:border-white/50 text-white/70 hover:text-white font-display font-bold text-xs uppercase tracking-[0.15em] px-10 py-5 transition-all duration-300">
-              Request a Consultation
-              <ArrowUpRight className="w-4 h-4 opacity-60 group-hover:opacity-100" />
             </Link>
           </div>
         </FadeUp>
@@ -445,10 +441,10 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 transition={{ duration: 0.7, delay: 0.7, ease: easeOut }}
               >
                 <Link
-                  href="/quote"
+                  href="/contact"
                   className="group relative overflow-hidden inline-flex items-center gap-3 bg-[#E8612C] hover:bg-[#D4521F] text-white font-display text-xs font-bold uppercase tracking-[0.15em] px-8 py-4 transition-all duration-300 hover:scale-[1.02] shadow-sm"
                 >
-                  Request a Quote
+                  Contact Us
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
                 </Link>
                 <Link
@@ -826,10 +822,10 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                           View Product
                         </Link>
                         <Link
-                          href={`/quote?product=${cat.slug}`}
+                          href="/contact"
                           className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 border border-[#D9DDE1] text-[#111318] text-[10px] font-display font-bold uppercase tracking-widest hover:border-[#111318] transition-colors"
                         >
-                          Get Quote
+                          Contact Us
                         </Link>
                       </div>
                     </div>
@@ -1093,20 +1089,29 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
             className="grid grid-cols-2 lg:grid-cols-4 gap-px mt-4 border border-white/10 overflow-hidden"
           >
             {[
-              { num: '10+', label: 'Years in Saudi Arabia' },
-              { num: '321+', label: 'Projects Delivered' },
-              { num: '4', label: 'Core Industries Served' },
-              { num: 'ISO', label: '9001 Certified Quality' },
-            ].map((stat) => (
-              <motion.div
-                key={stat.num}
-                variants={staggerItem}
-                className="bg-white/5 hover:bg-white/10 transition-colors duration-300 px-8 py-7 flex flex-col gap-1"
-              >
-                <span className="font-display font-black text-white text-3xl tracking-tighter">{stat.num}</span>
-                <span className="font-mono text-white/40 text-[9px] uppercase tracking-widest">{stat.label}</span>
-              </motion.div>
-            ))}
+              { num: '10+', target: 10, suffix: '+', label: 'Years in Saudi Arabia' },
+              { num: '321+', target: 321, suffix: '+', label: 'Projects Delivered' },
+              { num: '4', target: 4, suffix: '', label: 'Core Industries Served' },
+              { num: 'ISO', target: 0, suffix: '', label: '9001 Certified Quality' },
+            ].map((stat) => {
+              const isNumeric = stat.target > 0;
+              return (
+                <motion.div
+                  key={stat.label}
+                  variants={staggerItem}
+                  className="bg-white/5 hover:bg-white/10 transition-colors duration-300 px-8 py-7 flex flex-col gap-1"
+                >
+                  <span className="font-display font-black text-white text-3xl tracking-tighter">
+                    {isNumeric ? (
+                      <StatCounter value={stat.num} targetVal={stat.target} noMotion={!!noMotion} suffix={stat.suffix} />
+                    ) : (
+                      stat.num
+                    )}
+                  </span>
+                  <span className="font-mono text-white/40 text-[9px] uppercase tracking-widest">{stat.label}</span>
+                </motion.div>
+              );
+            })}
           </motion.div>
 
         </div>
@@ -1184,7 +1189,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 key={`pl1-${idx}`}
                 src={logo}
                 alt={`Partner ${idx + 1}`}
-                className="h-24 w-auto max-w-[240px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
+                className="h-24 w-auto max-w-[240px] object-contain transition-all duration-300 cursor-pointer flex-shrink-0 hover:scale-105"
               />
             ))}
             {partnerLogos.map((logo, idx) => (
@@ -1193,7 +1198,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 key={`pl2-${idx}`}
                 src={logo}
                 alt={`Partner ${idx + 1}`}
-                className="h-24 w-auto max-w-[240px] object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer flex-shrink-0"
+                className="h-24 w-auto max-w-[240px] object-contain transition-all duration-300 cursor-pointer flex-shrink-0 hover:scale-105"
               />
             ))}
           </div>

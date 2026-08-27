@@ -72,8 +72,8 @@ export default async function SolutionsPage() {
               No active solutions are currently published. Solutions will appear dynamically once added via the content management system.
             </p>
             <div className="flex justify-center">
-              <Link href="/quote" className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-xs font-bold uppercase tracking-wider text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm">
-                Discuss a Custom Solution
+              <Link href="/contact" className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-xs font-bold uppercase tracking-wider text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm">
+                Contact Us
               </Link>
             </div>
           </div>

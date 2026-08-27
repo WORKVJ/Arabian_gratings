@@ -11,6 +11,15 @@ import { Industry, BlogPost } from '@/types';
 
 export const revalidate = 86400;
 
+export async function generateStaticParams() {
+  return [
+    { slug: 'oil-gas' },
+    { slug: 'marine-offshore' },
+    { slug: 'water-treatment' },
+    { slug: 'infrastructure' },
+  ];
+}
+
 interface IndustryDetailPageProps {
   params: Promise<{ slug: string }>;
 }
@@ -91,10 +100,10 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
               {industry.short_description}
             </p>
             <Link
-              href="/quote"
+              href="/contact"
               className="inline-flex items-center justify-center px-6 py-3 border border-transparent font-display text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm shadow-sm"
             >
-              Request Sector Specifications
+              Contact Us
             </Link>
           </Reveal>
         </div>
@@ -191,10 +200,10 @@ export default async function IndustryDetailPage({ params }: IndustryDetailPageP
               </p>
               <div className="flex justify-center">
                 <Link
-                  href="/quote"
+                  href="/contact"
                   className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm"
                 >
-                  Request a Quote
+                  Contact Us
                 </Link>
               </div>
             </div>

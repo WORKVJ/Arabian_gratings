@@ -185,11 +185,8 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
                 <p className="text-xs text-slate-550 max-w-lg mx-auto mb-6">
                   Our project portfolio is currently being compiled. Completed project case studies will appear here once published via the content management system.
                 </p>
-                <div className="flex justify-center gap-4">
-                  <Link href="/quote" className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-xs font-bold uppercase tracking-wider text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm">
-                    Request a Quote
-                  </Link>
-                  <Link href="/contact" className="inline-flex items-center justify-center px-4 py-2 border border-border-color text-foreground text-xs font-bold uppercase tracking-wider bg-white hover:bg-slate-50 transition-colors rounded-sm">
+                <div className="flex justify-center">
+                  <Link href="/contact" className="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-xs font-bold uppercase tracking-wider text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm">
                     Contact Us
                   </Link>
                 </div>

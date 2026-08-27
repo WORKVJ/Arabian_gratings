@@ -10,6 +10,14 @@ import { Industry } from '@/types';
 
 export const revalidate = 86400;
 
+export async function generateStaticParams() {
+  return [
+    { slug: 'industrial-floor-grating' },
+    { slug: 'drainage-trench-covers' },
+    { slug: 'manhole-access-safety' },
+  ];
+}
+
 interface SolutionDetailPageProps {
   params: Promise<{ slug: string }>;
 }
@@ -84,10 +92,10 @@ export default async function SolutionDetailPage({ params }: SolutionDetailPageP
                 {solution.description}
               </p>
               <Link
-                href="/quote"
+                href="/contact"
                 className="inline-flex items-center justify-center px-6 py-3 border border-transparent font-display text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm shadow-sm"
               >
-                Request solution pricing
+                Contact Us
               </Link>
             </Reveal>
           </div>
@@ -159,10 +167,10 @@ export default async function SolutionDetailPage({ params }: SolutionDetailPageP
               </p>
               <div className="flex justify-center">
                 <Link
-                  href="/quote"
+                  href="/contact"
                   className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm"
                 >
-                  Request a Quote
+                  Contact Us
                 </Link>
               </div>
             </div>

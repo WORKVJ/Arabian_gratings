@@ -120,23 +120,6 @@ export default function ContactPage() {
                 </div>
               </div>
             </Reveal>
-
-            <Reveal direction="right" delay={0.3}>
-              <div className="border border-border-color p-8 rounded-sm bg-slate-50 text-center">
-                <h3 className="font-display font-bold text-foreground text-sm uppercase tracking-wider mb-2">
-                  Need a Comprehensive Quote?
-                </h3>
-                <p className="text-xs text-slate-500 mb-4 leading-relaxed font-sans">
-                  If you have structural drawings, dimension tables, or detailed load criteria, use our dedicated Request for Quotation system.
-                </p>
-                <Link
-                  href="/quote"
-                  className="inline-flex items-center justify-center px-4 py-2.5 border border-transparent font-display text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors w-full rounded-sm"
-                >
-                  Request a Quote (RFQ)
-                </Link>
-              </div>
-            </Reveal>
           </aside>
 
         </div>

@@ -127,10 +127,10 @@ function ProductCard({ product, index }: { product: ProductListItem; index: numb
         </Link>
         <div className="w-px bg-[#D9DDE1]" />
         <Link
-          href={`/quote?product=${product.slug}`}
+          href="/contact"
           className="flex-1 text-center py-3 text-[10px] font-display font-bold uppercase tracking-widest text-[#E8612C] hover:bg-[#E8612C] hover:text-white transition-colors duration-200"
         >
-          Request a Quote
+          Contact Us
         </Link>
       </div>
     </motion.div>
@@ -327,18 +327,12 @@ export default function ProductsClient({ initialProducts, categories }: Products
           <p className="text-sm text-[#9CA3AF] max-w-xl mx-auto leading-relaxed mb-8">
             Our engineering team can recommend the right grating system for your specific load class, environment and project requirements.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/quote"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
-            >
-              Request a Quote <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+          <div className="flex justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-[#3A3F4A] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:border-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
             >
-              Contact Our Team
+              Contact Us <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>

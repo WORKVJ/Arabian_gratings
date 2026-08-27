@@ -286,14 +286,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                   Clear Search
                 </Link>
               ) : (
-                <div className="flex justify-center gap-4">
-                  <Link href="/quote" className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-xs font-bold uppercase tracking-wider text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm">
-                    Request a Quote
-                  </Link>
-                  <Link href="/contact" className="inline-flex items-center justify-center px-4 py-2 border border-border-color text-foreground text-xs font-bold uppercase tracking-wider bg-white hover:bg-slate-50 transition-colors rounded-sm">
+                  <Link href="/contact" className="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-xs font-bold uppercase tracking-wider text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm">
                     Contact Us
                   </Link>
-                </div>
               )}
             </div>
           </Reveal>

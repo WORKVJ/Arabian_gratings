@@ -117,18 +117,12 @@ export default function AboutPage() {
           <p className="text-xs text-[#9CA3AF] max-w-lg mx-auto leading-relaxed">
             Get structural drawings reviewed, deflection ratios calculated, or load parameter spans confirmed for your GCC project.
           </p>
-          <div className="flex justify-center gap-3">
-            <Link
-              href="/quote"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
-            >
-              Request a Quote <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+          <div className="flex justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-[#3A3F4A] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:border-white transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
             >
-              Contact Us
+              Contact Us <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>

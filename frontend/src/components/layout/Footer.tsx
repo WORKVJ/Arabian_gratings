@@ -23,7 +23,6 @@ const footerLinks = {
   resources: [
     { name: 'Knowledge Hub', href: '/blog' },
     { name: 'Contact Us', href: '/contact' },
-    { name: 'Request a Quote', href: '/quote' },
   ]
 };
 

@@ -68,16 +68,10 @@ export default function CategoryDetailClient({ category, products }: CategoryDet
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
-                    href="/quote"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors shadow-sm"
-                  >
-                    Request Bulk Quotation <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                  <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 px-6 py-3 border border-[#D9DDE1] text-[#111318] text-[10px] font-display font-bold uppercase tracking-widest bg-white hover:bg-slate-50 transition-colors"
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors shadow-sm"
                   >
-                    Consult Engineering Desk
+                    Contact Us <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </Reveal>
@@ -181,10 +175,10 @@ export default function CategoryDetailClient({ category, products }: CategoryDet
                         View Technical dossier <ChevronRight className="w-4 h-4" />
                       </Link>
                       <Link
-                        href={`/quote?product=${prod.slug}`}
+                        href="/contact"
                         className="inline-flex items-center justify-between text-xs font-bold text-slate-650 hover:text-[#111318] uppercase font-display tracking-wider transition-colors mt-1"
                       >
-                        Request RFQ Quote <ArrowRight className="w-3.5 h-3.5" />
+                        Contact Us <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   </div>
@@ -267,18 +261,12 @@ export default function CategoryDetailClient({ category, products }: CategoryDet
           <p className="text-xs text-slate-400 max-w-lg mx-auto leading-relaxed font-sans">
             Get structural drawings reviewed, load specifications calculated, or request bulk pricing for local and export GCC tenders.
           </p>
-          <div className="flex justify-center gap-3">
-            <Link
-              href="/quote"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
-            >
-              Request a Quote <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+          <div className="flex justify-center">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-[#3A3F4A] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:border-white transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
             >
-              Contact Sales
+              Contact Us <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>

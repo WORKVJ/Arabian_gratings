@@ -9,6 +9,14 @@ import { ChevronRight, ArrowLeft } from 'lucide-react';
 
 export const revalidate = 86400;
 
+export async function generateStaticParams() {
+  return [
+    { slug: 'custom-fabrication' },
+    { slug: 'technical-consultation' },
+    { slug: 'site-survey-installation' },
+  ];
+}
+
 interface ServiceDetailPageProps {
   params: Promise<{ slug: string }>;
 }
@@ -99,20 +107,12 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
               <p className="text-xs text-slate-400 max-w-xl mx-auto leading-relaxed font-sans">
                 Contact our team with your project scope and requirements for a dedicated response from our engineering support team.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Link
-                  href="/quote"
-                  className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm"
-                >
-                  Request a Quote
-                </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold uppercase tracking-widest border border-slate-700 text-white hover:bg-slate-900 transition-colors rounded-sm"
+                  className="inline-flex items-center justify-center px-8 py-3 text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm"
                 >
                   Contact Us
                 </Link>
-              </div>
             </div>
           </div>
         </Reveal>

@@ -13,6 +13,14 @@ import { Industry, Project, BlogPost } from '@/types';
 
 export const revalidate = 86400;
 
+export async function generateStaticParams() {
+  return [
+    { slug: 'jazan-refinery-platform-gratings' },
+    { slug: 'swcc-desalination-grp-walkways' },
+    { slug: 'king-abdulaziz-port-marine-gratings' },
+  ];
+}
+
 interface ProjectDetailPageProps {
   params: Promise<{ slug: string }>;
 }
@@ -226,10 +234,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                   Share your site layout and load requirements for a tailored quotation.
                 </p>
                 <Link
-                  href="/quote"
+                  href="/contact"
                   className="inline-flex items-center justify-center w-full px-4 py-2.5 border border-transparent font-display text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm"
                 >
-                  Request a Quote
+                  Contact Us
                 </Link>
               </div>
             </Reveal>
@@ -321,10 +329,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               </p>
               <div className="flex justify-center">
                 <Link
-                  href="/quote"
+                  href="/contact"
                   className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm"
                 >
-                  Request a Quote
+                  Contact Us
                 </Link>
               </div>
             </div>

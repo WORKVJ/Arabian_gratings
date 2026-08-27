@@ -311,8 +311,7 @@ function StickyCTA({ product, heroRef }: { product: Product; heroRef: React.RefO
     return () => observer.disconnect();
   }, [heroRef]);
 
-  const quoteHref = `/quote?product=${product.slug}`;
-  const contactHref = `/contact?subject=${encodeURIComponent(`Technical Consultation for ${product.name}`)}`;
+  const contactHref = `/contact?subject=${encodeURIComponent(`Technical Inquiry for ${product.name}`)}`;
 
   return (
     <AnimatePresence>
@@ -330,16 +329,10 @@ function StickyCTA({ product, heroRef }: { product: Product; heroRef: React.RefO
               {product.name}
             </span>
             <Link
-              href={quoteHref}
-              className="flex items-center gap-1.5 px-4 py-2 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors whitespace-nowrap rounded-sm"
-            >
-              Request Quote
-            </Link>
-            <Link
               href={contactHref}
-              className="flex items-center gap-1.5 px-4 py-2 border border-[#3A3F4A] text-[#A3A9B0] text-[10px] font-display font-bold uppercase tracking-widest hover:text-white hover:border-white transition-colors whitespace-nowrap rounded-sm"
+              className="flex items-center gap-1.5 px-6 py-2 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors whitespace-nowrap rounded-sm"
             >
-              Consultation
+              Contact Us
             </Link>
           </motion.div>
 
@@ -349,19 +342,13 @@ function StickyCTA({ product, heroRef }: { product: Product; heroRef: React.RefO
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-0 left-0 right-0 z-45 lg:hidden bg-[#111318] border-t border-[#3A3F4A] p-3 flex gap-2 shadow-2xl"
+            className="fixed bottom-0 left-0 right-0 z-45 lg:hidden bg-[#111318] border-t border-[#3A3F4A] p-3 flex shadow-2xl"
           >
             <Link
-              href={quoteHref}
+              href={contactHref}
               className="flex-1 flex items-center justify-center gap-1.5 py-3 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors whitespace-nowrap rounded-sm"
             >
-              Request Quote
-            </Link>
-            <Link
-              href={contactHref}
-              className="flex-1 flex items-center justify-center gap-1.5 py-3 border border-[#3A3F4A] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:border-white transition-colors whitespace-nowrap rounded-sm"
-            >
-              Consultation
+              Contact Us
             </Link>
           </motion.div>
         </>
@@ -372,21 +359,15 @@ function StickyCTA({ product, heroRef }: { product: Product; heroRef: React.RefO
 
 // ─── Section CTAs Inline Row ──────────────────────────────────────────────────
 
-function SectionCTAs({ productName, quoteHref }: { productName: string; quoteHref: string }) {
-  const contactHref = `/contact?subject=${encodeURIComponent(`Technical Consultation for ${productName}`)}`;
+function SectionCTAs({ productName }: { productName: string }) {
+  const contactHref = `/contact?subject=${encodeURIComponent(`Technical Inquiry for ${productName}`)}`;
   return (
     <div className="flex flex-wrap gap-3 mt-6 pt-5 border-t border-[#D9DDE1]">
       <Link
-        href={quoteHref}
-        className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#E8612C] text-white text-[9px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors rounded-sm"
-      >
-        Request Quote
-      </Link>
-      <Link
         href={contactHref}
-        className="inline-flex items-center gap-1.5 px-4 py-2 border border-[#D9DDE1] text-[#111318] text-[9px] font-display font-bold uppercase tracking-widest hover:bg-[#111318] hover:text-white hover:border-[#111318] transition-all rounded-sm"
+        className="inline-flex items-center gap-1.5 px-6 py-2 bg-[#E8612C] text-white text-[9px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors rounded-sm"
       >
-        Technical Consultation
+        Contact Us
       </Link>
     </div>
   );
@@ -499,10 +480,10 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 {/* CTA buttons */}
                 <div className="flex flex-col sm:flex-row gap-3 mb-8">
                   <Link
-                    href={quoteHref}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#E8612C] text-white text-[11px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
+                    href={`/contact?subject=${encodeURIComponent(`Inquiry: ${product.name}`)}`}
+                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#E8612C] text-white text-[11px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
                   >
-                    Request a Quote <ArrowRight className="w-3.5 h-3.5" />
+                    Contact Us <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                   {hasDatasheet && (
                     <a
@@ -560,7 +541,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                     <p key={i}>{para}</p>
                   ))}
                 </div>
-                <SectionCTAs productName={product.name} quoteHref={quoteHref} />
+                <SectionCTAs productName={product.name} />
               </motion.div>
             </div>
 
@@ -700,7 +681,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 </motion.div>
               ))}
             </div>
-            <SectionCTAs productName={product.name} quoteHref={quoteHref} />
+            <SectionCTAs productName={product.name} />
           </div>
         </section>
       )}
@@ -819,7 +800,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 )}
 
               </div>
-              <SectionCTAs productName={product.name} quoteHref={quoteHref} />
+              <SectionCTAs productName={product.name} />
             </div>
           </section>
         );
@@ -866,7 +847,7 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
                 </motion.details>
               ))}
             </div>
-            <SectionCTAs productName={product.name} quoteHref={quoteHref} />
+            <SectionCTAs productName={product.name} />
           </div>
         </section>
       )}
@@ -927,13 +908,13 @@ export default function ProductDetailClient({ product }: ProductDetailClientProp
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href={quoteHref}
+                href="/contact"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#E8612C] text-white text-[11px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
               >
-                Request a Quote <ArrowRight className="w-4 h-4" />
+                Contact Us <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/contact"
+                href="/products"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-[#3A3F4A] text-white text-[11px] font-display font-bold uppercase tracking-widest hover:border-white transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" /> Back to Products

@@ -252,10 +252,10 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                     Speak directly with an engineer for spacing, span calculations, and coating recommendations.
                   </p>
                   <Link
-                    href="/quote"
+                    href="/contact"
                     className="inline-flex items-center justify-center w-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm"
                   >
-                    Request technical quote
+                    Contact Us
                   </Link>
                 </div>
               </div>

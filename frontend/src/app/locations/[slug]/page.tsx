@@ -6,6 +6,10 @@ import Reveal from '@/components/animations/Reveal';
 
 export const revalidate = 86400;
 
+export async function generateStaticParams() {
+  return Object.keys(LOCATIONS).map((slug) => ({ slug }));
+}
+
 interface LocationData {
   name: string;
   title: string;
@@ -291,10 +295,10 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
               {location.intro}
             </p>
             <Link
-              href="/quote"
+              href="/contact"
               className="inline-flex items-center justify-center px-6 py-3 border border-transparent font-display text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm shadow-sm"
             >
-              Request {location.name} Project Quotation
+              Contact Us
             </Link>
           </Reveal>
         </div>
@@ -392,18 +396,12 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
               <p className="text-xs text-slate-400 max-w-xl mx-auto leading-relaxed font-sans">
                 Submit drawing files or dimensions directly to our sales team for quick, localized technical specifications and GCC pricing.
               </p>
-              <div className="flex justify-center gap-3">
-                <Link
-                  href="/quote"
-                  className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm"
-                >
-                  Request a Quote
-                </Link>
+              <div className="flex justify-center">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-2.5 border border-slate-700 hover:border-white text-xs font-bold uppercase tracking-widest text-white transition-colors rounded-sm bg-transparent"
+                  className="inline-flex items-center justify-center px-8 py-3 text-xs font-bold uppercase tracking-widest text-white bg-accent hover:bg-accent-hover transition-colors rounded-sm"
                 >
-                  Contact Office
+                  Contact Us
                 </Link>
               </div>
             </div>

@@ -102,10 +102,10 @@ export default function Header() {
         {/* RIGHT CTA */}
         <div className="hidden lg:block shrink-0">
           <Link
-            href="/quote"
+            href="/contact"
             className="inline-flex items-center justify-center px-4 py-2 bg-[#E8612C] hover:bg-[#D4521F] text-white font-sans text-[11px] font-bold uppercase tracking-widest transition-all duration-300 hover:translate-y-[-1px] shadow-sm"
           >
-            <span>Request a Quote &rarr;</span>
+            <span>Contact Us &rarr;</span>
           </Link>
         </div>
 
@@ -149,11 +149,11 @@ export default function Header() {
 
               <div className="pt-6">
                 <Link
-                  href="/quote"
+                  href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full inline-flex items-center justify-center px-4 py-4 font-sans text-xs font-bold uppercase tracking-widest text-white bg-[#E8612C] hover:bg-[#D4521F] transition-colors rounded-[2px]"
                 >
-                  Request a Quote
+                  Contact Us
                 </Link>
               </div>
             </div>
