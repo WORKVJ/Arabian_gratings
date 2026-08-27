@@ -129,15 +129,11 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--foreground) !important;
 }
 
-.text-[#111318] {
-  color: var(--foreground) !important;
-}
-
 .text-slate-800, .text-slate-700, .text-slate-900 {
   color: var(--foreground) !important;
 }
 
-.text-[#59616B], .text-slate-650, .text-slate-600, .text-slate-500 {
+.text-slate-650, .text-slate-600, .text-slate-500 {
   color: var(--slate-grey) !important;
 }
 
