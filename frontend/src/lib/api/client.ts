@@ -1,9 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { 
-  Product, ProductCategory, Industry, Solution, Service, Project, BlogPost, PaginatedResponse, BlogCategory 
+  Product, ProductListItem, ProductCategory, Industry, Solution, Service, Project, BlogPost, PaginatedResponse, BlogCategory 
 } from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api/v1';
+const MEDIA_BASE_URL = process.env.NEXT_PUBLIC_MEDIA_URL || 'http://127.0.0.1:8000';
+
+export function getImageUrl(path: string | null | undefined): string | null {
+  if (!path) return null;
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  }
+  if (path.startsWith('/media/')) {
+    return `${MEDIA_BASE_URL}${path}`;
+  }
+  if (path.startsWith('uploads/')) {
+    return `${MEDIA_BASE_URL}/media/${path}`;
+  }
+  return path;
+}
 
 export class APIError extends Error {
   status: number;
@@ -40,15 +55,21 @@ async function fetchFromAPI<T>(endpoint: string, options?: RequestInit): Promise
 }
 
 // Products API
-export async function getProducts(params?: { category?: string; is_featured?: boolean; search?: string }): Promise<PaginatedResponse<Product>> {
+export async function getProducts(params?: {
+  category?: string;
+  is_featured?: boolean;
+  search?: string;
+  page_size?: number;
+}): Promise<PaginatedResponse<ProductListItem>> {
   const query = new URLSearchParams();
   if (params?.category) query.append('category', params.category);
   if (params?.is_featured) query.append('is_featured', String(params.is_featured));
   if (params?.search) query.append('search', params.search);
+  if (params?.page_size) query.append('page_size', String(params.page_size));
   
   const queryString = query.toString() ? `?${query.toString()}` : '';
-  return fetchFromAPI<PaginatedResponse<Product>>(`/products/${queryString}`, {
-    next: { tags: ['products'], revalidate: 86400 } // 24 hours caching
+  return fetchFromAPI<PaginatedResponse<ProductListItem>>(`/products/${queryString}`, {
+    next: { tags: ['products'], revalidate: 86400 }
   });
 }
 
@@ -61,6 +82,12 @@ export async function getProduct(slug: string): Promise<Product> {
 export async function getProductCategories(): Promise<PaginatedResponse<ProductCategory>> {
   return fetchFromAPI<PaginatedResponse<ProductCategory>>('/products/categories/', {
     next: { tags: ['categories'], revalidate: 86400 }
+  });
+}
+
+export async function getProductCategory(slug: string): Promise<ProductCategory> {
+  return fetchFromAPI<ProductCategory>(`/products/categories/${slug}/`, {
+    next: { tags: [`category-${slug}`], revalidate: 86400 }
   });
 }
 

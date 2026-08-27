@@ -48,14 +48,32 @@ export default function Footer() {
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
               Engineered access solutions. High-performance steel, aluminum, and FRP/GRP gratings for industrial and civil infrastructure installations in the UAE and Middle East.
             </p>
-            <div className="space-y-2 text-xs text-slate-400">
+            <div className="space-y-3 text-xs text-slate-400">
               <div className="flex items-start space-x-2">
                 <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                <span>Sales & Engineering Division, United Arab Emirates</span>
+                <div>
+                  <strong>Head Office:</strong> Jeddah, Saudi Arabia<br />
+                  Othman Bin Afan Street, Jeddah 22234
+                </div>
+              </div>
+              <div className="flex items-start space-x-2">
+                <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                <div>
+                  <strong>Branch:</strong> Dammam, Saudi Arabia<br />
+                  Petromin Business Center, Dammam 32214
+                </div>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-accent shrink-0" />
-                <span>Contact sales desk directly via Enquiry / RFQ portal</span>
+                <a href="mailto:sales@arabiangratings.com" className="hover:text-accent transition-colors">
+                  sales@arabiangratings.com
+                </a>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-[10px] font-mono font-bold text-accent shrink-0 w-4">TEL</span>
+                <a href="tel:+966126576896" className="hover:text-accent transition-colors font-mono">
+                  +966 12 657 6896
+                </a>
               </div>
             </div>
           </div>

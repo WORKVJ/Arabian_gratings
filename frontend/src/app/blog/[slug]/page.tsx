@@ -9,7 +9,7 @@ import { generatePageMetadata } from '@/lib/seo/config';
 import { stripHtml } from '@/lib/seo/stripHtml';
 import { Metadata } from 'next';
 import { ChevronRight, ArrowLeft, User, Calendar } from 'lucide-react';
-import { Product, Industry, BlogPost } from '@/types';
+import { Industry, BlogPost } from '@/types';
 
 export const revalidate = 86400; // 24 hours ISR
 
@@ -206,7 +206,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
                     Related Products
                   </h3>
                   <ul className="space-y-3 font-display text-xs font-bold uppercase tracking-wider">
-                    {post.related_products.map((prod: Product) => (
+                    {post.related_products.map((prod) => (
                       <li key={prod.id} className="flex items-center justify-between">
                         <Link href={`/products/${prod.slug}`} className="text-slate-grey hover:text-accent transition-colors">
                           {prod.name}

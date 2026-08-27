@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Reveal from '@/components/animations/Reveal';
 import ProjectFilterPanel from '@/components/projects/ProjectFilterPanel';
 import { getProjects, getIndustries, getProducts } from '@/lib/api/client';
-import { Project, Industry, Product, PaginatedResponse } from '@/types';
+import { Project, Industry, ProductListItem, PaginatedResponse } from '@/types';
 import { ChevronRight } from 'lucide-react';
 import { defaultMetadata } from '@/lib/seo/config';
 import { Metadata } from 'next';
@@ -27,7 +27,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
 
   let projectsRes: PaginatedResponse<Project> = { count: 0, next: null, previous: null, results: [] };
   let industriesRes: PaginatedResponse<Industry> = { count: 0, next: null, previous: null, results: [] };
-  let productsRes: PaginatedResponse<Product> = { count: 0, next: null, previous: null, results: [] };
+  let productsRes: PaginatedResponse<ProductListItem> = { count: 0, next: null, previous: null, results: [] };
 
   try {
     projectsRes = await getProjects({
@@ -137,7 +137,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
                       {/* Products used chips */}
                       {project.products_used && project.products_used.length > 0 && (
                         <div className="flex flex-wrap gap-1.5 mb-4">
-                          {project.products_used.slice(0, 3).map((prod: Product) => (
+                          {project.products_used.slice(0, 3).map((prod) => (
                             <span
                               key={prod.id}
                               className="text-[9px] font-mono px-2 py-0.5 border border-border-color text-slate-600 bg-slate-50 rounded-sm"

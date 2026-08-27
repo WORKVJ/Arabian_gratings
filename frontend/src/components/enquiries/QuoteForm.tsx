@@ -1,24 +1,36 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { submitQuoteRequest, APIError } from '@/lib/api/client';
 import { Loader2, CheckCircle2, AlertTriangle, Paperclip, X, Trash2 } from 'lucide-react';
 
 const ALLOWED_EXTENSIONS = ['.pdf', '.dwg', '.dxf', '.jpg', '.jpeg', '.png', '.doc', '.docx'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
-export default function QuoteForm() {
+// Fallback product list — used if API is unavailable
+const FALLBACK_PRODUCTS = [
+  'Electroforged Welded Steel Grating',
+  'Moulded GRP Walkway Grating',
+  'Stainless Steel SS316 Floor Grating',
+  'Aluminium Access Grating Walkway',
+  'Ductile Iron Double Sealed Manhole Cover',
+  'M-Clip Grating Fastening Clamp',
+  'Ductile Iron Plastic Encapsulated Step Iron',
+  'Stainless Steel Tactile Stud',
+];
+
+export default function QuoteForm({ initialProduct }: { initialProduct?: string }) {
   const [formData, setFormData] = useState({
     name: '',
     company: '',
     email: '',
     phone: '',
-    product: '',
+    product: initialProduct || '',
     material: '',
     quantity: '',
     dimensions: '',
     project_requirements: '',
-    message: '',
+    message: initialProduct ? `Enquiry regarding: ${initialProduct}` : '',
   });
 
   const [drawing, setDrawing] = useState<File | null>(null);
@@ -28,9 +40,27 @@ export default function QuoteForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [generalError, setGeneralError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
+  const [productOptions, setProductOptions] = useState<string[]>(FALLBACK_PRODUCTS);
 
   const drawingInputRef = useRef<HTMLInputElement>(null);
   const attachmentsInputRef = useRef<HTMLInputElement>(null);
+
+  // Fetch live product list from Django API on mount
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const res = await fetch(`${apiBase}/api/v1/products/?page_size=100&is_active=true`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const names: string[] = (data.results || []).map((p: { name: string }) => p.name);
+        if (names.length > 0) setProductOptions(names);
+      } catch {
+        // silently keep fallback list
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const formatFileSize = (bytes: number) => {
     if (bytes === 0) return '0 Bytes';
@@ -317,11 +347,13 @@ export default function QuoteForm() {
               className="w-full px-3 py-2 border border-border-color rounded-sm text-xs bg-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent disabled:opacity-50 font-sans"
             >
               <option value="">Select a product line...</option>
-              <option value="Electroforge Steel Grating">Electroforge Steel Grating</option>
-              <option value="GRP/FRP Molded Grating">GRP/FRP Molded Grating</option>
-              <option value="GRP/FRP Pultruded Grating">GRP/FRP Pultruded Grating</option>
-              <option value="Stair Treads">Stair Treads</option>
-              <option value="Walkways & Access Platforms">Walkways & Access Platforms</option>
+              {/* If initialProduct is set and not in the dynamic list, show it as a distinct option */}
+              {initialProduct && !productOptions.includes(initialProduct) && (
+                <option value={initialProduct}>{initialProduct}</option>
+              )}
+              {productOptions.map((name) => (
+                <option key={name} value={name}>{name}</option>
+              ))}
             </select>
             {fieldErrors.product && <p className="text-xs text-red-500 font-semibold font-sans mt-1">{fieldErrors.product[0]}</p>}
           </div>

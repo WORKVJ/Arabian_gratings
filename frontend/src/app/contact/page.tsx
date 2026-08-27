@@ -50,41 +50,58 @@ export default function ContactPage() {
               <div className="bg-charcoal text-white p-8 rounded-sm border border-slate-800 space-y-6 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-5 tech-grid-overlay-dark" />
                 <h2 className="text-sm font-display font-bold uppercase tracking-widest border-b border-slate-800 pb-3 text-slate-350 relative z-10">
-                  UAE Engineering Office
+                  Head Office & Manufacturing
                 </h2>
 
                 <div className="flex items-start gap-4 relative z-10">
                   <MapPin className="w-5 h-5 text-accent shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xs font-display font-bold text-white uppercase tracking-wider mb-1">Office Location</h3>
+                    <h3 className="text-xs font-display font-bold text-white uppercase tracking-wider mb-1">Head Office — Jeddah</h3>
                     <p className="text-xs text-slate-400 leading-relaxed">
-                      Arabian Gratings Sales & Engineering Division<br />
-                      United Arab Emirates
+                      Arabian Gratings & Manufacturing Company<br />
+                      Othman Bin Afan Street, Jeddah 22234<br />
+                      Saudi Arabia
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 relative z-10">
+                <div className="flex items-start gap-4 relative z-10 border-t border-slate-800 pt-4">
+                  <MapPin className="w-5 h-5 text-accent shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-xs font-display font-bold text-white uppercase tracking-wider mb-1">Branch — Dammam</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Petromin Business Center<br />
+                      4648 King Saud Bin Abdulaziz Rd, Arabia An Nawras<br />
+                      Dammam 32214, Saudi Arabia
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 relative z-10 border-t border-slate-800 pt-4">
                   <Phone className="w-5 h-5 text-accent shrink-0 mt-1" />
                   <div>
                     <h3 className="text-xs font-display font-bold text-white uppercase tracking-wider mb-1">Direct Call</h3>
                     <p className="text-xs text-slate-400">
-                      Contact desk via central request form
+                      <a href="tel:+966126576896" className="hover:text-accent transition-colors font-mono">
+                        +966 12 657 6896
+                      </a>
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 relative z-10">
+                <div className="flex items-start gap-4 relative z-10 border-t border-slate-800 pt-4">
                   <Mail className="w-5 h-5 text-accent shrink-0 mt-1" />
                   <div>
                     <h3 className="text-xs font-display font-bold text-white uppercase tracking-wider mb-1">Email Correspondence</h3>
                     <p className="text-xs text-slate-400">
-                      Submit project tenders directly via RFQ portal
+                      <a href="mailto:sales@arabiangratings.com" className="hover:text-accent transition-colors">
+                        sales@arabiangratings.com
+                      </a>
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 relative z-10">
+                <div className="flex items-start gap-4 relative z-10 border-t border-slate-800 pt-4">
                   <Clock className="w-5 h-5 text-accent shrink-0 mt-1" />
                   <div>
                     <h3 className="text-xs font-display font-bold text-white uppercase tracking-wider mb-1">Operational Hours</h3>

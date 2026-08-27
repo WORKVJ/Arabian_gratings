@@ -9,9 +9,49 @@ import {
   useTransform,
   useSpring,
   useReducedMotion,
+  useInView,
+  animate,
 } from 'framer-motion';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { ProductCategory, Industry, Project, BlogPost } from '@/types';
+import { getImageUrl } from '@/lib/api/client';
+
+function StatCounter({ value, targetVal, noMotion }: { value: string; targetVal: number; noMotion: boolean }) {
+  const [count, setCount] = useState(0);
+  const [hasMounted, setHasMounted] = useState(false);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-50px 0px' });
+
+  useEffect(() => {
+    /* eslint-disable-next-line react-hooks/set-state-in-effect */
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasMounted || !inView) return;
+    if (noMotion) {
+      /* eslint-disable-next-line react-hooks/set-state-in-effect */
+      setCount(targetVal);
+      return;
+    }
+
+    const controls = animate(0, targetVal, {
+      duration: 2.2,
+      ease: [0.25, 1, 0.5, 1],
+      onUpdate: (latest) => {
+        setCount(Math.floor(latest));
+      }
+    });
+
+    return () => controls.stop();
+  }, [targetVal, noMotion, hasMounted, inView]);
+
+  if (!hasMounted) {
+    return <span ref={ref}>{value}</span>;
+  }
+
+  return <span ref={ref}>{count}+</span>;
+}
 
 interface HomeClientProps {
   categories: ProductCategory[];
@@ -21,10 +61,10 @@ interface HomeClientProps {
 }
 
 const defaultCategories: ProductCategory[] = [
-  { id: 1, name: 'Steel Grating Systems', slug: 'steel-gratings', description: 'Industrial heavy-duty metal floors galvanized to ISO 1461. Fabricated using high-strength structural grade steels.', image: null, is_active: true, no_index: false },
-  { id: 2, name: 'FRP / GRP Grating', slug: 'frp-gratings', description: 'Corrosion-proof fiberglass reinforced plastic grates built with isophthalic polyester or vinyl ester resins.', image: null, is_active: true, no_index: false },
-  { id: 3, name: 'Industrial Stair Treads', slug: 'stair-treads', description: 'Grating steps with anti-slip nosing plates and standard welded end-plates for immediate field installation.', image: null, is_active: true, no_index: false },
-  { id: 4, name: 'Custom Fabricated Grates', slug: 'custom-fabrications', description: 'Bespoke grating panels with circular penetrations, notches, complex shapes and edge bandings to match site drawings.', image: null, is_active: true, no_index: false },
+  { id: 1, name: 'Steel Grating Systems', slug: 'steel-gratings', short_description: 'Industrial heavy-duty metal floors galvanized to ISO 1461.', description: 'Industrial heavy-duty metal floors galvanized to ISO 1461. Fabricated using high-strength structural grade steels.', image: null, is_active: true, no_index: false, sort_order: 0, product_count: 0 },
+  { id: 2, name: 'FRP / GRP Grating', slug: 'frp-gratings', short_description: 'Corrosion-proof fiberglass reinforced plastic grates.', description: 'Corrosion-proof fiberglass reinforced plastic grates built with isophthalic polyester or vinyl ester resins.', image: null, is_active: true, no_index: false, sort_order: 1, product_count: 0 },
+  { id: 3, name: 'Industrial Stair Treads', slug: 'stair-treads', short_description: 'Grating steps with anti-slip nosing plates.', description: 'Grating steps with anti-slip nosing plates and standard welded end-plates for immediate field installation.', image: null, is_active: true, no_index: false, sort_order: 2, product_count: 0 },
+  { id: 4, name: 'Custom Fabricated Grates', slug: 'custom-fabrications', short_description: 'Bespoke grating panels to match site drawings.', description: 'Bespoke grating panels with circular penetrations, notches, complex shapes and edge bandings to match site drawings.', image: null, is_active: true, no_index: false, sort_order: 3, product_count: 0 },
 ];
 
 const defaultIndustries: Industry[] = [
@@ -146,7 +186,7 @@ function CtaSection() {
       <div className="absolute top-0 left-0 right-0 h-px bg-white/10 z-10" />
       <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-10 text-center space-y-8">
         <FadeUp delay={0.05}>
-          <span className="font-mono text-[#d97706] text-[10px] uppercase tracking-[0.25em] block">08 // Get In Touch</span>
+          <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block">08 // Get In Touch</span>
         </FadeUp>
         <MaskReveal delay={0.12}>
           <h2 className="font-display font-black text-white text-[clamp(2.5rem,6vw,5rem)] leading-[0.92] tracking-tighter uppercase">
@@ -160,7 +200,7 @@ function CtaSection() {
         </FadeUp>
         <FadeUp delay={0.42}>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href="/quote" className="group inline-flex items-center gap-3 bg-[#d97706] hover:bg-[#b45309] text-white font-display font-bold text-xs uppercase tracking-[0.15em] px-10 py-5 transition-colors duration-300 shadow-2xl">
+            <Link href="/quote" className="group inline-flex items-center gap-3 bg-[#E8612C] hover:bg-[#D4521F] text-white font-display font-bold text-xs uppercase tracking-[0.15em] px-10 py-5 transition-colors duration-300 shadow-2xl">
               Submit RFQ Details
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
@@ -286,11 +326,11 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, ease: easeOut }}
               >
-                <span className="block font-mono text-[#d97706] text-[10px] tracking-[0.25em] uppercase">
+                <span className="block font-mono text-[#E8612C] text-[10px] tracking-[0.25em] uppercase">
                   Arabian Gratings UAE / Industrial Grating Systems
                 </span>
                 <motion.div
-                  className="h-px bg-[#d97706] shrink-0"
+                  className="h-px bg-[#E8612C] shrink-0"
                   initial={{ width: 0 }}
                   animate={{ width: 40 }}
                   transition={{ duration: 0.6, delay: 0.7 }}
@@ -321,7 +361,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 </div>
                 <div className="overflow-hidden relative pb-2.5">
                   <motion.span
-                    className="font-display font-black text-[#d97706] text-[clamp(2.3rem,4vw,3.6rem)] leading-[0.98] tracking-tighter uppercase block"
+                    className="font-display font-black text-[#E8612C] text-[clamp(2.3rem,4vw,3.6rem)] leading-[0.98] tracking-tighter uppercase block"
                     initial={noMotion ? false : { opacity: 0, y: 70, clipPath: 'inset(100% 0 0 0)' }}
                     animate={{ opacity: 1, y: 0, clipPath: 'inset(0% 0 0 0)' }}
                     transition={{ duration: 0.9, delay: 0.39, ease: easeOut }}
@@ -329,7 +369,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                     Industries<span className="text-[#111318]">.</span>
                   </motion.span>
                   <motion.div
-                    className="absolute bottom-0 left-0 h-[2px] bg-[#d97706]"
+                    className="absolute bottom-0 left-0 h-[2px] bg-[#E8612C]"
                     initial={{ width: 0 }}
                     animate={{ width: 60 }}
                     transition={{ duration: 0.6, delay: 1.0, ease: easeOut }}
@@ -356,14 +396,14 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               >
                 <Link
                   href="/quote"
-                  className="group relative overflow-hidden inline-flex items-center gap-3 bg-[#d97706] hover:bg-[#b45309] text-white font-display text-xs font-bold uppercase tracking-[0.15em] px-8 py-4 transition-all duration-300 hover:scale-[1.02] shadow-sm"
+                  className="group relative overflow-hidden inline-flex items-center gap-3 bg-[#E8612C] hover:bg-[#D4521F] text-white font-display text-xs font-bold uppercase tracking-[0.15em] px-8 py-4 transition-all duration-300 hover:scale-[1.02] shadow-sm"
                 >
                   Request a Quote
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
                 </Link>
                 <Link
                   href="/products"
-                  className="group inline-flex items-center gap-2 text-[#111318] hover:text-[#d97706] font-display text-xs font-bold uppercase tracking-[0.15em] px-4 py-4 transition-all duration-300 border border-[#D9DDE1] hover:border-[#d97706]"
+                  className="group inline-flex items-center gap-2 text-[#111318] hover:text-[#E8612C] font-display text-xs font-bold uppercase tracking-[0.15em] px-4 py-4 transition-all duration-300 border border-[#D9DDE1] hover:border-[#E8612C]"
                 >
                   Explore Products
                   <span className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
@@ -371,49 +411,104 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               </motion.div>
 
               {/* Credentials */}
-              <motion.div
-                className="pt-8 border-t border-[#D9DDE1] grid grid-cols-2 sm:grid-cols-4 gap-8"
-                initial={noMotion ? false : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.0, delay: 0.85 }}
-              >
-                {[
-                  { value: '15+', label: 'Years in UAE' },
-                  { value: 'ISO 9001', label: 'Quality Certified' },
-                  { value: '500+', label: 'Projects Delivered' },
-                  { value: 'UAE / GCC', label: 'Regional Coverage' },
-                ].map((stat, idx) => {
-                  const isActive = (isHoveredStat !== null ? isHoveredStat === idx : activeStatIndex === idx) && !noMotion;
-                  return (
-                    <div
-                      key={stat.label}
-                      className="relative transition-all duration-500 cursor-pointer select-none"
-                      onMouseEnter={() => setIsHoveredStat(idx)}
-                      onMouseLeave={() => setIsHoveredStat(null)}
-                      style={{
-                        opacity: isActive ? 1.0 : 0.6,
-                        transform: isActive ? 'translateY(-2px)' : 'translateY(0)',
-                        transition: 'opacity 0.4s ease, transform 0.4s ease',
-                      }}
-                    >
-                      <span className={`block font-display font-black text-2xl tracking-tight ${isActive ? 'text-[#d97706]' : 'text-[#111318]'}`}>
-                        {stat.value}
-                      </span>
-                      <span className="block font-mono text-[#59616B] text-[9px] uppercase tracking-widest mt-1">
-                        {stat.label}
-                      </span>
-                      <div className="absolute -bottom-2 left-0 right-0 h-[2px] bg-[#D9DDE1] overflow-hidden">
-                        <motion.div
-                          className="h-full bg-[#d97706]"
-                          initial={{ width: '0%' }}
-                          animate={{ width: isActive ? '100%' : '0%' }}
-                          transition={{ duration: isActive ? 2.8 : 0.3, ease: 'linear' }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
-              </motion.div>
+              <div className="relative pt-8 mt-8 border-t border-[#D9DDE1] overflow-hidden rounded-sm">
+                {/* Subtle blueprint grid texture */}
+                <div className="absolute inset-0 opacity-[0.03] tech-dot-grid-light pointer-events-none" />
+                
+                {/* Horizontal scan line */}
+                {!noMotion && (
+                  <motion.div
+                    className="absolute left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#E8612C]/20 to-transparent pointer-events-none"
+                    initial={{ top: '0%' }}
+                    animate={{ top: '100%' }}
+                    transition={{ duration: 6, ease: 'linear', repeat: Infinity }}
+                  />
+                )}
+
+                <motion.div
+                  className="grid grid-cols-2 sm:grid-cols-4 gap-8 relative z-10 p-4 -m-4 rounded-sm"
+                  variants={{
+                    hidden: {},
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.15
+                      }
+                    }
+                  }}
+                  initial={noMotion ? undefined : "hidden"}
+                  whileInView={noMotion ? undefined : "visible"}
+                  viewport={{ once: true, margin: "-50px 0px" }}
+                >
+                  {[
+                    { value: '15+', label: 'Years in UAE' },
+                    { value: 'ISO 9001', label: 'Quality Certified' },
+                    { value: '500+', label: 'Projects Delivered' },
+                    { value: 'UAE / GCC', label: 'Regional Coverage' },
+                  ].map((stat, idx) => {
+                    const isHighlighted = (isHoveredStat !== null ? isHoveredStat === idx : activeStatIndex === idx) && !noMotion;
+                    const opacityVal = noMotion ? 1.0 : (isHighlighted ? 1.0 : 0.6);
+                    const yVal = noMotion ? 0 : (isHighlighted ? -3 : 0);
+                    const lineColor = noMotion ? '#D9DDE1' : (isHighlighted ? '#E8612C' : '#D9DDE1');
+                    const lineHeight = isHighlighted ? '3px' : '2px';
+                    const glowShadow = isHighlighted ? '0 1px 4px rgba(232, 97, 44, 0.25)' : 'none';
+
+                    const isNumeric = stat.value === '15+' || stat.value === '500+';
+                    const targetVal = stat.value === '15+' ? 15 : stat.value === '500+' ? 500 : 0;
+
+                    return (
+                      <motion.div
+                        key={stat.label}
+                        variants={{
+                          hidden: { opacity: 0, y: 20 },
+                          visible: {
+                            opacity: 1,
+                            y: 0,
+                            transition: { duration: 0.6, ease: 'easeOut' }
+                          }
+                        }}
+                        className="relative cursor-pointer select-none p-4 rounded-sm"
+                        onMouseEnter={() => setIsHoveredStat(idx)}
+                        onMouseLeave={() => setIsHoveredStat(null)}
+                        animate={{
+                          opacity: opacityVal,
+                          y: yVal,
+                          backgroundColor: isHighlighted ? 'rgba(232, 97, 44, 0.02)' : 'rgba(232, 97, 44, 0)'
+                        }}
+                        transition={{ duration: 0.25, ease: 'easeOut' }}
+                      >
+                        <span className={`block font-display font-black text-2xl tracking-tight ${isHighlighted ? 'text-[#E8612C]' : 'text-[#111318]'}`}>
+                          {isNumeric ? (
+                            <StatCounter value={stat.value} targetVal={targetVal} noMotion={!!noMotion} />
+                          ) : (
+                            stat.value
+                          )}
+                        </span>
+                        <span className="block font-mono text-[#59616B] text-[9px] uppercase tracking-widest mt-1">
+                          {stat.label}
+                        </span>
+                        
+                        <div 
+                          className="absolute bottom-1 left-4 right-4 overflow-hidden" 
+                          style={{ height: lineHeight, boxShadow: glowShadow }}
+                        >
+                          <motion.div
+                            className="h-full"
+                            style={{ 
+                              originX: 0, 
+                              backgroundColor: lineColor,
+                              width: '100%' 
+                            }}
+                            initial={noMotion ? { scaleX: 1 } : { scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, ease: 'easeOut', delay: idx * 0.15 + 0.1 }}
+                          />
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+              </div>
             </div>
           </motion.div>
 
@@ -452,7 +547,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               <div className="flex justify-between items-start font-mono text-[9px] text-[#59616B] uppercase tracking-widest">
                 <div className="leading-relaxed">
                   SYSTEM STATUS:{' '}
-                  <span className="text-[#d97706]">ACTIVE</span>
+                  <span className="text-[#E8612C]">ACTIVE</span>
                   <br />
                   GRID SPAN: 1200 × 3000 MM
                 </div>
@@ -500,14 +595,14 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                     );
                   })}
                   <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}>
-                    <line x1="38" y1="116" x2="462" y2="116" stroke="#d97706" strokeWidth="0.8" />
-                    <line x1="38" y1="112" x2="38" y2="120" stroke="#d97706" strokeWidth="0.8" />
-                    <line x1="462" y1="112" x2="462" y2="120" stroke="#d97706" strokeWidth="0.8" />
-                    <text x="250" y="128" fill="#d97706" fontSize="7" textAnchor="middle" style={{ fontFamily: 'monospace', letterSpacing: '0.08em' }}>SPAN: 3000 MM</text>
+                    <line x1="38" y1="116" x2="462" y2="116" stroke="#E8612C" strokeWidth="0.8" />
+                    <line x1="38" y1="112" x2="38" y2="120" stroke="#E8612C" strokeWidth="0.8" />
+                    <line x1="462" y1="112" x2="462" y2="120" stroke="#E8612C" strokeWidth="0.8" />
+                    <text x="250" y="128" fill="#E8612C" fontSize="7" textAnchor="middle" style={{ fontFamily: 'monospace', letterSpacing: '0.08em' }}>SPAN: 3000 MM</text>
                   </motion.g>
                   <motion.line
                     x1="50" y1="20" x2="50" y2="110"
-                    stroke="#d97706" strokeWidth="1.5" opacity="0.65"
+                    stroke="#E8612C" strokeWidth="1.5" opacity="0.65"
                     animate={{ x: [0, 400, 0] }}
                     transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
                   />
@@ -518,7 +613,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               <div className="flex justify-between items-end border-t border-[#D9DDE1] pt-2.5">
                 <div>
                   <span className="block font-mono text-[#59616B] text-[8px] uppercase tracking-widest">ACTIVE PARAMETER</span>
-                  <span className="block font-mono text-[#d97706] text-[10px] font-black tracking-wider uppercase mt-0.5">
+                  <span className="block font-mono text-[#E8612C] text-[10px] font-black tracking-wider uppercase mt-0.5">
                     {visSpecsList[visSpecIndex].label}
                   </span>
                 </div>
@@ -544,11 +639,11 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
             {/* LEFT */}
             <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-28">
               <FadeUp delay={0.05}>
-                <span className="font-mono text-[#d97706] text-[10px] uppercase tracking-[0.25em] block">
+                <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block">
                   01 // ENGINEERING &mdash; UAE / GCC
                 </span>
               </FadeUp>
-              <div className="w-12 h-[2px] bg-[#d97706]/40" />
+              <div className="w-12 h-[2px] bg-[#E8612C]/40" />
               <div className="space-y-2">
                 <span className="block font-mono text-[#59616B] text-[9px] uppercase tracking-widest leading-[1.9]">
                   SYSTEM TYPE: STRUCTURAL SYSTEMS<br />
@@ -592,17 +687,17 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                     >
                       <div className="absolute top-0 left-0 w-[2px] h-full bg-[#D9DDE1]">
                         <motion.div
-                          className="w-full bg-[#d97706]"
+                          className="w-full bg-[#E8612C]"
                           initial={{ height: '0%' }}
                           animate={{ height: isActive ? '100%' : '0%' }}
                           transition={{ duration: 0.3 }}
                         />
                       </div>
                       <div className="pl-4">
-                        <span className={`block font-mono text-[9px] uppercase tracking-widest ${isActive ? 'text-[#d97706]' : 'text-[#59616B]'}`}>
+                        <span className={`block font-mono text-[9px] uppercase tracking-widest ${isActive ? 'text-[#E8612C]' : 'text-[#59616B]'}`}>
                           {item.num} {'//'} SPEC
                         </span>
-                        <h3 className={`font-display font-black text-lg uppercase tracking-tight mt-1 ${isActive ? 'text-[#d97706]' : 'text-[#111318]'}`}>
+                        <h3 className={`font-display font-black text-lg uppercase tracking-tight mt-1 ${isActive ? 'text-[#E8612C]' : 'text-[#111318]'}`}>
                           {item.title}
                         </h3>
                         <span className="block font-sans text-[11px] text-[#59616B] uppercase tracking-wider mt-0.5">
@@ -655,7 +750,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
             <div className="lg:col-span-5 space-y-10 lg:sticky lg:top-28">
               <div>
                 <FadeUp delay={0.05}>
-                  <span className="font-mono text-[#d97706] text-[10px] uppercase tracking-[0.25em] block mb-4">
+                  <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block mb-4">
                     02 // PRODUCT CATALOG
                   </span>
                 </FadeUp>
@@ -686,16 +781,16 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                     >
                       <div className="absolute top-0 left-0 w-[2px] h-full bg-[#D9DDE1]">
                         <motion.div
-                          className="w-full bg-[#d97706]"
+                          className="w-full bg-[#E8612C]"
                           initial={{ height: '0%' }}
                           animate={{ height: isActive ? '100%' : '0%' }}
                           transition={{ duration: 0.3 }}
                         />
                       </div>
-                      <span className={`block font-mono text-[9px] uppercase tracking-widest ${isActive ? 'text-[#d97706]' : 'text-[#59616B]'}`}>
+                      <span className={`block font-mono text-[9px] uppercase tracking-widest ${isActive ? 'text-[#E8612C]' : 'text-[#59616B]'}`}>
                         0{idx + 1} {'//'} SYSTEMS
                       </span>
-                      <h3 className={`font-display font-black text-sm uppercase tracking-tight mt-0.5 ${isActive ? 'text-[#d97706]' : 'text-[#111318]'}`}>
+                      <h3 className={`font-display font-black text-sm uppercase tracking-tight mt-0.5 ${isActive ? 'text-[#E8612C]' : 'text-[#111318]'}`}>
                         {cat.name}
                       </h3>
                     </div>
@@ -704,7 +799,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               </div>
 
               <FadeUp delay={0.35}>
-                <Link href="/products" className="group inline-flex items-center gap-2 font-mono text-[10px] text-[#d97706] uppercase tracking-widest hover:text-[#111318] transition-colors duration-300">
+                <Link href="/products" className="group inline-flex items-center gap-2 font-mono text-[10px] text-[#E8612C] uppercase tracking-widest hover:text-[#111318] transition-colors duration-300">
                   All Systems &rarr;
                 </Link>
               </FadeUp>
@@ -717,7 +812,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               <div className="relative w-full aspect-[4/3] min-h-[380px] sm:min-h-[460px] overflow-hidden bg-slate-100 border border-[#D9DDE1] shadow-sm">
                 {categories.map((cat, idx) => {
                   const isActive = isHoveredProd !== null ? isHoveredProd === idx : activeProdIndex === idx;
-                  const imgSrc = (cat.image as string | null) || productImages[idx % productImages.length];
+                  const imgSrc = getImageUrl(cat.image?.file) || productImages[idx % productImages.length];
                   return (
                     <motion.div
                       key={cat.id}
@@ -743,7 +838,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                       </div>
 
                       <div className="absolute bottom-5 left-5">
-                        <span className="block font-mono text-[#d97706] text-[9px] uppercase tracking-widest mb-1">
+                        <span className="block font-mono text-[#E8612C] text-[9px] uppercase tracking-widest mb-1">
                           PRODUCT TYPE // OVERVIEW
                         </span>
                         <h4 className="font-display font-black text-white text-xl sm:text-2xl uppercase tracking-tight">
@@ -778,6 +873,22 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                           <span className="font-mono text-[#111318] text-[10px] uppercase tracking-wider font-semibold">{spec.value}</span>
                         </motion.div>
                       ))}
+                      
+                      {/* CTAs */}
+                      <div className="flex gap-3 pt-5 border-t border-[#D9DDE1] mt-4">
+                        <Link
+                          href={`/products?category=${cat.slug}`}
+                          className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
+                        >
+                          View Products
+                        </Link>
+                        <Link
+                          href={`/quote?product=${cat.slug}`}
+                          className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 border border-[#D9DDE1] text-[#111318] text-[10px] font-display font-bold uppercase tracking-widest hover:border-[#111318] transition-colors"
+                        >
+                          Get Quote
+                        </Link>
+                      </div>
                     </div>
                   );
                 })}
@@ -793,7 +904,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start lg:items-end">
             <div className="lg:col-span-8">
               <FadeUp delay={0.05}>
-                <span className="font-mono text-[#d97706] text-[10px] uppercase tracking-[0.25em] block mb-4">
+                <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block mb-4">
                   03 // INDUSTRIES &mdash; UAE / GCC
                 </span>
               </FadeUp>
@@ -810,7 +921,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                 </p>
               </FadeUp>
               <FadeUp delay={0.28}>
-                <Link href="/industries" className="group inline-flex items-center gap-2 font-mono text-[10px] text-[#d97706] uppercase tracking-widest hover:text-[#111318] transition-colors duration-300">
+                <Link href="/industries" className="group inline-flex items-center gap-2 font-mono text-[10px] text-[#E8612C] uppercase tracking-widest hover:text-[#111318] transition-colors duration-300">
                   Explore All Industries &rarr;
                 </Link>
               </FadeUp>
@@ -853,11 +964,11 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
 
                   <div className="relative z-30 p-6 sm:p-7 flex flex-col justify-between h-full select-none">
                     <div className="flex justify-between items-start">
-                      <span className="font-mono text-[#d97706] text-xs font-black">0{idx + 1}</span>
+                      <span className="font-mono text-[#E8612C] text-xs font-black">0{idx + 1}</span>
                       {isActive && (
                         <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10 overflow-hidden">
                           <motion.div
-                            className="h-full bg-[#d97706]"
+                            className="h-full bg-[#E8612C]"
                             initial={{ width: '0%' }}
                             animate={{ width: '100%' }}
                             transition={{ duration: 3.6, ease: 'linear' }}
@@ -875,7 +986,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                           className="space-y-4"
                         >
                           <p className="font-sans text-slate-300 text-xs leading-relaxed max-w-md">{ind.short_description}</p>
-                          <Link href={`/industries/${ind.slug}`} className="group/link inline-flex items-center gap-2 font-mono text-[9px] text-[#d97706] uppercase tracking-[0.2em]">
+                          <Link href={`/industries/${ind.slug}`} className="group/link inline-flex items-center gap-2 font-mono text-[9px] text-[#E8612C] uppercase tracking-[0.2em]">
                             View Industry
                             <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1.5" />
                           </Link>
@@ -896,7 +1007,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             <div className="lg:col-span-4">
               <FadeUp delay={0.05}>
-                <span className="font-mono text-[#d97706] text-[10px] uppercase tracking-[0.25em] block mb-6">
+                <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block mb-6">
                   04 // Quality Assurance
                 </span>
               </FadeUp>
@@ -922,12 +1033,12 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                   <motion.div
                     key={cap.num}
                     variants={staggerItem}
-                    className="group border-t border-[#D9DDE1] py-7 grid grid-cols-12 gap-4 sm:gap-6 items-start transition-all duration-300 hover:border-[#d97706]/50 cursor-default"
+                    className="group border-t border-[#D9DDE1] py-7 grid grid-cols-12 gap-4 sm:gap-6 items-start transition-all duration-300 hover:border-[#E8612C]/50 cursor-default"
                     whileHover={noMotion ? {} : { x: 10 }}
                   >
-                    <span className="col-span-1 font-mono text-[#d97706]/70 text-xs pt-0.5 group-hover:translate-x-1 transition-transform duration-300">{cap.num}</span>
+                    <span className="col-span-1 font-mono text-[#E8612C]/70 text-xs pt-0.5 group-hover:translate-x-1 transition-transform duration-300">{cap.num}</span>
                     <div className="col-span-5 pr-4">
-                      <h3 className="font-display font-black text-[#111318] text-base uppercase tracking-wide group-hover:text-[#d97706] transition-colors duration-300">{cap.title}</h3>
+                      <h3 className="font-display font-black text-[#111318] text-base uppercase tracking-wide group-hover:text-[#E8612C] transition-colors duration-300">{cap.title}</h3>
                       <span className="font-mono text-[#59616B] text-[9px] uppercase tracking-widest mt-1 block">{cap.detail}</span>
                     </div>
                     <p className="col-span-6 font-sans text-[#59616B] text-xs leading-relaxed group-hover:opacity-100 opacity-85 transition-opacity duration-300">{cap.sub}</p>
@@ -946,14 +1057,14 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end border-b border-[#D9DDE1] pb-8 mb-20">
             <div>
               <FadeUp delay={0.05}>
-                <span className="font-mono text-[#d97706] text-[10px] uppercase tracking-[0.25em] block mb-4">05 // Case Installations</span>
+                <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block mb-4">05 // Case Installations</span>
               </FadeUp>
               <MaskReveal delay={0.1}>
                 <h2 className="font-display font-black text-[#111318] text-[clamp(2rem,4.5vw,3.5rem)] leading-none tracking-tighter uppercase">Selected Installations</h2>
               </MaskReveal>
             </div>
             <FadeUp delay={0.2}>
-              <Link href="/projects" className="group inline-flex items-center gap-2 font-mono text-[10px] text-[#d97706] uppercase tracking-widest mt-6 sm:mt-0 hover:text-[#111318] transition-colors duration-300">
+              <Link href="/projects" className="group inline-flex items-center gap-2 font-mono text-[10px] text-[#E8612C] uppercase tracking-widest mt-6 sm:mt-0 hover:text-[#111318] transition-colors duration-300">
                 All Projects
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
@@ -979,11 +1090,11 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                         <span className="text-[#59616B]">{proj.project_date || 'UAE'}</span>
                         <span className="text-[#59616B] text-right">{proj.location}</span>
                       </div>
-                      <h3 className="font-display font-black text-[#111318] text-xl sm:text-2xl uppercase tracking-tight leading-tight group-hover:text-[#d97706] transition-colors duration-300">
+                      <h3 className="font-display font-black text-[#111318] text-xl sm:text-2xl uppercase tracking-tight leading-tight group-hover:text-[#E8612C] transition-colors duration-300">
                         <Link href={`/projects/${proj.slug}`}>{proj.title}</Link>
                       </h3>
                       <p className="font-sans text-[#59616B] text-xs leading-relaxed">{proj.description}</p>
-                      <Link href={`/projects/${proj.slug}`} className="group/link inline-flex items-center gap-2 font-mono text-[10px] text-[#d97706] uppercase tracking-[0.2em] hover:gap-3 transition-all duration-300">
+                      <Link href={`/projects/${proj.slug}`} className="group/link inline-flex items-center gap-2 font-mono text-[10px] text-[#E8612C] uppercase tracking-[0.2em] hover:gap-3 transition-all duration-300">
                         View Project
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
@@ -1002,14 +1113,14 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end border-b border-[#D9DDE1] pb-8 mb-16">
             <div>
               <FadeUp delay={0.05}>
-                <span className="font-mono text-[#d97706] text-[10px] uppercase tracking-[0.25em] block mb-4">06 // Technical Reports</span>
+                <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block mb-4">06 // Technical Reports</span>
               </FadeUp>
               <MaskReveal delay={0.1}>
                 <h2 className="font-display font-black text-[#111318] text-[clamp(2rem,4.5vw,3.5rem)] leading-none tracking-tighter uppercase">Industry Insights</h2>
               </MaskReveal>
             </div>
             <FadeUp delay={0.2}>
-              <Link href="/blog" className="group inline-flex items-center gap-2 font-mono text-[10px] text-[#d97706] uppercase tracking-widest mt-6 sm:mt-0 hover:text-[#111318] transition-colors duration-300">
+              <Link href="/blog" className="group inline-flex items-center gap-2 font-mono text-[10px] text-[#E8612C] uppercase tracking-widest mt-6 sm:mt-0 hover:text-[#111318] transition-colors duration-300">
                 Knowledge Hub
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
@@ -1024,20 +1135,20 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                     <div className="w-full h-full bg-gradient-to-br from-[#F0F1F2] via-[#E5E7EA] to-[#DDDFE2] flex items-end p-8">
                       <span className="font-display font-black text-[#D9DDE1] text-6xl uppercase tracking-tighter leading-none">Technical</span>
                     </div>
-                    <div className="absolute inset-0 group-hover:bg-[#d97706]/5 transition-colors duration-500" />
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d97706]" />
+                    <div className="absolute inset-0 group-hover:bg-[#E8612C]/5 transition-colors duration-500" />
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#E8612C]" />
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-4 font-mono text-[10px] text-[#59616B] uppercase tracking-widest">
                       <span>{posts[0].published_at}</span>
-                      <span className="w-1 h-1 rounded-full bg-[#d97706]" />
-                      <span className="text-[#d97706] font-bold">{posts[0].category?.name}</span>
+                      <span className="w-1 h-1 rounded-full bg-[#E8612C]" />
+                      <span className="text-[#E8612C] font-bold">{posts[0].category?.name}</span>
                     </div>
-                    <h3 className="font-display font-black text-[#111318] text-2xl sm:text-3xl leading-tight uppercase tracking-tight group-hover:text-[#d97706] transition-colors duration-300">
+                    <h3 className="font-display font-black text-[#111318] text-2xl sm:text-3xl leading-tight uppercase tracking-tight group-hover:text-[#E8612C] transition-colors duration-300">
                       {posts[0].title}
                     </h3>
                     <p className="font-sans text-[#59616B] text-sm leading-relaxed">{posts[0].excerpt}</p>
-                    <span className="inline-flex items-center gap-2 font-mono text-[10px] text-[#d97706] uppercase tracking-widest group-hover:gap-3 transition-all duration-300">
+                    <span className="inline-flex items-center gap-2 font-mono text-[10px] text-[#E8612C] uppercase tracking-widest group-hover:gap-3 transition-all duration-300">
                       Read Article
                       <ArrowRight className="w-3.5 h-3.5" />
                     </span>
@@ -1052,9 +1163,9 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                   <Link href={`/blog/${post.slug}`} className="group block border-b border-[#D9DDE1] pb-7 last:border-0 last:pb-0">
                     <div className="flex items-center gap-3 font-mono text-[9px] text-[#59616B] uppercase tracking-widest mb-3">
                       <span>{post.published_at}</span>
-                      <span className="text-[#d97706] font-bold">{post.category?.name}</span>
+                      <span className="text-[#E8612C] font-bold">{post.category?.name}</span>
                     </div>
-                    <h4 className="font-display font-black text-[#111318] text-base sm:text-lg uppercase tracking-tight leading-tight group-hover:text-[#d97706] transition-colors duration-300 mb-2">
+                    <h4 className="font-display font-black text-[#111318] text-base sm:text-lg uppercase tracking-tight leading-tight group-hover:text-[#E8612C] transition-colors duration-300 mb-2">
                       {post.title}
                     </h4>
                     <p className="font-sans text-[#59616B] text-xs leading-relaxed line-clamp-2">{post.excerpt}</p>
@@ -1065,7 +1176,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               {/* Quality callout — light card (replaced old dark block) */}
               <FadeUp delay={0.4}>
                 <div className="bg-[#F5F6F7] border border-[#D9DDE1] p-6">
-                  <span className="font-mono text-[#d97706] text-[9px] uppercase tracking-widest block mb-2">Standard // Quality</span>
+                  <span className="font-mono text-[#E8612C] text-[9px] uppercase tracking-widest block mb-2">Standard // Quality</span>
                   <p className="font-sans text-[#59616B] text-xs leading-relaxed">
                     Mill Test Certificates (MTC) matching standard alloy classifications are enclosed with every delivery in the GCC region.
                   </p>

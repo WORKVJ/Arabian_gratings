@@ -6,7 +6,7 @@ import { generatePageMetadata } from '@/lib/seo/config';
 import { stripHtml } from '@/lib/seo/stripHtml';
 import { Metadata } from 'next';
 import { ChevronRight, ArrowLeft } from 'lucide-react';
-import { Product, Industry } from '@/types';
+import { Industry } from '@/types';
 
 export const revalidate = 86400;
 
@@ -125,12 +125,12 @@ export default async function SolutionDetailPage({ params }: SolutionDetailPageP
               </h2>
             </Reveal>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {solution.related_products.map((prod: Product, idx: number) => (
+              {solution.related_products.map((prod, idx) => (
                 <Reveal key={prod.id} direction="up" delay={idx * 0.05}>
                   <div className="border border-border-color p-5 rounded-sm bg-white flex flex-col justify-between h-full hover:border-accent transition-colors">
                     <div>
                       <span className="text-[10px] font-mono font-bold text-accent uppercase tracking-wider block mb-1">
-                        {prod.category?.name}
+                        {prod.category_name}
                       </span>
                       <h3 className="text-sm font-bold text-foreground mb-2 font-display uppercase tracking-wide">{prod.name}</h3>
                       <p className="text-xs text-slate-500 line-clamp-2 mb-4 leading-relaxed">{prod.short_description}</p>

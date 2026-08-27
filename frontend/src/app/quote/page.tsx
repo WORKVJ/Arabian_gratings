@@ -3,6 +3,7 @@ import { defaultMetadata } from '@/lib/seo/config';
 import QuoteForm from '@/components/enquiries/QuoteForm';
 import Reveal from '@/components/animations/Reveal';
 import { FileText, ShieldAlert, BadgeInfo } from 'lucide-react';
+import { getProduct, getProductCategory } from '@/lib/api/client';
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -10,7 +11,31 @@ export const metadata: Metadata = {
   description: 'Submit an RFQ for industrial gratings, GRP/FRP walkway layouts, or custom access flooring. Attach drawings and layout specifications.',
 };
 
-export default function QuotePage() {
+interface QuotePageProps {
+  searchParams: Promise<{ product?: string }>;
+}
+
+export default async function QuotePage({ searchParams }: QuotePageProps) {
+  const { product } = await searchParams;
+
+  let displayProductName = '';
+  if (product) {
+    try {
+      // First try resolving as a product slug
+      const prodDetails = await getProduct(product);
+      displayProductName = prodDetails.name;
+    } catch {
+      try {
+        // If not a product, try resolving as a category slug
+        const catDetails = await getProductCategory(product);
+        displayProductName = catDetails.name;
+      } catch {
+        // Fallback to raw value
+        displayProductName = decodeURIComponent(product);
+      }
+    }
+  }
+
   return (
     <div className="pt-24 pb-16 min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -30,6 +55,23 @@ export default function QuotePage() {
           </div>
         </Reveal>
 
+        {/* Selected Product Confirmation Banner */}
+        {displayProductName && (
+          <Reveal direction="up" delay={0.12}>
+            <div className="mb-8 p-4 bg-accent/5 border border-accent/25 rounded-sm flex items-center justify-between text-xs text-foreground font-sans">
+              <div className="flex items-center gap-2">
+                <BadgeInfo className="w-4 h-4 text-accent shrink-0" />
+                <span>
+                  Requesting quotation for: <strong className="font-semibold">{displayProductName}</strong>
+                </span>
+              </div>
+              <span className="text-[10px] font-mono font-bold text-accent uppercase tracking-wider">
+                Pre-Filled System
+              </span>
+            </div>
+          </Reveal>
+        )}
+
         {/* Layout grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
@@ -39,7 +81,7 @@ export default function QuotePage() {
               <h2 className="text-lg font-display font-bold text-foreground uppercase tracking-wider mb-6">
                 Technical Specifications Form
               </h2>
-              <QuoteForm />
+              <QuoteForm initialProduct={displayProductName} />
             </Reveal>
           </div>
 

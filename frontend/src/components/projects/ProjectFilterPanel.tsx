@@ -2,12 +2,12 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { X } from 'lucide-react';
-import { Industry, Product } from '@/types';
+import { Industry, ProductListItem } from '@/types';
 import { motion } from 'framer-motion';
 
 interface ProjectFilterPanelProps {
   industries: Industry[];
-  products: Product[];
+  products: ProductListItem[];
 }
 
 export default function ProjectFilterPanel({ industries, products }: ProjectFilterPanelProps) {

@@ -9,7 +9,7 @@ import { generatePageMetadata } from '@/lib/seo/config';
 import { stripHtml } from '@/lib/seo/stripHtml';
 import { Metadata } from 'next';
 import { ChevronRight, ArrowLeft, MapPin, Calendar } from 'lucide-react';
-import { Product, Industry, Project, BlogPost } from '@/types';
+import { Industry, Project, BlogPost } from '@/types';
 
 export const revalidate = 86400;
 
@@ -167,12 +167,12 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                   </h2>
                 </Reveal>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {project.products_used.map((prod: Product, idx: number) => (
+                  {project.products_used.map((prod, idx: number) => (
                     <Reveal key={prod.id} direction="up" delay={idx * 0.05}>
                       <div className="border border-border-color p-4 rounded-sm bg-white flex flex-col justify-between hover:border-accent transition-colors">
                         <div>
                           <span className="text-[9px] font-mono font-bold text-accent uppercase tracking-wider block mb-1">
-                            {prod.category?.name}
+                            {prod.category_name}
                           </span>
                           <h3 className="text-sm font-bold text-foreground mb-1 font-display uppercase tracking-wide">{prod.name}</h3>
                           <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">{prod.short_description}</p>

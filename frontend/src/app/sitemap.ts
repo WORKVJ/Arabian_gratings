@@ -14,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/services', priority: 0.9 },
     { path: '/projects', priority: 0.8 },
     { path: '/blog', priority: 0.8 },
+    { path: '/about', priority: 0.8 },
     { path: '/contact', priority: 0.7 },
     { path: '/quote', priority: 0.8 },
   ];
@@ -27,14 +28,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic: Products
   try {
-    const res = await getProducts();
+    const res = await getProducts({ page_size: 500 });
     (res.results || []).forEach((item) => {
       if (item.is_active) {
         entries.push({
           url: `${SITE_URL}/products/${item.slug}`,
-          lastModified: new Date(item.updated_at),
+          lastModified: new Date(item.created_at),
           changeFrequency: 'weekly' as const,
-          priority: 0.7,
+          priority: 0.85,
         });
       }
     });
@@ -146,6 +147,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch {
     console.warn('Blog Posts unavailable for sitemap generation.');
   }
+
+  // Location Pages
+  const locations = ['dubai', 'abu-dhabi', 'sharjah', 'ajman', 'ras-al-khaimah', 'fujairah', 'umm-al-quwain'];
+  locations.forEach((loc) => {
+    entries.push({
+      url: `${SITE_URL}/locations/${loc}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
+    });
+  });
 
   return entries;
 }
