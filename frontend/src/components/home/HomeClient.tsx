@@ -271,9 +271,9 @@ const categoryToProductSlugMap: Record<string, string> = {
 };
 
 const heroSlides = [
-  { src: '/product-frp-grating.jpg', label: 'GRP PRODUCTS // WALKWAY PLATFORM', alt: 'Bright yellow GRP walkway grating' },
-  { src: '/product-steel-grating.jpg', label: 'GALVANIZED STEEL // REFINERY ACCESS', alt: 'Hot-dip galvanized steel grating staircase' },
-  { src: '/product-aluminium-grating.jpg', label: 'ALUMINIUM SYSTEMS // UTILITY FLOORS', alt: 'Lightweight aluminium access flooring' },
+  { src: '/hero-grp.jpg', label: 'GRP PRODUCTS // WALKWAY PLATFORM', alt: 'Bright yellow GRP walkway grating' },
+  { src: '/hero-steel.jpg', label: 'GALVANIZED STEEL // REFINERY ACCESS', alt: 'Hot-dip galvanized steel grating staircase' },
+  { src: '/hero-aluminium.jpg', label: 'ALUMINIUM SYSTEMS // UTILITY FLOORS', alt: 'Lightweight aluminium access flooring' },
 ];
 
 export default function HomeClient({ categories: rawCategories, industries: rawIndustries, projects: rawProjects, posts: rawPosts }: HomeClientProps) {
