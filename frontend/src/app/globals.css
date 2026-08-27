@@ -2,17 +2,17 @@
 
 /* ─── Runtime CSS custom properties (available in JS/CSS at runtime) ─── */
 :root {
-  --background:     #ffffff;
-  --foreground:     #111318;
-  --card-bg:        #ffffff;
-  --bg-secondary:   #F5F6F7;
-  --bg-tertiary:    #F0F1F2;
-  --accent:         #d97706;
-  --accent-hover:   #b45309;
+  --background:     #090A0C;
+  --foreground:     #F3F4F6;
+  --card-bg:        #111318;
+  --bg-secondary:   #15181F;
+  --bg-tertiary:    #1C1F26;
+  --accent:         #E8612C;
+  --accent-hover:   #D4521F;
   --charcoal:       #111318;
-  --slate-grey:     #59616B;
-  --metallic-zinc:  #D9DDE1;
-  --border-color:   #D9DDE1;
+  --slate-grey:     #9CA3AF;
+  --metallic-zinc:  #15181F;
+  --border-color:   #1F242F;
 }
 
 /* ─── Tailwind v4 theme tokens ────────────────────────────────────────── */
@@ -21,14 +21,14 @@
 /* Font vars use Next.js-injected CSS variables (resolved at runtime).     */
 @theme {
   /* Colors */
-  --color-background:   #ffffff;
-  --color-foreground:   #111318;
-  --color-card-bg:      #ffffff;
-  --color-accent:       #d97706;
-  --color-accent-hover: #b45309;
+  --color-background:   #090A0C;
+  --color-foreground:   #F3F4F6;
+  --color-card-bg:      #111318;
+  --color-accent:       #E8612C;
+  --color-accent-hover: #D4521F;
   --color-charcoal:     #111318;
-  --color-slate-grey:   #59616B;
-  --color-border:       #D9DDE1;
+  --color-slate-grey:   #9CA3AF;
+  --color-border:       #1F242F;
 
   /* Fonts — Next.js injects --font-inter / --font-space-grotesk at runtime */
   --font-sans:    var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -111,3 +111,52 @@ h1, h2, h3, h4, h5, h6 {
 .animate-marquee-infinite:hover {
   animation-play-state: paused;
 }
+
+/* ─── Premium Dark Theme Overrides for Light Utility Classes ─── */
+.bg-white {
+  background-color: var(--background) !important;
+}
+
+.bg-slate-50, .bg-\[#f8fafc\], .bg-\[\#f8fafc\] {
+  background-color: var(--bg-secondary) !important;
+}
+
+.bg-\[\#F5F6F7\], .bg-\[\#F0F1F2\] {
+  background-color: var(--bg-secondary) !important;
+}
+
+.text-\[\#111318\] {
+  color: var(--foreground) !important;
+}
+
+.text-[#111318] {
+  color: var(--foreground) !important;
+}
+
+.text-slate-800, .text-slate-700, .text-slate-900 {
+  color: var(--foreground) !important;
+}
+
+.text-[#59616B], .text-slate-650, .text-slate-600, .text-slate-500 {
+  color: var(--slate-grey) !important;
+}
+
+.text-\[\#59616B\] {
+  color: var(--slate-grey) !important;
+}
+
+.border-\[\#D9DDE1\], .border-border-color {
+  border-color: var(--border-color) !important;
+}
+
+/* Fix technical section grids/accents for black theme */
+.tech-dot-grid-light {
+  background-image: radial-gradient(rgba(243, 244, 246, 0.04) 1px, transparent 0) !important;
+}
+
+.tech-grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(243, 244, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(243, 244, 246, 0.03) 1px, transparent 1px) !important;
+}
+
