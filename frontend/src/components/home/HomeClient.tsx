@@ -959,99 +959,132 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
         </div>
       </section>
 
-      {/* ─── 04 INDUSTRIES ─── */}
-      <section ref={industriesRef} className="bg-white py-32 relative z-20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 mb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start lg:items-end">
-            <div className="lg:col-span-8">
+      {/* ─── 03 INDUSTRIES ─── */}
+      <section ref={industriesRef} className="bg-[#0D0F12] py-32 relative z-20 overflow-hidden">
+
+        {/* Subtle dot grid texture */}
+        <div className="absolute inset-0 tech-dot-grid opacity-20 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+
+          {/* ── Header ── */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 border-b border-white/10 pb-14">
+            <div className="lg:max-w-2xl">
               <FadeUp delay={0.05}>
-                <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block mb-4">
-                  03 // INDUSTRIES &mdash; SAUDI / GCC
+                <span className="font-mono text-[#E8612C] text-[10px] uppercase tracking-[0.25em] block mb-5">
+                  03 // Industries &mdash; Saudi / GCC
                 </span>
               </FadeUp>
               <MaskReveal delay={0.1}>
-                <h2 className="font-display font-black text-[#111318] text-[clamp(2.5rem,5.5vw,5.5rem)] leading-[0.92] tracking-tighter uppercase">
+                <h2 className="font-display font-black text-white text-[clamp(2.8rem,5.5vw,5rem)] leading-[0.9] tracking-tighter uppercase">
                   Built For<br />Harsh<br />Atmospheres.
                 </h2>
               </MaskReveal>
             </div>
-            <div className="lg:col-span-4 space-y-6">
+            <div className="lg:max-w-xs space-y-6">
               <FadeUp delay={0.2}>
-                <p className="text-[#59616B] text-sm leading-relaxed">
-                  Engineered access systems for demanding environments across energy, infrastructure, marine, utilities and industrial facilities.
+                <p className="text-white/50 text-sm leading-relaxed">
+                  Engineered access systems for the most demanding environments across energy, infrastructure, marine, and industrial facilities in Saudi Arabia and GCC.
                 </p>
               </FadeUp>
               <FadeUp delay={0.28}>
-                <Link href="/industries" className="group inline-flex items-center gap-2 font-mono text-[10px] text-[#E8612C] uppercase tracking-widest hover:text-[#111318] transition-colors duration-300">
-                  Explore All Industries &rarr;
+                <Link href="/industries" className="group inline-flex items-center gap-3 font-mono text-[10px] text-[#E8612C] uppercase tracking-widest hover:text-white transition-colors duration-300">
+                  Explore All Industries
+                  <span className="w-6 h-px bg-[#E8612C] group-hover:w-10 transition-all duration-300 block" />
                 </Link>
               </FadeUp>
             </div>
           </div>
-        </div>
 
-        {/* Desktop Accordion Panel (hidden on mobile, shown on desktop) */}
-        <div className="hidden lg:block max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div
-            className="flex flex-row gap-0.5 h-[580px] overflow-hidden border border-[#D9DDE1]"
-            onMouseEnter={() => setIsHoveredInd(activeIndIndex)}
-            onMouseLeave={() => setIsHoveredInd(null)}
-          >
+          {/* ── 2×2 Industry Cards Grid ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {industries.map((ind, idx) => {
-              const isActive = isHoveredInd !== null ? isHoveredInd === idx : activeIndIndex === idx;
               const imgSrc = getImageUrl(ind.image?.file) || industryImages[idx % industryImages.length];
+              const isActive = isHoveredInd === idx;
+              const stats = [
+                { val: '8,500+', unit: 'sqm Installed' },
+                { val: '98%', unit: 'Client Retention' },
+                { val: '15+', unit: 'Active Projects' },
+                { val: '24hr', unit: 'Response Time' },
+              ];
               return (
                 <motion.div
                   key={ind.id}
-                  className="relative overflow-hidden bg-slate-800 flex flex-col justify-end cursor-pointer h-full"
-                  animate={{
-                    width: noMotion ? '100%' : (isActive ? '55%' : '11%'),
-                  }}
-                  transition={{ duration: 0.85, ease: easeOut }}
-                  onClick={() => { setActiveIndIndex(idx); setIsHoveredInd(idx); }}
-                  style={{ minHeight: noMotion ? '260px' : '400px' }}
+                  className="relative overflow-hidden cursor-pointer group"
+                  style={{ height: '380px' }}
+                  onHoverStart={() => setIsHoveredInd(idx)}
+                  onHoverEnd={() => setIsHoveredInd(null)}
+                  onClick={() => setActiveIndIndex(idx)}
                 >
+                  {/* Background Image */}
                   <div className="absolute inset-0 z-0">
                     <Image
                       src={imgSrc}
                       alt={ind.name}
                       fill
-                      sizes="800px"
-                      className={`object-cover transition-transform duration-1000 ${isActive ? 'scale-105' : 'scale-100'}`}
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-[#111318]/75 z-10 transition-opacity duration-700" style={{ opacity: isActive ? 0.5 : 0.82 }} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111318] via-transparent to-transparent z-20" />
                   </div>
 
-                  <div className="relative z-30 p-6 sm:p-7 flex flex-col justify-between h-full select-none">
-                    <div className="flex justify-between items-start">
-                      <span className="font-mono text-[#E8612C] text-xs font-black">0{idx + 1}</span>
+                  {/* Dark overlays */}
+                  <div className="absolute inset-0 bg-[#0D0F12]/60 z-10 transition-opacity duration-500 group-hover:bg-[#0D0F12]/40" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D0F12]/95 via-[#0D0F12]/30 to-transparent z-10" />
+
+                  {/* Left accent bar on hover */}
+                  <motion.div
+                    className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#E8612C] z-20"
+                    initial={{ scaleY: 0 }}
+                    animate={{ scaleY: isActive ? 1 : 0 }}
+                    style={{ originY: 0 }}
+                    transition={{ duration: 0.4 }}
+                  />
+
+                  {/* Content */}
+                  <div className="absolute inset-0 z-20 p-8 flex flex-col justify-between">
+                    {/* Top: number + tag */}
+                    <div className="flex items-start justify-between">
+                      <span className="font-mono text-[#E8612C] text-[11px] font-black tracking-widest">
+                        0{idx + 1}
+                      </span>
+                      <span className="font-mono text-white/30 text-[9px] uppercase tracking-widest">
+                        {stats[idx].val} {stats[idx].unit}
+                      </span>
+                    </div>
+
+                    {/* Bottom: title + description + CTA */}
+                    <div className="space-y-3">
+                      <h3 className="font-display font-black text-white text-2xl uppercase tracking-tight leading-none">
+                        {ind.name}
+                      </h3>
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: isActive ? 1 : 0, height: isActive ? 'auto' : 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="overflow-hidden"
+                      >
+                        <p className="font-sans text-white/65 text-xs leading-relaxed mb-4 max-w-sm">
+                          {ind.short_description}
+                        </p>
+                        <Link
+                          href={`/industries/${ind.slug}`}
+                          className="inline-flex items-center gap-2 font-mono text-[10px] text-[#E8612C] uppercase tracking-[0.2em] hover:text-white transition-colors duration-200"
+                        >
+                          View Industry
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </motion.div>
+
+                      {/* Bottom progress bar when active */}
                       {isActive && (
-                        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10 overflow-hidden">
+                        <div className="h-[1px] bg-white/10 overflow-hidden mt-3">
                           <motion.div
                             className="h-full bg-[#E8612C]"
                             initial={{ width: '0%' }}
                             animate={{ width: '100%' }}
-                            transition={{ duration: 3.6, ease: 'linear' }}
+                            transition={{ duration: 3, ease: 'linear' }}
                           />
                         </div>
-                      )}
-                    </div>
-                    <div className="space-y-3">
-                      <h3 className="font-display font-black text-white text-lg uppercase tracking-tight">{ind.name}</h3>
-                      {isActive && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 15 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6, delay: 0.15 }}
-                          className="space-y-4"
-                        >
-                          <p className="font-sans text-slate-300 text-xs leading-relaxed max-w-md">{ind.short_description}</p>
-                          <Link href={`/industries/${ind.slug}`} className="group/link inline-flex items-center gap-2 font-mono text-[9px] text-[#E8612C] uppercase tracking-[0.2em]">
-                            View Industry
-                            <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1.5" />
-                          </Link>
-                        </motion.div>
                       )}
                     </div>
                   </div>
@@ -1059,47 +1092,32 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
               );
             })}
           </div>
-        </div>
 
-        {/* Mobile Grid/Stack Version (shown on mobile, hidden on desktop) */}
-        <div className="block lg:hidden max-w-7xl mx-auto px-6 sm:px-10">
-          <div className="flex flex-col gap-4">
-            {industries.map((ind, idx) => {
-              const imgSrc = getImageUrl(ind.image?.file) || industryImages[idx % industryImages.length];
-              return (
-                <div
-                  key={ind.id}
-                  className="relative overflow-hidden bg-slate-800 h-[200px] flex flex-col justify-end p-6 rounded-sm border border-[#D9DDE1] group"
-                >
-                  <div className="absolute inset-0 z-0">
-                    <Image
-                      src={imgSrc}
-                      alt={ind.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 600px"
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-[#111318]/70 z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111318]/90 via-[#111318]/25 to-transparent z-20" />
-                  </div>
+          {/* ── Bottom Stats Strip ── */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-10%' }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-px mt-4 border border-white/10 overflow-hidden"
+          >
+            {[
+              { num: '10+', label: 'Years in Saudi Arabia' },
+              { num: '321+', label: 'Projects Delivered' },
+              { num: '4', label: 'Core Industries Served' },
+              { num: 'ISO', label: '9001 Certified Quality' },
+            ].map((stat) => (
+              <motion.div
+                key={stat.num}
+                variants={staggerItem}
+                className="bg-white/5 hover:bg-white/10 transition-colors duration-300 px-8 py-7 flex flex-col gap-1"
+              >
+                <span className="font-display font-black text-white text-3xl tracking-tighter">{stat.num}</span>
+                <span className="font-mono text-white/40 text-[9px] uppercase tracking-widest">{stat.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
 
-                  <div className="relative z-30 flex flex-col justify-end h-full space-y-2 select-none">
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-[#E8612C] text-[10px] font-black">0{idx + 1}</span>
-                      <h3 className="font-display font-black text-white text-sm uppercase tracking-tight">{ind.name}</h3>
-                    </div>
-                    <p className="font-sans text-slate-300 text-[11px] leading-relaxed max-w-md line-clamp-2">
-                      {ind.short_description}
-                    </p>
-                    <Link href={`/industries/${ind.slug}`} className="inline-flex items-center gap-1.5 font-mono text-[9px] text-[#E8612C] uppercase tracking-[0.2em] pt-1">
-                      View Industry
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
