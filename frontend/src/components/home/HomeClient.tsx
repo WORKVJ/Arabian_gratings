@@ -322,13 +322,6 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
     return () => clearInterval(interval);
   }, [isHoveredProd, noMotion]);
 
-  useEffect(() => {
-    if (noMotion) return;
-    const interval = setInterval(() => {
-      if (isHoveredInd === null) setActiveIndIndex((prev) => (prev + 1) % 4);
-    }, 3600);
-    return () => clearInterval(interval);
-  }, [isHoveredInd, noMotion]);
 
   useEffect(() => {
     if (noMotion) return;
