@@ -548,7 +548,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                         }}
                         transition={{ duration: 0.25, ease: 'easeOut' }}
                       >
-                        <span className={`block font-display font-black text-xl sm:text-2xl tracking-tighter whitespace-nowrap transition-colors duration-200 ${isHighlighted ? 'text-white' : 'text-[#111318]'}`}>
+                        <span className={`block font-display font-black tracking-tighter whitespace-nowrap transition-colors duration-200 ${stat.value.length > 8 ? 'text-base sm:text-lg lg:text-xl' : 'text-xl sm:text-2xl'} ${isHighlighted ? 'text-white' : 'text-[#111318]'}`}>
                           {isNumeric ? (
                             <StatCounter value={stat.value} targetVal={targetVal} noMotion={!!noMotion} />
                           ) : (

@@ -42,14 +42,14 @@ export default function Header() {
   ];
 
   const productDropdownItems = [
-    { name: 'FRP / GRP Products', href: '/products/category/frp-grp-products' },
-    { name: 'Steel Gratings', href: '/products/category/steel-gratings' },
-    { name: 'Stainless Steel Products', href: '/products/category/stainless-steel-products' },
-    { name: 'Aluminium Solutions', href: '/products/category/aluminium' },
-    { name: 'Manhole Covers', href: '/products/category/manhole' },
-    { name: 'SS/GI Grating Clamps', href: '/products/category/ss-gi-grating-clamps' },
-    { name: 'Step Irons', href: '/products/category/step-iron' },
-    { name: 'Tactile Studs', href: '/products/category/stud-products' },
+    { name: 'FRP / GRP Products', href: '/products/frp-grp-products' },
+    { name: 'Steel Gratings', href: '/products/steel-gratings' },
+    { name: 'Stainless Steel Products', href: '/products/stainless-steel-products' },
+    { name: 'Aluminium Solutions', href: '/products/aluminium' },
+    { name: 'Manhole Covers', href: '/products/manhole' },
+    { name: 'SS/GI Grating Clamps', href: '/products/ss-gi-grating-clamps' },
+    { name: 'Step Irons', href: '/products/step-iron' },
+    { name: 'Tactile Studs', href: '/products/stud-products' },
   ];
 
   return (
