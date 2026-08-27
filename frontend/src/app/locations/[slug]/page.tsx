@@ -35,7 +35,7 @@ const LOCATIONS: Record<string, LocationData> = {
       'Retail & Airport Passenger Terminal Services'
     ],
     products: [
-      { name: 'Aluminium Access Grating Walkway', slug: 'aluminium-access-grating-walkway', desc: 'Lightweight, non-sparking walkways ideal for architectural facades and sunscreens.' },
+      { name: 'Aluminium Access Grating Walkway', slug: 'landscape-aluminium', desc: 'Lightweight, non-sparking walkways ideal for architectural facades and sunscreens.' },
       { name: 'Stainless Steel SS316 Floor Grating', slug: 'stainless-steel-ss316-floor-grating', desc: 'Hygienic, corrosion-resistant SS316 grids for commercial kitchens and high-end facades.' },
       { name: 'Stainless Steel Tactile Stud', slug: 'stainless-steel-tactile-stud', desc: 'Compliant tactile warning studs for pedestrian accessibility in metro zones and transit ports.' }
     ],
@@ -64,7 +64,7 @@ const LOCATIONS: Record<string, LocationData> = {
     ],
     products: [
       { name: 'Electroforged Welded Steel Grating', slug: 'electroforged-welded-steel-grating', desc: 'ISO 1461 galvanized heavy-duty panels for intense loading spans.' },
-      { name: 'Moulded GRP Walkway Grating', slug: 'moulded-grp-walkway-grating', desc: 'Chemical-immune composite floor grids with anti-slip silicon carbide grit surfaces.' },
+      { name: 'Moulded GRP Walkway Grating', slug: 'molded-gratings', desc: 'Chemical-immune composite floor grids with anti-slip silicon carbide grit surfaces.' },
       { name: 'M-Clip Grating Fastening Clamp', slug: 'm-clip-grating-fastening-clamp', desc: 'Marine-grade SS316 clamping fasteners to secure panels without hot-work drilling.' }
     ],
     faqs: [
@@ -121,7 +121,7 @@ const LOCATIONS: Record<string, LocationData> = {
     products: [
       { name: 'Stainless Steel SS316 Floor Grating', slug: 'stainless-steel-ss316-floor-grating', desc: 'Superior SS316 panels designed for high-salinity seawater decks.' },
       { name: 'M-Clip Grating Fastening Clamp', slug: 'm-clip-grating-fastening-clamp', desc: 'Vibration-immune SS316 saddle plates to secure grates without welding.' },
-      { name: 'Aluminium Access Grating Walkway', slug: 'aluminium-access-grating-walkway', desc: 'Lightweight, corrosion-resistant walkways for floating marine docks.' }
+      { name: 'Aluminium Access Grating Walkway', slug: 'landscape-aluminium', desc: 'Lightweight, corrosion-resistant walkways for floating marine docks.' }
     ],
     faqs: [
       {
@@ -149,7 +149,7 @@ const LOCATIONS: Record<string, LocationData> = {
     products: [
       { name: 'Electroforged Welded Steel Grating', slug: 'electroforged-welded-steel-grating', desc: 'Maximum-span galvanized steel panels with high deflection stiffness.' },
       { name: 'Ductile Iron Double Sealed Manhole Cover', slug: 'ductile-iron-double-sealed-manhole-cover', desc: 'Heavy-duty D400 ductile iron covers for quarry access roads.' },
-      { name: 'Moulded GRP Walkway Grating', slug: 'moulded-grp-walkway-grating', desc: 'Lightweight composite panels for chemical storage areas in cement plants.' }
+      { name: 'Moulded GRP Walkway Grating', slug: 'molded-gratings', desc: 'Lightweight composite panels for chemical storage areas in cement plants.' }
     ],
     faqs: [
       {
@@ -175,8 +175,8 @@ const LOCATIONS: Record<string, LocationData> = {
       'Chemical Loading Terminals & Pipeline Walkways'
     ],
     products: [
-      { name: 'Aluminium Access Grating Walkway', slug: 'aluminium-access-grating-walkway', desc: 'Naturally non-sparking walkways for volatile fuel storage environments.' },
-      { name: 'Moulded GRP Walkway Grating', slug: 'moulded-grp-walkway-grating', desc: 'Fire-retardant ASTM E84 Class 1 composite panels with high chemical resistance.' },
+      { name: 'Aluminium Access Grating Walkway', slug: 'landscape-aluminium', desc: 'Naturally non-sparking walkways for volatile fuel storage environments.' },
+      { name: 'Moulded GRP Walkway Grating', slug: 'molded-gratings', desc: 'Fire-retardant ASTM E84 Class 1 composite panels with high chemical resistance.' },
       { name: 'Ductile Iron Plastic Encapsulated Step Iron', slug: 'ductile-iron-plastic-encapsulated-step-iron', desc: 'High-visibility yellow steps for underground utility chambers.' }
     ],
     faqs: [
@@ -203,7 +203,7 @@ const LOCATIONS: Record<string, LocationData> = {
       'Sewerage Pump Chambers & Stormwater Outlets'
     ],
     products: [
-      { name: 'Moulded GRP Walkway Grating', slug: 'moulded-grp-walkway-grating', desc: '100% corrosion-proof walkway grids designed for long-term marine contact.' },
+      { name: 'Moulded GRP Walkway Grating', slug: 'molded-gratings', desc: '100% corrosion-proof walkway grids designed for long-term marine contact.' },
       { name: 'Ductile Iron Plastic Encapsulated Step Iron', slug: 'ductile-iron-plastic-encapsulated-step-iron', desc: 'Polypropylene encapsulated step ladders for sewerage pump chambers.' },
       { name: 'Stainless Steel SS316 Floor Grating', slug: 'stainless-steel-ss316-floor-grating', desc: 'Premium passivated SS316 floor panels for water treatment chambers.' }
     ],

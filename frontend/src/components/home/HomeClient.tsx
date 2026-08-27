@@ -260,14 +260,14 @@ function CtaSection() {
 }
 
 const categoryToProductSlugMap: Record<string, string> = {
-  'stud-products': 'stainless-steel-tactile-stud',
-  'step-iron': 'ductile-iron-plastic-encapsulated-step-iron',
-  'ss-gi-grating-clamps': 'm-clip-grating-fastening-clamp',
-  'manhole': 'ductile-iron-double-sealed-manhole-cover',
-  'aluminium': 'aluminium-access-grating-walkway',
-  'stainless-steel-products': 'stainless-steel-ss316-floor-grating',
-  'steel-gratings': 'electroforged-welded-steel-grating',
-  'frp-grp-products': 'moulded-grp-walkway-grating',
+  'stud-products': 'shear-connector',
+  'step-iron': 'pvc-gi-ss',
+  'ss-gi-grating-clamps': 'ss-gi-clamps',
+  'manhole': 'ductile-iron',
+  'aluminium': 'landscape-aluminium',
+  'stainless-steel-products': 'ss-gratings',
+  'steel-gratings': 'electro-forged-type-gratings',
+  'frp-grp-products': 'molded-gratings',
 };
 
 const heroSlides = [
