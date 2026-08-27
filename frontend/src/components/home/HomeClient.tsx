@@ -259,16 +259,6 @@ function CtaSection() {
   );
 }
 
-const categoryToProductSlugMap: Record<string, string> = {
-  'stud-products': 'shear-connector',
-  'step-iron': 'pvc-gi-ss',
-  'ss-gi-grating-clamps': 'ss-gi-clamps',
-  'manhole': 'ductile-iron',
-  'aluminium': 'landscape-aluminium',
-  'stainless-steel-products': 'ss-gratings',
-  'steel-gratings': 'electro-forged-type-gratings',
-  'frp-grp-products': 'molded-gratings',
-};
 
 const heroSlides = [
   { src: '/hero-grp.jpg', label: 'GRP PRODUCTS // WALKWAY PLATFORM', alt: 'Bright yellow GRP walkway grating' },
@@ -858,10 +848,10 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                       {/* CTAs */}
                       <div className="flex gap-3 pt-5 border-t border-[#D9DDE1] mt-4">
                         <Link
-                          href={`/products/${categoryToProductSlugMap[cat.slug] || cat.slug}`}
+                          href={`/products/${cat.slug}`}
                           className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-[#E8612C] text-white text-[10px] font-display font-bold uppercase tracking-widest hover:bg-[#D4521F] transition-colors"
                         >
-                          View Product
+                          View Products
                         </Link>
                         <Link
                           href="/contact"
