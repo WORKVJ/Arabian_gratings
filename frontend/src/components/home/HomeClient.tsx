@@ -447,7 +447,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                   ].map((stat, idx) => {
                     const isHighlighted = (isHoveredStat !== null ? isHoveredStat === idx : activeStatIndex === idx) && !noMotion;
                     const opacityVal = noMotion ? 1.0 : (isHighlighted ? 1.0 : 0.6);
-                    const yVal = noMotion ? 0 : (isHighlighted ? -2 : 0);
+                    const yVal = noMotion ? 0 : (isHighlighted ? -3 : 0);
                     const lineColor = noMotion ? '#D9DDE1' : (isHighlighted ? '#E8612C' : '#D9DDE1');
                     const lineHeight = isHighlighted ? '2px' : '1px';
 
@@ -465,32 +465,32 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
                             transition: { duration: 0.6, ease: 'easeOut' }
                           }
                         }}
-                        className="relative cursor-pointer select-none p-4 rounded-sm"
+                        className="relative cursor-pointer select-none py-4 px-3 rounded-sm"
                         onMouseEnter={() => setIsHoveredStat(idx)}
                         onMouseLeave={() => setIsHoveredStat(null)}
                         animate={{
                           opacity: opacityVal,
                           y: yVal,
-                          backgroundColor: isHighlighted ? 'rgba(232, 97, 44, 0.05)' : 'rgba(232, 97, 44, 0)',
+                          backgroundColor: isHighlighted ? '#111318' : 'rgba(17, 19, 24, 0)',
                           boxShadow: isHighlighted 
-                            ? '0 4px 12px rgba(232, 97, 44, 0.04), inset 0 0 0 1px rgba(232, 97, 44, 0.08)' 
-                            : '0 4px 12px rgba(0, 0, 0, 0), inset 0 0 0 1px rgba(0, 0, 0, 0)'
+                            ? '0 6px 20px rgba(17, 19, 24, 0.15)' 
+                            : '0 6px 20px rgba(0, 0, 0, 0)'
                         }}
                         transition={{ duration: 0.25, ease: 'easeOut' }}
                       >
-                        <span className="block font-display font-black text-2xl sm:text-3xl tracking-tight text-[#111318] whitespace-nowrap">
+                        <span className={`block font-display font-black text-xl sm:text-2xl tracking-tighter whitespace-nowrap transition-colors duration-200 ${isHighlighted ? 'text-white' : 'text-[#111318]'}`}>
                           {isNumeric ? (
                             <StatCounter value={stat.value} targetVal={targetVal} noMotion={!!noMotion} />
                           ) : (
                             stat.value
                           )}
                         </span>
-                        <span className="block font-mono text-[#59616B] text-[9px] uppercase tracking-widest mt-1">
+                        <span className={`block font-mono text-[9px] uppercase tracking-widest mt-1 transition-colors duration-200 ${isHighlighted ? 'text-[#A3A9B0]' : 'text-[#59616B]'}`}>
                           {stat.label}
                         </span>
                         
                         <div 
-                          className="absolute bottom-2 left-4 right-4 overflow-hidden" 
+                          className="absolute bottom-2 left-3 right-3 overflow-hidden" 
                           style={{ height: lineHeight }}
                         >
                           <motion.div
