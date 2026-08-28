@@ -16,6 +16,7 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 # Application definition
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,3 +121,72 @@ REST_FRAMEWORK = {
         'enquiries': '10/hour',
     }
 }
+
+# Jazzmin Dashboard Theme Configuration
+JAZZMIN_SETTINGS = {
+    "site_title": "Arabian Gratings Admin",
+    "site_header": "Arabian Gratings",
+    "site_brand": "Arabian Gratings CMS",
+    "site_logo_classes": "img-circle",
+    "site_icon": None,
+    "welcome_sign": "Welcome to Arabian Gratings CMS Control Panel",
+    "copyright": "Arabian Gratings Ltd",
+    "search_model": ["products.Product", "blog.BlogPost"],
+    "user_avatar": None,
+    "show_ui_builder": False,
+    "topmenu_links": [
+        {"name": "Home Page", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Visit Website", "url": "https://arabiangratings.com", "new_window": True},
+    ],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "order_with_respect_to": ["products", "blog", "enquiries", "projects", "industries", "services", "solutions", "auth"],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "products.Product": "fas fa-box-open",
+        "products.ProductCategory": "fas fa-tags",
+        "blog.BlogPost": "fas fa-feather-alt",
+        "blog.BlogCategory": "fas fa-folder-open",
+        "enquiries.ContactEnquiry": "fas fa-envelope-open-text",
+        "enquiries.QuoteRequest": "fas fa-file-invoice-dollar",
+        "projects.Project": "fas fa-tasks",
+        "industries.Industry": "fas fa-industry",
+        "services.Service": "fas fa-tools",
+        "solutions.Solution": "fas fa-lightbulb",
+    },
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": True,
+    "brand_small_text": False,
+    "brand_colour": "navbar-dark",
+    "accent": "accent-primary",
+    "navbar": "navbar-dark bg-dark",
+    "no_navbar_border": True,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "slate",
+    "dark_mode_theme": "slate",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
+
