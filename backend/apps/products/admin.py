@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Media, ProductImage, ProductSpecification, Document, ProductCategory, Product
+from apps.utils_admin import SuperuserOnlyAdmin
 
 
 # ─────────────────────────────────────────────
@@ -8,7 +9,7 @@ from .models import Media, ProductImage, ProductSpecification, Document, Product
 # ─────────────────────────────────────────────
 
 @admin.register(Media)
-class MediaAdmin(admin.ModelAdmin):
+class MediaAdmin(SuperuserOnlyAdmin):
     list_display = ("title", "alt_text", "image_preview", "created_at")
     search_fields = ("title", "alt_text")
     readonly_fields = ("image_preview",)
@@ -27,7 +28,7 @@ class MediaAdmin(admin.ModelAdmin):
 # ─────────────────────────────────────────────
 
 @admin.register(Document)
-class DocumentAdmin(admin.ModelAdmin):
+class DocumentAdmin(SuperuserOnlyAdmin):
     list_display = ("title", "document_type", "is_active", "sort_order", "created_at")
     list_filter = ("document_type", "is_active")
     search_fields = ("title", "description")
@@ -39,7 +40,7 @@ class DocumentAdmin(admin.ModelAdmin):
 # ─────────────────────────────────────────────
 
 @admin.register(ProductCategory)
-class ProductCategoryAdmin(admin.ModelAdmin):
+class ProductCategoryAdmin(SuperuserOnlyAdmin):
     list_display = ("name", "slug", "sort_order", "is_active", "product_count_display")
     list_filter = ("is_active",)
     search_fields = ("name", "description")
@@ -94,7 +95,7 @@ class ProductSpecificationInline(admin.TabularInline):
 # ─────────────────────────────────────────────
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(SuperuserOnlyAdmin):
     list_display = ("name", "category", "product_code", "material", "is_featured", "is_active", "sort_order", "created_at")
     list_filter = ("is_featured", "is_active", "category")
     search_fields = ("name", "short_description", "description", "product_code")
