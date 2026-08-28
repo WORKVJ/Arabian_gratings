@@ -57,7 +57,7 @@ export default function CategoryDetailClient({ category, products }: CategoryDet
             {/* Left: Intro */}
             <div className="lg:col-span-7">
               <Reveal direction="left" delay={0.1}>
-                <span className="text-[10px] font-mono font-bold text-[#E8612C] tracking-[0.3em] uppercase block mb-3">
+                <span className="text-[12px] font-display font-black text-[#E8612C] tracking-[0.3em] uppercase block mb-3">
                   Industrial Supply // Category
                 </span>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-black uppercase leading-tight tracking-tight mb-5">
