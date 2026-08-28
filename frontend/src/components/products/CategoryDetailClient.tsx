@@ -60,8 +60,8 @@ export default function CategoryDetailClient({ category, products }: CategoryDet
                 <span className="text-[10px] font-mono font-bold text-[#E8612C] tracking-[0.3em] uppercase block mb-3">
                   Industrial Supply // Category
                 </span>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-[#111318] uppercase leading-tight tracking-tight mb-5">
-                  {category.name} <span className="text-[#111318]">Supplier in Saudi Arabia</span>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-black uppercase leading-tight tracking-tight mb-5">
+                  {category.name} <span className="text-black">Supplier in Saudi Arabia</span>
                 </h1>
                 <p className="text-sm text-slate-500 max-w-2xl leading-relaxed mb-6 font-sans">
                   {category.short_description}
