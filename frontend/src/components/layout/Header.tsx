@@ -53,8 +53,8 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0D0F12]/95 border-b border-[#1F242F] backdrop-blur-md ${
-        scrolled ? 'py-2.5 shadow-lg shadow-black/20' : 'py-3'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 border-b border-[#E5E7EB] backdrop-blur-md ${
+        scrolled ? 'py-2.5 shadow-md shadow-slate-100/50' : 'py-3'
       }`}
       style={{
         transition: 'padding 0.3s ease, background-color 0.3s ease, border-color 0.3s ease',
@@ -69,7 +69,7 @@ export default function Header() {
               alt="Arabian Gratings Logo"
               width={160}
               height={38}
-              className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-102 brightness-110"
+              className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-102 brightness-0"
               priority
             />
           </Link>
@@ -90,7 +90,7 @@ export default function Header() {
                     <Link
                       href={item.href}
                       className={`relative font-sans text-[11px] font-semibold uppercase tracking-wider transition-colors flex items-center gap-1 ${
-                        isPageActive ? 'text-[#E8612C]' : 'text-white/80 hover:text-white'
+                        isPageActive ? 'text-[#E8612C]' : 'text-[#111318]/80 hover:text-[#111318]'
                       }`}
                     >
                       {item.name}
@@ -103,12 +103,12 @@ export default function Header() {
 
                     {/* Desktop Hover Dropdown Panel */}
                     <div className="absolute top-full left-1/2 -translate-x-1/2 w-56 pt-2 opacity-0 pointer-events-none group-hover/dropdown:opacity-100 group-hover/dropdown:pointer-events-auto transition-all duration-200">
-                      <div className="bg-[#15181F] border border-[#242830] rounded-sm shadow-xl p-2 flex flex-col">
+                      <div className="bg-white border border-[#E5E7EB] rounded-sm shadow-xl p-2 flex flex-col">
                         {productDropdownItems.map((subItem) => (
                           <Link
                             key={subItem.name}
                             href={subItem.href}
-                            className="font-sans text-[10px] font-bold uppercase tracking-wider text-white/70 hover:text-white hover:bg-[#1C1F26] px-3 py-2 transition-colors rounded-sm"
+                            className="font-sans text-[10px] font-bold uppercase tracking-wider text-slate-700 hover:text-[#E8612C] hover:bg-slate-50 px-3 py-2 transition-colors rounded-sm"
                           >
                             {subItem.name}
                           </Link>
@@ -124,7 +124,7 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={`relative font-sans text-[11px] font-semibold uppercase tracking-wider transition-colors py-2 block ${
-                      isPageActive ? 'text-[#E8612C]' : 'text-white/80 hover:text-white'
+                      isPageActive ? 'text-[#E8612C]' : 'text-[#111318]/80 hover:text-[#111318]'
                     }`}
                   >
                     {item.name}
@@ -153,7 +153,7 @@ export default function Header() {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="inline-flex items-center justify-center p-2 text-white hover:text-[#E8612C] focus:outline-none transition-colors"
+            className="inline-flex items-center justify-center p-2 text-[#111318] hover:text-[#E8612C] focus:outline-none transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Navigation Menu"
           >
@@ -166,7 +166,7 @@ export default function Header() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="lg:hidden fixed inset-0 z-40 bg-[#0D0F12] flex flex-col p-6 overflow-y-auto border-t border-[#1F242F]"
+            className="lg:hidden fixed inset-0 z-40 bg-white flex flex-col p-6 overflow-y-auto border-t border-[#E5E7EB]"
             style={{ top: '60px', height: 'calc(100vh - 60px)' }}
             initial={noMotion ? {} : { opacity: 0, y: 15 }}
             animate={noMotion ? {} : { opacity: 1, y: 0 }}
@@ -177,18 +177,18 @@ export default function Header() {
               {menuItems.map((item, idx) => {
                 if (item.isDropdown) {
                   return (
-                    <div key={item.name} className="border-b border-[#1F242F] pb-4">
-                      <div className="flex items-center gap-3 font-sans text-base font-black uppercase tracking-wider text-white mb-3">
+                    <div key={item.name} className="border-b border-[#E5E7EB] pb-4">
+                      <div className="flex items-center gap-3 font-sans text-base font-black uppercase tracking-wider text-[#111318] mb-3">
                         <span className="font-mono text-xs text-[#E8612C]">0{idx + 1}</span>
                         <span>{item.name}</span>
                       </div>
-                      <div className="pl-6 flex flex-col space-y-3.5 border-l border-[#1F242F]">
+                      <div className="pl-6 flex flex-col space-y-3.5 border-l border-[#E5E7EB]">
                         {productDropdownItems.map((subItem) => (
                           <Link
                             key={subItem.name}
                             href={subItem.href}
                             onClick={() => setMobileMenuOpen(false)}
-                            className="font-sans text-xs font-bold uppercase tracking-wider text-white/60 hover:text-[#E8612C] transition-colors"
+                            className="font-sans text-xs font-bold uppercase tracking-wider text-[#59616B] hover:text-[#E8612C] transition-colors"
                           >
                             {subItem.name}
                           </Link>
@@ -199,11 +199,11 @@ export default function Header() {
                 }
 
                 return (
-                  <div key={item.name} className="border-b border-[#1F242F] pb-4">
+                  <div key={item.name} className="border-b border-[#E5E7EB] pb-4">
                     <Link
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center gap-3 font-sans text-base font-black uppercase tracking-wider text-white hover:text-[#E8612C] transition-colors"
+                      className="flex items-center gap-3 font-sans text-base font-black uppercase tracking-wider text-[#111318] hover:text-[#E8612C] transition-colors"
                     >
                       <span className="font-mono text-xs text-[#E8612C]">0{idx + 1}</span>
                       <span>{item.name}</span>

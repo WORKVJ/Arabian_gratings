@@ -870,7 +870,7 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
       </section>
 
       {/* ─── PARTNERS MARQUEE ─── */}
-      <section className="bg-background py-16 border-b border-[#1F242F] overflow-hidden relative z-25">
+      <section className="bg-background py-16 border-b border-[#E5E7EB] overflow-hidden relative z-25">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 mb-8">
           <FadeUp delay={0.05}>
             <span className="font-mono text-[#E8612C] text-[9px] uppercase tracking-[0.25em] block mb-1">
@@ -882,8 +882,8 @@ export default function HomeClient({ categories: rawCategories, industries: rawI
           </FadeUp>
         </div>
         <div className="relative w-full overflow-hidden select-none py-4">
-          <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-r from-[#090A0C] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-l from-[#090A0C] to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
           <div className="animate-marquee-infinite flex items-center gap-20 sm:gap-32 px-12">
             {partnerLogos.map((logo, idx) => (
               // eslint-disable-next-line @next/next/no-img-element
